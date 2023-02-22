@@ -86,7 +86,7 @@ function prepareObjects(jsonData) {
       studentCard.middlename = middlename.charAt(0).toUpperCase() + middlename.slice(1).toLowerCase();
     }
 
-    console.log(fullnameTrim);
+    // * console.log(fullnameTrim);
     // Lastname --------------------------------------------
     let lastname = "";
     let lastnameTrim = "";
@@ -118,6 +118,26 @@ function prepareObjects(jsonData) {
     houseResult = houseTrim.substring();
     // * console.log(houseResult);
 
+    // Images----------------------------------------------------
+    let imageSrc = new Image(100, 100);
+
+    studentCard.image = imageSrc;
+
+    let imageLastname = studentCard.lastname.toLowerCase();
+    let imageFirstname = firstnameResult.charAt(0).toLowerCase();
+    imageSrc.src = `images/${imageLastname}_${imageFirstname}.png`;
+    console.log(imageLastname);
+    console.log(imageFirstname);
+
+    if (imageLastname === "Leanne") {
+      imageSrc.src = "";
+    } else if (imageLastname.includes("patil")) {
+      imageSrc.src = "images/" + imageLastname + "_" + firstnameResult.charAt(0).toLowerCase() + firstnameResult.substring(1) + ".png";
+    } else if (imageLastname.includes("-")) {
+      imageSrc.src = "images/" + imageLastname.substring(imageLastname.indexOf("-") + 1) + "_" + imageFirstname + ".png";
+    } else if (imageLastname === "Patil") {
+      imageSrc.src = "images/" + imageLastname.toLowerCase() + "_" + imageLastname.trim[0].toLowerCase() + ".png";
+    }
     // Concatenation of the studentCard data ------------------------------------------------------------
 
     // Firstname concatenation
@@ -125,7 +145,6 @@ function prepareObjects(jsonData) {
     // Nickname concatenation
     studentCard.nickname = nicknameResult;
     // Middlename concatenation
-
     // * console.log(studentCard.lastname);
     // This is the concatenation for the house data
     studentCard.house = houseResult.charAt(0).toUpperCase() + houseResult.slice(1).toLowerCase();
@@ -155,6 +174,6 @@ function displayStudent(studentCard) {
   clone.querySelector("[data-field=middlename]").textContent = studentCard.middlename;
   clone.querySelector("[data-field=lastname]").textContent = studentCard.lastname;
   clone.querySelector("[data-field=house]").textContent = studentCard.house;
-
+  clone.querySelector("#studentImage").src = studentCard.image.src;
   document.querySelector("#list tbody").appendChild(clone);
 }
