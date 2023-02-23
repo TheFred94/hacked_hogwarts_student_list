@@ -100,6 +100,8 @@ function prepareObjects(jsonData) {
       let lastnameHyphen = lastname.split("-");
       // * console.log(lastnameHyphen);
       studentCard.lastname = lastnameResult;
+    } else if (lastnameResult === "Leanne") {
+      studentCard.lastname = "";
     } else {
       studentCard.lastname = lastnameResult.charAt(0).toUpperCase() + lastnameResult.slice(1).toLowerCase();
     }
