@@ -78,65 +78,65 @@ function prepareObjects(jsonData) {
 }
 
 // Gets the firstname
-function getFirstname(name) {
-  return `${name[0].charAt(0).toUpperCase()}${name[0].slice(1).toLowerCase()}`;
+function getFirstname(studentName) {
+  return `${studentName[0].charAt(0).toUpperCase()}${studentName[0].slice(1).toLowerCase()}`;
 }
 
 // Gets the middlename
-function getMiddlename(name) {
-  if (name.length <= 2) {
+function getMiddlename(studentName) {
+  if (studentName.length <= 2) {
     return ``;
   } else {
-    if (name[1].includes(`"`) === true) {
+    if (studentName[1].includes(`"`) === true) {
       return ``;
     } else {
-      return `${name[1].charAt(0).toUpperCase()}${name[1].slice(1).toLowerCase()}`;
+      return `${studentName[1].charAt(0).toUpperCase()}${studentName[1].slice(1).toLowerCase()}`;
     }
   }
 }
 
 // Gets the nickname
-function getNickname(name) {
-  if (name.length === 1) {
+function getNickname(studentName) {
+  if (studentName.length === 1) {
     return ``;
-  } else if (name.length > 1) {
-    if (name[1].includes(`"`) !== true) {
+  } else if (studentName.length > 1) {
+    if (studentName[1].includes(`"`) !== true) {
       return ``;
     } else {
-      return `${name[1].substring(1, 2).toUpperCase()}${name[1].substring(2, name[1].lastIndexOf('"')).toLowerCase()}`;
+      return `${studentName[1].substring(1, 2).toUpperCase()}${studentName[1].substring(2, studentName[1].lastIndexOf('"')).toLowerCase()}`;
     }
   }
 }
 
 // Gets the lastname
-function getLastname(name) {
-  if (name.length === 1) {
+function getLastname(studentName) {
+  if (studentName.length === 1) {
     return ``;
   } else {
-    if (name[1].includes("-")) {
-      let sepLastName = name[1].split("-");
+    if (studentName[1].includes("-")) {
+      let sepLastName = studentName[1].split("-");
       return `${sepLastName[0].charAt(0).toUpperCase()}${sepLastName[0].slice(1).toLowerCase()}-${sepLastName[1].charAt(0).toUpperCase()}${sepLastName[1].slice(1).toLowerCase()}`;
     } else {
-      const trimName = name[name.length - 1];
+      const trimName = studentName[studentName.length - 1];
       return `${trimName.charAt(0).toUpperCase()}${trimName.slice(1).toLowerCase()}`;
     }
   }
 }
 
 // Gets the student image
-function getStudentImage(name) {
-  let trimName = name[name.length - 1];
-  if (name.length === 1) {
+function getStudentImage(studentName) {
+  let trimName = studentName[studentName.length - 1];
+  if (studentName.length === 1) {
     return ``;
-  } else if (name[1] === "Patil") {
-    return `${trimName.toLowerCase()}_${name[0].toLowerCase()}.png`;
+  } else if (studentName[1] === "Patil") {
+    return `${trimName.toLowerCase()}_${studentName[0].toLowerCase()}.png`;
   } else {
-    if (name[1].includes("-")) {
+    if (studentName[1].includes("-")) {
       let sepName = trimName.split("-");
-      return `${sepName[sepName.length - 1].toLowerCase()}_${name[0].charAt(0).toLowerCase()}.png`;
+      return `${sepName[sepName.length - 1].toLowerCase()}_${studentName[0].charAt(0).toLowerCase()}.png`;
     } else {
       //Last name fix
-      return `${trimName.toLowerCase()}_${name[0].charAt(0).toLowerCase()}.png`;
+      return `${trimName.toLowerCase()}_${studentName[0].charAt(0).toLowerCase()}.png`;
     }
   }
 }
