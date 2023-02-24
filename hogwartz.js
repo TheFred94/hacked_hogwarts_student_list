@@ -18,13 +18,6 @@ const Student = {
   gender: "",
 };
 
-const prefectCount = {
-  Gryffindor: { boys: 0, girls: 0 },
-  Hufflepuff: { boys: 0, girls: 0 },
-  Ravenclaw: { boys: 0, girls: 0 },
-  Slytherin: { boys: 0, girls: 0 },
-};
-
 // Controls the filter functions
 const filterFunctions = {
   gryffindor: (studentCard) => studentCard.house === "Gryffindor",
@@ -306,27 +299,18 @@ function displayStudent(studentCard) {
   document.querySelector("#list tbody").appendChild(clone);
 }
 
+function checkPrefectLimit(house, gender) {
+  let prefectsFromHouse = allStudents.filter((student) => student.house === house && student.prefect);
+  let prefectsFromGender = prefectsFromHouse.filter((student) => student.gender === gender);
+  return prefectsFromHouse.length < 2 && prefectsFromGender.length < 1;
+}
+
+// Makes the selected student a prefect
 function makeStudentAPrefect(selectedStudent) {
   const prefects = allStudents.filter((studentCard) => studentCard.prefect);
 
   const numberOfPrefects = prefects.length;
   const other = prefects.filter((studentCard) => studentCard.gender === selectedStudent.gender).shift();
-  console.log(`There are ${numberOfPrefects} prefects`);
-  console.log(prefects);
-  console.log(other);
-
-  if (other !== undefined) {
-    console.log("There can only be one prefect of each gender");
-    removeOtherPrefect(other);
-  } else if (numberOfPrefects >= 8) {
-    console.log("There can only be two prefects from each house!");
-    removePrefectAOrPrefectB(prefects[0], prefects[1]);
-  } else {
-    assignPrefect(selectedStudent);
-  }
-
-  // console.log(`The other prefect of this gender is ${other.firstname} ${other.lastname}`);
-  // Just for testing
 
   assignPrefect(selectedStudent);
   // Ask the user to remove or ignore the other
@@ -338,22 +322,29 @@ function makeStudentAPrefect(selectedStudent) {
     assignPrefect(selectedStudent);
   }
 
-  function removePrefectAOrPrefectB(prefectA, prefectB) {
-    // if ignore - do nothing
-    // if remove A:
-    removePrefect(prefectA);
-    assignPrefect(selectedStudent);
+  // function removePrefectAOrPrefectB(prefectA, prefectB) {
+  //   // if ignore - do nothing
+  //   // if remove A:
+  //   removePrefect(prefectA);
+  //   assignPrefect(selectedStudent);
 
-    // else
-    removePrefect(prefectB);
-    assignPrefect(selectedStudent);
-  }
+  //   // else
+  //   removePrefect(prefectB);
+  //   assignPrefect(selectedStudent);
+  // }
 
   function removePrefect(studentCard) {
     studentCard.prefect = false;
   }
 
-  function assignPrefect(studentCard) {
-    studentCard.prefect = true;
+  // Checks the limit for prefects in each house
+  function assignPrefect(student) {
+    if (checkPrefectLimit(student.house, student.gender, student.firstname, student.lastname)) {
+      student.prefect = true;
+      console.log(`${student.firstname} ${student.lastname} is now a prefect of ${student.house}`);
+    } else {
+      console.log(`Cannot assign prefect ${student.firstname} ${student.lastname} from ${student.house} ${student.gender} as the prefect limit has been reached`);
+      removeOtherPrefect(other);
+    }
   }
 }
