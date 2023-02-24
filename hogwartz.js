@@ -1,15 +1,37 @@
 "use strict";
 
 const studentDataUrl = "https://petlatkea.dk/2021/hogwarts/students.json";
-const allStudents = [];
+let allStudents = [];
 let students;
 
 document.addEventListener("DOMContentLoaded", loadPage);
+const Student = {
+  firstname: "",
+  middlename: "",
+  lastname: "",
+  nickname: "",
+  image: "",
+  blood: "",
+  house: "",
+};
 
+const settings = {
+  filter: "all",
+  sortBy: "name",
+  sortDir: "asc",
+};
 // Loads the page
 function loadPage() {
   console.log("Page loaded");
+  registerButtons();
+
   loadJSON(studentDataUrl);
+}
+
+function registerButtons() {
+  document.querySelectorAll("[data-action='filter']").forEach((button) => button.addEventListener("click", selectFilter));
+  document.querySelectorAll("[data-action='sort']").forEach((button) => button.addEventListener("click", selectSort));
+  console.log("buttons ready");
 }
 
 // Runs the async function that fetches the data from the Json------------------------------
@@ -17,7 +39,7 @@ function loadPage() {
 async function getData(studentDataUrl) {
   const result = await fetch(studentDataUrl);
   students = await result.json();
-  showListOfStudents();
+  prepareObjects(jsonData);
 }
 
 // Loads the Json and prepares the data for the following functions---------------------------
@@ -37,106 +59,169 @@ function showListOfStudents() {
   prepareObjects(jsonData);
 }
 
-// This is where all the magic happens. All the different name values are returned here -------------------------
 function prepareObjects(jsonData) {
-  jsonData.forEach((jsonObject) => {
-    const Student = {
-      firstname: "",
-      middlename: "",
-      lastname: "",
-      nickname: "",
-      image: "",
-      blood: "",
-      house: "",
-    };
+  allStudents = jsonData.map(prepareObject);
 
-    // Creates a const with the name student card that contains all the information from the Object
-    const studentCard = Object.create(Student);
+  buildList();
+}
 
-    // Trims the fullName string
-    let fullnameTrim = jsonObject.fullname.trim().split(" ");
+function prepareObject(jsonObject) {
+  // Creates a const with the name student card that contains all the information from the Object
+  const studentCard = Object.create(Student);
 
-    studentCard.firstname = getFirstname(fullnameTrim);
-    studentCard.middlename = getMiddlename(fullnameTrim);
-    studentCard.nickname = getNickname(fullnameTrim);
-    studentCard.lastname = getLastname(fullnameTrim);
-    studentCard.image = getStudentImage(fullnameTrim);
-    studentCard.house = getStudentHouse(jsonObject);
-    allStudents.push(studentCard);
-    // studentCard.house = getStudentHouse(jsonObject);
-    // * console.log(fullName);
-    // Splits the fullname string into parts
-    console.log(studentCard.firstname);
-    console.log(studentCard.middlename);
-    console.log(studentCard.nickname);
-    console.log(studentCard.lastname);
-    console.log(studentCard.image);
-    console.log(jsonObject.house);
-  });
+  // Trims the fullName string
+  let fullnameTrim = jsonObject.fullname.trim().split(" ");
 
-  displayList();
+  studentCard.firstname = getFirstname(fullnameTrim);
+  studentCard.middlename = getMiddlename(fullnameTrim);
+  studentCard.nickname = getNickname(fullnameTrim);
+  studentCard.lastname = getLastname(fullnameTrim);
+  studentCard.image = getStudentImage(fullnameTrim);
+  studentCard.house = getStudentHouse(jsonObject);
+
+  return studentCard;
+}
+// This is where all the magic happens. All the different name values are returned here -------------------------
+
+function selectFilter(event) {
+  const filter = event.target.dataset.filter;
+  console.log(`User selected ${filter}`);
+
+  setFilter(filter);
+}
+
+function setFilter(filter) {
+  settings.filterBy = filter;
+  buildList();
+}
+function selectSort(event) {
+  //   This line of code is using the dataset property of the event.target object to get the value of a data-sort attribute on the HTML element that triggered an event.
+  const sortBy = event.target.dataset.sort;
+  const sortDir = event.target.dataset.sortDirection;
+  console.log(`user selected ${sortBy} - ${sortDir}`);
+
+  // Find "old" sortBy element, and remove .sortBy class
+  const oldElement = document.querySelector(`[data-sort='${settings.sortBy}']`);
+  oldElement.classList.remove("sortby");
+
+  // Indicate active sort
+  event.target.classList.add("sortby");
+
+  // Toggles the direction from asc to desc or vice versa!
+  if (sortDir === "asc") {
+    event.target.dataset.sortDirection = "desc";
+  } else {
+    event.target.dataset.sortDirection = "asc";
+  }
+  console.log(`user selected ${sortBy}`);
+  //  Runs the filterList function with the filter variable as it's parameter
+  setSort(sortBy, sortDir);
+}
+
+function setSort(sortBy, sortDir) {
+  settings.sortBy = sortBy;
+  settings.sortDir = sortDir;
+  buildList();
+}
+
+function filterList(filteredList) {
+  if (settings.filterBy === "gryffindor") {
+    console.log("Gryffindor");
+    filteredList = allStudents.filter(isGryffindor);
+  } else if (settings.filterBy === "huffelpuff") {
+    console.log("Huffelpuff");
+    filteredList = allStudents.filter(isHufflepuff);
+  } else if (settings.filterBy === "ravenclaw") {
+    console.log("Ravenclaw");
+    filteredList = allStudents.filter(isRavenclaw);
+  } else if (settings.filterBy === "slytherin") {
+    console.log("Slytherin");
+    filteredList = allStudents.filter(isSlytherin);
+  } else {
+    console.log("Allstudents");
+    filteredList = allStudents;
+  }
+
+  return filteredList;
+}
+
+function isGryffindor(studentCard) {
+  console.log("Gryffindor");
+  return studentCard.house === "Gryffindor";
+}
+function isHufflepuff(studentCard) {
+  console.log("Huffelpuff");
+  return studentCard.house === "Hufflepuff";
+}
+function isRavenclaw(studentCard) {
+  console.log("Ravenclaw");
+  return studentCard.house === "Ravenclaw";
+}
+function isSlytherin(studentCard) {
+  console.log("slytherin");
+  return studentCard.house === "Slytherin";
 }
 
 // Gets the firstname
-function getFirstname(name) {
-  return `${name[0].charAt(0).toUpperCase()}${name[0].slice(1).toLowerCase()}`;
+function getFirstname(studentName) {
+  return `${studentName[0].charAt(0).toUpperCase()}${studentName[0].slice(1).toLowerCase()}`;
 }
 
 // Gets the middlename
-function getMiddlename(name) {
-  if (name.length <= 2) {
+function getMiddlename(studentName) {
+  if (studentName.length <= 2) {
     return ``;
   } else {
-    if (name[1].includes(`"`) === true) {
+    if (studentName[1].includes(`"`) === true) {
       return ``;
     } else {
-      return `${name[1].charAt(0).toUpperCase()}${name[1].slice(1).toLowerCase()}`;
+      return `${studentName[1].charAt(0).toUpperCase()}${studentName[1].slice(1).toLowerCase()}`;
     }
   }
 }
 
 // Gets the nickname
-function getNickname(name) {
-  if (name.length === 1) {
+function getNickname(studentName) {
+  if (studentName.length === 1) {
     return ``;
-  } else if (name.length > 1) {
-    if (name[1].includes(`"`) !== true) {
+  } else if (studentName.length > 1) {
+    if (studentName[1].includes(`"`) !== true) {
       return ``;
     } else {
-      return `${name[1].substring(1, 2).toUpperCase()}${name[1].substring(2, name[1].lastIndexOf('"')).toLowerCase()}`;
+      return `${studentName[1].substring(1, 2).toUpperCase()}${studentName[1].substring(2, studentName[1].lastIndexOf('"')).toLowerCase()}`;
     }
   }
 }
 
 // Gets the lastname
-function getLastname(name) {
-  if (name.length === 1) {
+function getLastname(studentName) {
+  if (studentName.length === 1) {
     return ``;
   } else {
-    if (name[1].includes("-")) {
-      let sepLastName = name[1].split("-");
+    if (studentName[1].includes("-")) {
+      let sepLastName = studentName[1].split("-");
       return `${sepLastName[0].charAt(0).toUpperCase()}${sepLastName[0].slice(1).toLowerCase()}-${sepLastName[1].charAt(0).toUpperCase()}${sepLastName[1].slice(1).toLowerCase()}`;
     } else {
-      const trimName = name[name.length - 1];
+      const trimName = studentName[studentName.length - 1];
       return `${trimName.charAt(0).toUpperCase()}${trimName.slice(1).toLowerCase()}`;
     }
   }
 }
 
 // Gets the student image
-function getStudentImage(name) {
-  let trimName = name[name.length - 1];
-  if (name.length === 1) {
+function getStudentImage(studentName) {
+  let trimName = studentName[studentName.length - 1];
+  if (studentName.length === 1) {
     return ``;
-  } else if (name[1] === "Patil") {
-    return `${trimName.toLowerCase()}_${name[0].toLowerCase()}.png`;
+  } else if (studentName[1] === "Patil") {
+    return `${trimName.toLowerCase()}_${studentName[0].toLowerCase()}.png`;
   } else {
-    if (name[1].includes("-")) {
+    if (studentName[1].includes("-")) {
       let sepName = trimName.split("-");
-      return `${sepName[sepName.length - 1].toLowerCase()}_${name[0].charAt(0).toLowerCase()}.png`;
+      return `${sepName[sepName.length - 1].toLowerCase()}_${studentName[0].charAt(0).toLowerCase()}.png`;
     } else {
       //Last name fix
-      return `${trimName.toLowerCase()}_${name[0].charAt(0).toLowerCase()}.png`;
+      return `${trimName.toLowerCase()}_${studentName[0].charAt(0).toLowerCase()}.png`;
     }
   }
 }
@@ -147,14 +232,40 @@ function getStudentHouse(person) {
   return `${houseTrim.charAt(0).toUpperCase()}${houseTrim.slice(1).toLowerCase()}`;
 }
 
+function sortList(sortedList) {
+  let direction = 1;
+  if (settings.sortDir === "desc") {
+    direction = -1;
+  } else {
+    settings.direction = 1;
+  }
+  sortedList = sortedList.sort(sortByProperty);
+
+  function sortByProperty(studentA, studentB) {
+    // console.log(`sortBy is ${sortBy}`);
+    if (studentA[settings.sortBy] < studentB[settings.sortBy]) {
+      return -1 * direction;
+    } else {
+      return 1 * direction;
+    }
+  }
+  return sortedList;
+}
+
+function buildList() {
+  const currentList = filterList(allStudents);
+  const sortedList = sortList(currentList);
+  displayList(sortedList);
+  console.log("new list build");
+}
+
 // Clears the html and displays the list-----------------------------------
-function displayList() {
+function displayList(allStudents) {
   // Grabs the id="list" and the tbody element from the HTML and empties the content
   document.querySelector("#list tbody").innerHTML = "";
 
   //  Runs the displayStudent functions for each of the data entries in the Json file
   allStudents.forEach(displayStudent);
-  console.log("displayList");
 }
 
 // Creates the student card/row for each of the students
