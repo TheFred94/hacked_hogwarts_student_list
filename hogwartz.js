@@ -78,7 +78,7 @@ function prepareObject(jsonObject) {
   studentCard.lastname = getLastname(fullnameTrim);
   studentCard.image = getStudentImage(fullnameTrim);
   studentCard.house = getStudentHouse(jsonObject);
-  allStudents.push(studentCard);
+
   return studentCard;
 }
 // This is where all the magic happens. All the different name values are returned here -------------------------
@@ -125,15 +125,20 @@ function setSort(sortBy, sortDir) {
 }
 
 function filterList(filteredList) {
-  if (settings.filter === "gryffindor") {
+  if (settings.filterBy === "gryffindor") {
+    console.log("Gryffindor");
     filteredList = allStudents.filter(isGryffindor);
-  } else if (settings.filter === "huffelpuff") {
-    filteredList = allStudents.filter(isHuffelpuff);
-  } else if (settings.filter === "ravenclaw") {
+  } else if (settings.filterBy === "huffelpuff") {
+    console.log("Huffelpuff");
+    filteredList = allStudents.filter(isHufflepuff);
+  } else if (settings.filterBy === "ravenclaw") {
+    console.log("Ravenclaw");
     filteredList = allStudents.filter(isRavenclaw);
-  } else if (settings.filter === "slytherin") {
+  } else if (settings.filterBy === "slytherin") {
+    console.log("Slytherin");
     filteredList = allStudents.filter(isSlytherin);
   } else {
+    console.log("Allstudents");
     filteredList = allStudents;
   }
 
@@ -141,16 +146,20 @@ function filterList(filteredList) {
 }
 
 function isGryffindor(studentCard) {
-  return studentCard.house === "gryffindor";
+  console.log("Gryffindor");
+  return studentCard.house === "Gryffindor";
 }
-function isHuffelpuff(studentCard) {
-  return studentCard.house === "huffelpuff";
+function isHufflepuff(studentCard) {
+  console.log("Huffelpuff");
+  return studentCard.house === "Hufflepuff";
 }
 function isRavenclaw(studentCard) {
-  return studentCard.house === "ravenclaw";
+  console.log("Ravenclaw");
+  return studentCard.house === "Ravenclaw";
 }
 function isSlytherin(studentCard) {
-  return studentCard.house === "slytherin";
+  console.log("slytherin");
+  return studentCard.house === "Slytherin";
 }
 
 // Gets the firstname
@@ -247,6 +256,7 @@ function buildList() {
   const currentList = filterList(allStudents);
   const sortedList = sortList(currentList);
   displayList(sortedList);
+  console.log("new list build");
 }
 
 // Clears the html and displays the list-----------------------------------
