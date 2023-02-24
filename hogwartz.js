@@ -300,16 +300,43 @@ function displayStudent(studentCard) {
 
 function makeStudentAPrefect(selectedStudent) {
   const prefects = allStudents.filter((studentCard) => studentCard.prefect);
+  const numberOfPrefects = prefects.length;
+  const other = prefects.filter((studentCard) => studentCard.gender === selectedStudent.gender).shift();
+  console.log(`There are ${numberOfPrefects} prefects`);
+  console.log(other);
 
-  console.log(prefects);
-
+  if (other !== undefined) {
+    console.log("There can only be one prefect of each gender");
+    removeOtherPrefect(other);
+  } else if (numberOfPrefects >= 2) {
+    console.log("There can only be two prefects!");
+    removePrefectAOrPrefectB(prefects[0], prefects[1]);
+  } else {
+    assignPrefect(selectedStudent);
+  }
+  // console.log(`The other prefect of this gender is ${other.firstname} ${other.lastname}`);
   // Just for testing
 
   assignPrefect(selectedStudent);
+  // Ask the user to remove or ignore the other
+  function removeOtherPrefect(other) {
+    // if ignore - do nothing
 
-  function removeOtherPrefect(other) {}
+    // if remove other:
+    removePrefect(other);
+    assignPrefect(selectedStudent);
+  }
 
-  function removePrefectAOrPrefectB(prefectA, prefectB) {}
+  function removePrefectAOrPrefectB(prefectA, prefectB) {
+    // if ignore - do nothing
+    // if remove A:
+    removePrefect(prefectA);
+    assignPrefect(selectedStudent);
+
+    // else
+    removePrefect(prefectB);
+    assignPrefect(selectedStudent);
+  }
 
   function removePrefect(studentCard) {
     studentCard.prefect = false;
