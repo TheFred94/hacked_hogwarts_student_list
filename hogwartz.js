@@ -15,6 +15,14 @@ const Student = {
   house: "",
 };
 
+// Controls the filter functions
+const filterFunctions = {
+  gryffindor: (studentCard) => studentCard.house === "Gryffindor",
+  hufflepuff: (studentCard) => studentCard.house === "Hufflepuff",
+  ravenclaw: (studentCard) => studentCard.house === "Ravenclaw",
+  slytherin: (studentCard) => studentCard.house === "Slytherin",
+};
+
 const settings = {
   filter: "all",
   sortBy: "name",
@@ -124,42 +132,17 @@ function setSort(sortBy, sortDir) {
   buildList();
 }
 
+// Creates the filter list - on load all students are displayed. Every time the filter is clicked it returns filteredList and builds a new list with the selected students accordin to the filter selected by the user
 function filterList(filteredList) {
-  if (settings.filterBy === "gryffindor") {
-    console.log("Gryffindor");
-    filteredList = allStudents.filter(isGryffindor);
-  } else if (settings.filterBy === "huffelpuff") {
-    console.log("Huffelpuff");
-    filteredList = allStudents.filter(isHufflepuff);
-  } else if (settings.filterBy === "ravenclaw") {
-    console.log("Ravenclaw");
-    filteredList = allStudents.filter(isRavenclaw);
-  } else if (settings.filterBy === "slytherin") {
-    console.log("Slytherin");
-    filteredList = allStudents.filter(isSlytherin);
+  const filterFunction = filterFunctions[settings.filterBy];
+  if (filterFunction) {
+    console.log(settings.filterBy);
+    filteredList = allStudents.filter(filterFunction);
   } else {
-    console.log("Allstudents");
+    console.log("All students");
     filteredList = allStudents;
   }
-
   return filteredList;
-}
-
-function isGryffindor(studentCard) {
-  console.log("Gryffindor");
-  return studentCard.house === "Gryffindor";
-}
-function isHufflepuff(studentCard) {
-  console.log("Huffelpuff");
-  return studentCard.house === "Hufflepuff";
-}
-function isRavenclaw(studentCard) {
-  console.log("Ravenclaw");
-  return studentCard.house === "Ravenclaw";
-}
-function isSlytherin(studentCard) {
-  console.log("slytherin");
-  return studentCard.house === "Slytherin";
 }
 
 // Gets the firstname
