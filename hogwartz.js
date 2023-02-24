@@ -13,6 +13,8 @@ const Student = {
   image: "",
   blood: "",
   house: "",
+  prefect: false,
+  gender: "",
 };
 
 // Controls the filter functions
@@ -26,7 +28,7 @@ const filterFunctions = {
 const settings = {
   filter: "all",
   sortBy: "name",
-  sortDir: "asc",
+  sortDir: "desc",
 };
 // Loads the page
 function loadPage() {
@@ -62,10 +64,10 @@ function loadJSON() {
 }
 
 // Shows the list of students---------------------------------------------
-function showListOfStudents() {
-  // * console.log(students);
-  prepareObjects(jsonData);
-}
+// function showListOfStudents() {
+//   // * console.log(students);
+//   prepareObjects(jsonData);
+// }
 
 function prepareObjects(jsonData) {
   allStudents = jsonData.map(prepareObject);
@@ -274,5 +276,27 @@ function displayStudent(studentCard) {
   clone.querySelector("[data-field=house]").textContent = studentCard.house;
   clone.querySelector("#studentImage").src = `images/${studentCard.image}`;
 
+  // Assign prefect
+  clone.querySelector("[data-field=prefect]").dataset.prefect = studentCard.prefect;
+  clone.querySelector("[data-field=prefect]").addEventListener("click", clickStudent);
+
+  function clickStudent() {
+    if (studentCard.prefect === true) {
+      studentCard.prefect = false;
+    } else {
+      studentCard.prefect = true;
+    }
+    buildList();
+  }
   document.querySelector("#list tbody").appendChild(clone);
+}
+
+function assignStudentPrefect() {
+  function removeOtherPrefect(other) {}
+
+  function removeAorB(prefectA, prefectB) {}
+
+  function removePrefect(studentPrefect) {}
+
+  function assignPrefect() {}
 }
