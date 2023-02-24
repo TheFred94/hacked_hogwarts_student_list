@@ -291,9 +291,31 @@ function displayStudent(studentCard) {
     if (studentCard.prefect === true) {
       studentCard.prefect = false;
     } else {
-      studentCard.prefect = true;
+      makeStudentAPrefect(studentCard);
     }
     buildList();
   }
   document.querySelector("#list tbody").appendChild(clone);
+}
+
+function makeStudentAPrefect(selectedStudent) {
+  const prefects = allStudents.filter((studentCard) => studentCard.prefect);
+
+  console.log(prefects);
+
+  // Just for testing
+
+  assignPrefect(selectedStudent);
+
+  function removeOtherPrefect(other) {}
+
+  function removePrefectAOrPrefectB(prefectA, prefectB) {}
+
+  function removePrefect(studentCard) {
+    studentCard.prefect = false;
+  }
+
+  function assignPrefect(studentCard) {
+    studentCard.prefect = true;
+  }
 }
