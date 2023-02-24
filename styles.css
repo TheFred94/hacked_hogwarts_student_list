@@ -17,3 +17,10 @@
 #list tr:nth-child(even) {
   background-color: rgb(173, 230, 210);
 }
+
+td[data-field="prefect"]::after {
+  content: " 🥇 ";
+}
+td[data-field="prefect"][data-prefect="false"]::after {
+  filter: grayscale(1);
+}
