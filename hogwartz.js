@@ -3,6 +3,7 @@
 const studentDataUrl = "https://petlatkea.dk/2021/hogwarts/students.json";
 let allStudents = [];
 let students;
+let studentCard;
 
 document.addEventListener("DOMContentLoaded", loadPage);
 const Student = {
@@ -15,6 +16,13 @@ const Student = {
   house: "",
   prefect: false,
   gender: "",
+};
+
+const prefectCount = {
+  Gryffindor: { boys: 0, girls: 0 },
+  Hufflepuff: { boys: 0, girls: 0 },
+  Ravenclaw: { boys: 0, girls: 0 },
+  Slytherin: { boys: 0, girls: 0 },
 };
 
 // Controls the filter functions
@@ -300,20 +308,23 @@ function displayStudent(studentCard) {
 
 function makeStudentAPrefect(selectedStudent) {
   const prefects = allStudents.filter((studentCard) => studentCard.prefect);
+
   const numberOfPrefects = prefects.length;
   const other = prefects.filter((studentCard) => studentCard.gender === selectedStudent.gender).shift();
   console.log(`There are ${numberOfPrefects} prefects`);
+  console.log(prefects);
   console.log(other);
 
   if (other !== undefined) {
     console.log("There can only be one prefect of each gender");
     removeOtherPrefect(other);
-  } else if (numberOfPrefects >= 2) {
-    console.log("There can only be two prefects!");
+  } else if (numberOfPrefects >= 8) {
+    console.log("There can only be two prefects from each house!");
     removePrefectAOrPrefectB(prefects[0], prefects[1]);
   } else {
     assignPrefect(selectedStudent);
   }
+
   // console.log(`The other prefect of this gender is ${other.firstname} ${other.lastname}`);
   // Just for testing
 
