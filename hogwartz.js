@@ -88,9 +88,11 @@ function prepareObject(jsonObject) {
   studentCard.lastname = getLastname(fullnameTrim);
   studentCard.image = getStudentImage(fullnameTrim);
   studentCard.house = getStudentHouse(jsonObject);
+  studentCard.gender = getStudentGender(jsonObject);
 
   return studentCard;
 }
+
 // This is where all the magic happens. All the different name values are returned here -------------------------
 
 function selectFilter(event) {
@@ -216,6 +218,10 @@ function getStudentHouse(person) {
   const houseTrim = person.house.trim();
   return `${houseTrim.charAt(0).toUpperCase()}${houseTrim.slice(1).toLowerCase()}`;
 }
+function getStudentGender(person) {
+  const genderTrim = person.gender.trim();
+  return `${genderTrim.charAt(0).toUpperCase()}${genderTrim.slice(1).toLowerCase()}`;
+}
 
 function sortList(sortedList) {
   let direction = 1;
@@ -274,6 +280,7 @@ function displayStudent(studentCard) {
   clone.querySelector("[data-field=middlename]").textContent = studentCard.middlename;
   clone.querySelector("[data-field=lastname]").textContent = studentCard.lastname;
   clone.querySelector("[data-field=house]").textContent = studentCard.house;
+  clone.querySelector("[data-field=gender]").textContent = studentCard.gender;
   clone.querySelector("#studentImage").src = `images/${studentCard.image}`;
 
   // Assign prefect
@@ -289,14 +296,4 @@ function displayStudent(studentCard) {
     buildList();
   }
   document.querySelector("#list tbody").appendChild(clone);
-}
-
-function assignStudentPrefect() {
-  function removeOtherPrefect(other) {}
-
-  function removeAorB(prefectA, prefectB) {}
-
-  function removePrefect(studentPrefect) {}
-
-  function assignPrefect() {}
 }

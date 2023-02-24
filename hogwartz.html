@@ -24,6 +24,7 @@
       <thead>
         <tr>
           <th>Portrait</th>
+          <th data-action="sort" data-sort-direction="asc" data-sort="gender">Gender</th>
           <th data-action="sort" data-sort-direction="asc" data-sort="iqsquad">Inqusitorial Squad</th>
           <th data-action="sort" data-sort-direction="asc" data-sort="prefect">Prefect</th>
           <th data-action="sort" data-sort-direction="asc" data-sort="bloodtype">Bloodtype</th>
@@ -42,6 +43,7 @@
     <template id="student">
       <tr>
         <td data-field="image"><img id="studentImage" src="" /></td>
+        <td data-field="gender"></td>
         <td data-field="iqsquad"></td>
         <td class="prefect" data-prefect="false" data-field="prefect"></td>
         <td data-field="bloodtype"></td>
