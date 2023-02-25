@@ -435,7 +435,7 @@ function moveToExpelled(studentCard) {
 
   // Clone the template and fill in the fields with the expelled student's data
   const row = template.content.cloneNode(true).querySelector("tr");
-  row.querySelector("[data-field='image'] img").src = studentCard.image;
+  row.querySelector("[data-field='image'] img").src = `images/${studentCard.image}`;
   row.querySelector("[data-field='gender']").textContent = studentCard.gender;
   row.querySelector("[data-field='iqsquad']").textContent = studentCard.iqsquad;
   row.querySelector("[data-field='prefect']").textContent = studentCard.prefect;
