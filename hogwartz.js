@@ -345,14 +345,6 @@ function checkPrefectLimit(house, gender) {
   return prefectsFromHouse.length < 2 && prefectsFromGender.length < 1;
 }
 
-function makeStudentIqSquad(student) {
-  if (checkStudentHouse(student)) {
-    console.log("this is a slytherin Student");
-  } else {
-    console.log("This is not a slytherin student");
-  }
-}
-
 // Makes the selected student a prefect
 function makeStudentAPrefect(selectedStudent) {
   const prefects = allStudents.filter((studentCard) => studentCard.prefect);
