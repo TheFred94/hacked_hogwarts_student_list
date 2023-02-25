@@ -299,6 +299,7 @@ function displayStudent(studentCard) {
   document.querySelector("#list tbody").appendChild(clone);
 }
 
+// Check the house and gender of the selected prefect and returns the value
 function checkPrefectLimit(house, gender) {
   let prefectsFromHouse = allStudents.filter((student) => student.house === house && student.prefect);
   let prefectsFromGender = prefectsFromHouse.filter((student) => student.gender === gender);
@@ -322,6 +323,7 @@ function makeStudentAPrefect(selectedStudent) {
     } else {
       console.log(`Cannot assign prefect ${student.firstname} ${student.lastname} from ${student.house} ${student.gender} as the prefect limit has been reached`);
       removeOtherPrefect(other);
+      // removePrefectAOrPrefectB(prefects[0], prefects[1]);
     }
   }
   // Ask the user to remove or ignore the other
@@ -332,7 +334,7 @@ function makeStudentAPrefect(selectedStudent) {
     document.querySelector("#remove_other").classList.remove("hide");
     document.querySelector("#remove_other .closebutton").addEventListener("click", closeDialog);
     document.querySelector("#remove_other #removeother").addEventListener("click", clickRemoveOther);
-    document.querySelector("#remove_other [data-field=otherwinner]").textContent = other.name;
+    document.querySelector("#remove_other [data-field=otherprefect]").textContent = `${other.firstname} ${other.lastname} as prefect`;
     // removePrefect(other);
     // assignPrefect(selectedStudent);
 
@@ -349,17 +351,39 @@ function makeStudentAPrefect(selectedStudent) {
     }
   }
 
-  function removePrefectAOrPrefectB(prefectA, prefectB) {
-    // if ignore - do nothing
-    // if remove A:
-    removePrefect(prefectA);
-    assignPrefect(selectedStudent);
+  // function removePrefectAOrPrefectB(prefectA, prefectB) {
+  //   document.querySelector("#remove_aorb").classList.remove("hide");
+  //   document.querySelector("#remove_aorb .closebutton").addEventListener("click", closeDialog);
+  //   document.querySelector("#remove_aorb #removea").addEventListener("click", clickRemoveA);
+  //   document.querySelector("#remove_aorb #removeb").addEventListener("click", clickRemoveB);
 
-    // else
-    removePrefect(prefectB);
-    assignPrefect(selectedStudent);
-    // }
-  }
+  //   // Show names on buttons
+  //   document.querySelector("#remove_aorb [data-field=winnerA]").textContent = winnerA.name;
+  //   document.querySelector("#remove_aorb [data-field=winnerB]").textContent = winnerB.name;
+
+  //   // if ignore - do nothing
+  //   function closeDialog() {
+  //     document.querySelector("#remove_aorb").classList.add("hide");
+  //     document.querySelector("#remove_aorb .closebutton").removeEventListener("click", closeDialog);
+  //     document.querySelector("#remove_aorb #removea").removeEventListener("click", clickRemoveA);
+  //     document.querySelector("#remove_aorb #removeb").removeEventListener("click", clickRemoveB);
+  //   }
+  //   // if removeA
+  //   function clickRemoveA() {
+  //     removePrefect(prefectA);
+  //     assignPrefect(selectedStudent);
+  //     buildList();
+  //     closeDialog();
+  //   }
+
+  //   // else - if removeB
+  //   function clickRemoveB() {
+  //     removePrefect(prefectB);
+  //     assignPrefect(selectedStudent);
+  //     buildList();
+  //     closeDialog();
+  //   }
+  // }
   function removePrefect(studentCard) {
     studentCard.prefect = false;
   }
