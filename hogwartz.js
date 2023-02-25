@@ -314,10 +314,12 @@ function displayStudent(studentCard) {
   function notASlytherinStudent() {
     document.querySelector("#onlyslytherin").classList.remove("hide");
     document.querySelector("#onlyslytherin .closebutton").addEventListener("click", closeDialog);
+    document.querySelector("#onlyslytherin .filter").addEventListener("click", closeDialog);
 
     function closeDialog() {
-      document.querySelector("#onlyslytherin").classList.add("hide");
       document.querySelector("#onlyslytherin .closebutton").removeEventListener("click", closeDialog);
+      document.querySelector("#onlyslytherin .filter").removeEventListener("click", closeDialog);
+      document.querySelector("#onlyslytherin").classList.add("hide");
     }
   }
 
