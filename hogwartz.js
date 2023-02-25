@@ -14,6 +14,7 @@ const Student = {
   image: "",
   blood: "",
   house: "",
+  iqsquad: false,
   prefect: false,
   gender: "",
 };
@@ -286,9 +287,31 @@ function displayStudent(studentCard) {
 
   // Assign prefect
   clone.querySelector("[data-field=prefect]").dataset.prefect = studentCard.prefect;
-  clone.querySelector("[data-field=prefect]").addEventListener("click", clickStudent);
+  clone.querySelector("[data-field=prefect]").addEventListener("click", clickPrefect);
 
-  function clickStudent() {
+  if (studentCard.iqSquad === true) {
+    clone.querySelector("[data-field=iqsquad]").textContent = "⭐";
+  } else {
+    clone.querySelector("[data-field=iqsquad]").textContent = "☆";
+  }
+  clone.querySelector("[data-field=iqsquad]").addEventListener("click", clickIqSquad);
+
+  // Check wether the student is from Slytherin or not. If not it's a no-go getting into the Inqisitorial Squad
+  function clickIqSquad() {
+    console.log(`this is ${studentCard.house}`);
+    if (checkStudentHouse(studentCard)) {
+      if (studentCard.iqSquad === true) {
+        studentCard.iqSquad = false;
+      } else {
+        studentCard.iqSquad = true;
+      }
+      buildList();
+    } else {
+      console.log("Only Slytherin students can be added or removed from the IQ squad.");
+    }
+  }
+
+  function clickPrefect() {
     if (studentCard.prefect === true) {
       studentCard.prefect = false;
     } else {
@@ -299,6 +322,10 @@ function displayStudent(studentCard) {
   document.querySelector("#list tbody").appendChild(clone);
 }
 
+function checkStudentHouse(student) {
+  console.log(student.house);
+  return student.house === "Slytherin";
+}
 // Check the house and gender of the selected prefect and returns the value
 function checkPrefectLimit(house, gender) {
   let prefectsFromHouse = allStudents.filter((student) => student.house === house && student.prefect);
@@ -306,12 +333,20 @@ function checkPrefectLimit(house, gender) {
   return prefectsFromHouse.length < 2 && prefectsFromGender.length < 1;
 }
 
+function makeStudentIqSquad(student) {
+  if (checkStudentHouse(student)) {
+    console.log("this is a slytherin Student");
+  } else {
+    console.log("This is not a slytherin student");
+  }
+}
+
 // Makes the selected student a prefect
 function makeStudentAPrefect(selectedStudent) {
   const prefects = allStudents.filter((studentCard) => studentCard.prefect);
 
   // const numberOfPrefects = prefects.length;
-  const other = prefects.filter((studentCard) => studentCard.gender === selectedStudent.gender).shift();
+  // const other = prefects.filter((studentCard) => studentCard.gender === selectedStudent.gender).shift();
 
   assignPrefect(selectedStudent);
   // Checks the limit for prefects in each house
