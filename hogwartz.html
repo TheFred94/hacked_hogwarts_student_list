@@ -39,6 +39,26 @@
         <!-- The student template will be copied here -->
       </tbody>
     </table>
+    <!-- List of the expelled students -->
+    <table id="expelledlist">
+      <thead>
+        <tr>
+          <th>Portrait</th>
+          <th data-action="sort" data-sort-direction="asc" data-sort="gender">Gender</th>
+          <th data-action="sort" data-sort-direction="asc" data-sort="iqsquad">Inqusitorial Squad</th>
+          <th data-action="sort" data-sort-direction="asc" data-sort="prefect">Prefect</th>
+          <th data-action="sort" data-sort-direction="asc" data-sort="bloodtype">Bloodtype</th>
+          <th data-action="sort" data-sort-direction="asc" data-sort="name">First name</th>
+          <th data-action="sort" data-sort-direction="asc" data-sort="nickname">Nick name</th>
+          <th data-action="sort" data-sort-direction="asc" data-sort="middlename">Middle name</th>
+          <th data-action="sort" data-sort-direction="asc" data-sort="lastname">Last name</th>
+          <th data-action="sort" data-sort-direction="asc" data-sort="house">House</th>
+        </tr>
+      </thead>
+      <tbody>
+        <!-- The student template will be copied here -->
+      </tbody>
+    </table>
 
     <template id="student">
       <tr>
@@ -52,10 +72,26 @@
         <td data-field="middlename"></td>
         <td data-field="lastname"></td>
         <td data-field="house"></td>
-        <td data-field="expell">❌</td>
+        <td class="expelled" data-expel="false" data-field="expelled"></td>
       </tr>
     </template>
-    <script src="hogwartz.js"></script>
+
+    <!-- This is the list of data for the expelled students -->
+    <template id="expelledstudent">
+      <tr>
+        <td data-field="image"><img id="studentImage" src="" /></td>
+        <td data-field="gender"></td>
+        <td class="iqsquad" data-field="iqsquad">☆</td>
+        <td class="prefect" data-prefect="false" data-field="prefect"></td>
+        <td data-field="bloodtype"></td>
+        <td data-field="firstname"></td>
+        <td data-field="nickname"></td>
+        <td data-field="middlename"></td>
+        <td data-field="lastname"></td>
+        <td data-field="house"></td>
+        <td data-field="expel">❌</td>
+      </tr>
+    </template>
 
     <div id="remove_other" class="modal hide">
       <div class="dialog">
@@ -82,5 +118,6 @@
         </div>
       </div>
     </div>
+    <script src="hogwartz.js"></script>
   </body>
 </html>

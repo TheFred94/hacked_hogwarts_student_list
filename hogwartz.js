@@ -2,6 +2,8 @@
 
 const studentDataUrl = "https://petlatkea.dk/2021/hogwarts/students.json";
 let allStudents = [];
+let expelledStudents = [];
+
 let students;
 let studentCard;
 
@@ -16,6 +18,7 @@ const Student = {
   house: "",
   iqsquad: false,
   prefect: false,
+  expelled: false,
   gender: "",
 };
 
@@ -266,16 +269,6 @@ function displayStudent(studentCard) {
   // Clones the template for each of the students
   const clone = document.querySelector("template#student").content.cloneNode(true);
 
-  // if (studentCard.firstname === "Leanne") {
-  //   clone.querySelector("[data-field=fullname]").textContent = studentCard.firstname;
-  // } else if (studentCard.middlename === `N/A` && studentCard.nickname === `N/A`) {
-  //  clone.querySelector("[data-field=fullname]").textContent = `${studentCard.firstname} ${studentCard.lastname}`;
-  // } else if (studentCard.middlename === `N/A` && studentCard.nickname !== `N/A`) {
-  //   clone.querySelector("[data-field=fullname]").textContent = `${studentCard.firstname} "${studentCard.nickname}" ${studentCard.lastname}`;
-  // } else {
-  //   clone.querySelector("[data-field=fullname]").textContent = `${studentCard.firstname} ${studentCard.middlename} ${studentCard.lastname}`;
-  // }
-
   // Grabs the firstname data field in the HTML and displays the textcontent from the studentCard firstname property
   clone.querySelector("[data-field=firstname]").textContent = studentCard.firstname;
   clone.querySelector("[data-field=nickname]").textContent = studentCard.nickname;
@@ -288,13 +281,16 @@ function displayStudent(studentCard) {
   // Assign prefect
   clone.querySelector("[data-field=prefect]").dataset.prefect = studentCard.prefect;
   clone.querySelector("[data-field=prefect]").addEventListener("click", clickPrefect);
+  clone.querySelector("[data-field=expelled]").addEventListener("click", function () {
+    moveToExpelled(studentCard);
+  });
+  clone.querySelector("[data-field=iqsquad]").addEventListener("click", clickIqSquad);
 
   if (studentCard.iqSquad === true) {
     clone.querySelector("[data-field=iqsquad]").textContent = "⭐";
   } else {
     clone.querySelector("[data-field=iqsquad]").textContent = "☆";
   }
-  clone.querySelector("[data-field=iqsquad]").addEventListener("click", clickIqSquad);
 
   // Check wether the student is from Slytherin or not. If not it's a no-go getting into the Inqisitorial Squad
   function clickIqSquad() {
@@ -426,4 +422,49 @@ function makeStudentAPrefect(selectedStudent) {
   function removePrefect(studentCard) {
     studentCard.prefect = false;
   }
+}
+
+function moveToExpelled(studentCard) {
+  const index = allStudents.findIndex((s) => s.id === studentCard.id);
+  const expelledStudent = Object.assign({}, studentCard);
+  allStudents.splice(index, 1);
+  expelledStudents.push(expelledStudent);
+
+  // Get the template for expelled students
+  const template = document.querySelector("#expelledstudent");
+
+  // Clone the template and fill in the fields with the expelled student's data
+  const row = template.content.cloneNode(true).querySelector("tr");
+  row.querySelector("[data-field='image'] img").src = studentCard.image;
+  row.querySelector("[data-field='gender']").textContent = studentCard.gender;
+  row.querySelector("[data-field='iqsquad']").textContent = studentCard.iqsquad;
+  row.querySelector("[data-field='prefect']").textContent = studentCard.prefect;
+  row.querySelector("[data-field='bloodtype']").textContent = studentCard.blood;
+  row.querySelector("[data-field='firstname']").textContent = studentCard.firstname;
+  row.querySelector("[data-field='nickname']").textContent = studentCard.nickname;
+  row.querySelector("[data-field='middlename']").textContent = studentCard.middlename;
+  row.querySelector("[data-field='lastname']").textContent = studentCard.lastname;
+  row.querySelector("[data-field='house']").textContent = studentCard.house;
+
+  // Add the new row to the table
+  const tbody = document.querySelector("#expelledlist tbody");
+  tbody.appendChild(row);
+
+  buildList();
+}
+
+function displayExpelledList(expelledStudents) {
+  // Grabs the id="list" and the tbody element from the HTML and empties the content
+  document.querySelector("#expelledstudent tbody").innerHTML = "";
+
+  //  Runs the displayStudent functions for each of the data entries in the Json file
+  expelledStudents.forEach(displayStudent);
+}
+
+function moveFromExpelled(student) {
+  const index = expelledStudents.findIndex((s) => s.id === student.id);
+  const restoredStudent = Object.assign({}, student); // create a copy of the student object
+  expelledStudents.splice(index, 1);
+  allStudents.push(restoredStudent); // push the copied object into the array
+  buildList();
 }
