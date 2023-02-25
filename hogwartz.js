@@ -3,6 +3,7 @@
 const studentDataUrl = "https://petlatkea.dk/2021/hogwarts/students.json";
 let allStudents = [];
 let students;
+let studentCard;
 
 document.addEventListener("DOMContentLoaded", loadPage);
 const Student = {
@@ -13,6 +14,8 @@ const Student = {
   image: "",
   blood: "",
   house: "",
+  prefect: false,
+  gender: "",
 };
 
 // Controls the filter functions
@@ -26,7 +29,7 @@ const filterFunctions = {
 const settings = {
   filter: "all",
   sortBy: "name",
-  sortDir: "asc",
+  sortDir: "desc",
 };
 // Loads the page
 function loadPage() {
@@ -62,10 +65,10 @@ function loadJSON() {
 }
 
 // Shows the list of students---------------------------------------------
-function showListOfStudents() {
-  // * console.log(students);
-  prepareObjects(jsonData);
-}
+// function showListOfStudents() {
+//   // * console.log(students);
+//   prepareObjects(jsonData);
+// }
 
 function prepareObjects(jsonData) {
   allStudents = jsonData.map(prepareObject);
@@ -86,9 +89,11 @@ function prepareObject(jsonObject) {
   studentCard.lastname = getLastname(fullnameTrim);
   studentCard.image = getStudentImage(fullnameTrim);
   studentCard.house = getStudentHouse(jsonObject);
+  studentCard.gender = getStudentGender(jsonObject);
 
   return studentCard;
 }
+
 // This is where all the magic happens. All the different name values are returned here -------------------------
 
 function selectFilter(event) {
@@ -214,6 +219,10 @@ function getStudentHouse(person) {
   const houseTrim = person.house.trim();
   return `${houseTrim.charAt(0).toUpperCase()}${houseTrim.slice(1).toLowerCase()}`;
 }
+function getStudentGender(person) {
+  const genderTrim = person.gender.trim();
+  return `${genderTrim.charAt(0).toUpperCase()}${genderTrim.slice(1).toLowerCase()}`;
+}
 
 function sortList(sortedList) {
   let direction = 1;
@@ -272,7 +281,86 @@ function displayStudent(studentCard) {
   clone.querySelector("[data-field=middlename]").textContent = studentCard.middlename;
   clone.querySelector("[data-field=lastname]").textContent = studentCard.lastname;
   clone.querySelector("[data-field=house]").textContent = studentCard.house;
+  clone.querySelector("[data-field=gender]").textContent = studentCard.gender;
   clone.querySelector("#studentImage").src = `images/${studentCard.image}`;
 
+  // Assign prefect
+  clone.querySelector("[data-field=prefect]").dataset.prefect = studentCard.prefect;
+  clone.querySelector("[data-field=prefect]").addEventListener("click", clickStudent);
+
+  function clickStudent() {
+    if (studentCard.prefect === true) {
+      studentCard.prefect = false;
+    } else {
+      makeStudentAPrefect(studentCard);
+    }
+    buildList();
+  }
   document.querySelector("#list tbody").appendChild(clone);
+}
+
+function checkPrefectLimit(house, gender) {
+  let prefectsFromHouse = allStudents.filter((student) => student.house === house && student.prefect);
+  let prefectsFromGender = prefectsFromHouse.filter((student) => student.gender === gender);
+  return prefectsFromHouse.length < 2 && prefectsFromGender.length < 1;
+}
+
+// Makes the selected student a prefect
+function makeStudentAPrefect(selectedStudent) {
+  const prefects = allStudents.filter((studentCard) => studentCard.prefect);
+
+  // const numberOfPrefects = prefects.length;
+  const other = prefects.filter((studentCard) => studentCard.gender === selectedStudent.gender).shift();
+
+  assignPrefect(selectedStudent);
+  // Checks the limit for prefects in each house
+  function assignPrefect(student) {
+    if (checkPrefectLimit(student.house, student.gender, student.firstname, student.lastname)) {
+      student.prefect = true;
+      console.log(`${student.firstname} ${student.lastname} is now a prefect of ${student.house}`);
+      // removePrefectAOrPrefectB(prefects[0], prefects[1]);
+    } else {
+      console.log(`Cannot assign prefect ${student.firstname} ${student.lastname} from ${student.house} ${student.gender} as the prefect limit has been reached`);
+      removeOtherPrefect(other);
+    }
+  }
+  // Ask the user to remove or ignore the other
+  function removeOtherPrefect(other) {
+    // if ignore - do nothing
+
+    // if remove other:
+    document.querySelector("#remove_other").classList.remove("hide");
+    document.querySelector("#remove_other .closebutton").addEventListener("click", closeDialog);
+    document.querySelector("#remove_other #removeother").addEventListener("click", clickRemoveOther);
+    document.querySelector("#remove_other [data-field=otherwinner]").textContent = other.name;
+    // removePrefect(other);
+    // assignPrefect(selectedStudent);
+
+    function closeDialog() {
+      document.querySelector("#remove_other").classList.add("hide");
+      document.querySelector("#remove_other .closebutton").removeEventListener("click", closeDialog);
+      document.querySelector("#remove_other #removeother").removeEventListener("click", clickRemoveOther);
+    }
+    function clickRemoveOther() {
+      removePrefect(other);
+      assignPrefect(selectedStudent);
+      buildList();
+      closeDialog();
+    }
+  }
+
+  function removePrefectAOrPrefectB(prefectA, prefectB) {
+    // if ignore - do nothing
+    // if remove A:
+    removePrefect(prefectA);
+    assignPrefect(selectedStudent);
+
+    // else
+    removePrefect(prefectB);
+    assignPrefect(selectedStudent);
+    // }
+  }
+  function removePrefect(studentCard) {
+    studentCard.prefect = false;
+  }
 }
