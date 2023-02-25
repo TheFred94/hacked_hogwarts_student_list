@@ -308,6 +308,16 @@ function displayStudent(studentCard) {
       buildList();
     } else {
       console.log("Only Slytherin students can be added or removed from the IQ squad.");
+      notASlytherinStudent();
+    }
+  }
+  function notASlytherinStudent() {
+    document.querySelector("#onlyslytherin").classList.remove("hide");
+    document.querySelector("#onlyslytherin .closebutton").addEventListener("click", closeDialog);
+
+    function closeDialog() {
+      document.querySelector("#onlyslytherin").classList.add("hide");
+      document.querySelector("#onlyslytherin .closebutton").removeEventListener("click", closeDialog);
     }
   }
 
