@@ -346,7 +346,7 @@ function makeStudentAPrefect(selectedStudent) {
   const prefects = allStudents.filter((studentCard) => studentCard.prefect);
 
   // const numberOfPrefects = prefects.length;
-  // const other = prefects.filter((studentCard) => studentCard.gender === selectedStudent.gender).shift();
+  const other = prefects.filter((studentCard) => studentCard.gender === selectedStudent.gender).shift();
 
   assignPrefect(selectedStudent);
   // Checks the limit for prefects in each house
@@ -357,11 +357,10 @@ function makeStudentAPrefect(selectedStudent) {
       // removePrefectAOrPrefectB(prefects[0], prefects[1]);
     } else {
       console.log(`Cannot assign prefect ${student.firstname} ${student.lastname} from ${student.house} ${student.gender} as the prefect limit has been reached`);
-      removeOtherPrefect(other);
       // removePrefectAOrPrefectB(prefects[0], prefects[1]);
+      removeOtherPrefect(other);
     }
   }
-  // Ask the user to remove or ignore the other
   function removeOtherPrefect(other) {
     // if ignore - do nothing
 
@@ -384,6 +383,7 @@ function makeStudentAPrefect(selectedStudent) {
       buildList();
       closeDialog();
     }
+    // Ask the user to remove or ignore the other
   }
 
   // function removePrefectAOrPrefectB(prefectA, prefectB) {
