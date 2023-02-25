@@ -309,42 +309,58 @@ function checkPrefectLimit(house, gender) {
 function makeStudentAPrefect(selectedStudent) {
   const prefects = allStudents.filter((studentCard) => studentCard.prefect);
 
-  const numberOfPrefects = prefects.length;
+  // const numberOfPrefects = prefects.length;
   const other = prefects.filter((studentCard) => studentCard.gender === selectedStudent.gender).shift();
 
   assignPrefect(selectedStudent);
-  // Ask the user to remove or ignore the other
-  function removeOtherPrefect(other) {
-    // if ignore - do nothing
-
-    // if remove other:
-    removePrefect(other);
-    assignPrefect(selectedStudent);
-  }
-
-  // function removePrefectAOrPrefectB(prefectA, prefectB) {
-  //   // if ignore - do nothing
-  //   // if remove A:
-  //   removePrefect(prefectA);
-  //   assignPrefect(selectedStudent);
-
-  //   // else
-  //   removePrefect(prefectB);
-  //   assignPrefect(selectedStudent);
-  // }
-
-  function removePrefect(studentCard) {
-    studentCard.prefect = false;
-  }
-
   // Checks the limit for prefects in each house
   function assignPrefect(student) {
     if (checkPrefectLimit(student.house, student.gender, student.firstname, student.lastname)) {
       student.prefect = true;
       console.log(`${student.firstname} ${student.lastname} is now a prefect of ${student.house}`);
+      // removePrefectAOrPrefectB(prefects[0], prefects[1]);
     } else {
       console.log(`Cannot assign prefect ${student.firstname} ${student.lastname} from ${student.house} ${student.gender} as the prefect limit has been reached`);
       removeOtherPrefect(other);
     }
+  }
+  // Ask the user to remove or ignore the other
+  function removeOtherPrefect(other) {
+    // if ignore - do nothing
+
+    // if remove other:
+    document.querySelector("#remove_other").classList.remove("hide");
+    document.querySelector("#remove_other .closebutton").addEventListener("click", closeDialog);
+    document.querySelector("#remove_other #removeother").addEventListener("click", clickRemoveOther);
+    document.querySelector("#remove_other [data-field=otherwinner]").textContent = other.name;
+    // removePrefect(other);
+    // assignPrefect(selectedStudent);
+
+    function closeDialog() {
+      document.querySelector("#remove_other").classList.add("hide");
+      document.querySelector("#remove_other .closebutton").removeEventListener("click", closeDialog);
+      document.querySelector("#remove_other #removeother").removeEventListener("click", clickRemoveOther);
+    }
+    function clickRemoveOther() {
+      removePrefect(other);
+      assignPrefect(selectedStudent);
+      buildList();
+      closeDialog();
+    }
+  }
+
+  function removePrefectAOrPrefectB(prefectA, prefectB) {
+    // if ignore - do nothing
+    // if remove A:
+    removePrefect(prefectA);
+    assignPrefect(selectedStudent);
+
+    // else
+    removePrefect(prefectB);
+    assignPrefect(selectedStudent);
+    // }
+  }
+  function removePrefect(studentCard) {
+    studentCard.prefect = false;
   }
 }

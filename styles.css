@@ -24,3 +24,32 @@ td[data-field="prefect"]::after {
 td[data-field="prefect"][data-prefect="false"]::after {
   filter: grayscale(1);
 }
+
+/* popup dialog boxes ------------------------------- */
+
+.hide {
+  visibility: hidden;
+}
+
+.modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+button.close_button {
+  position: absolute;
+  right: 0;
+  top: 0;
+}
+
+.dialog {
+  padding: 1rem;
+  background-color: antiquewhite;
+}
