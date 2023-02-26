@@ -44,6 +44,8 @@ const filterFunctions = {
   hufflepuff: (studentCard) => studentCard.house === "Hufflepuff",
   ravenclaw: (studentCard) => studentCard.house === "Ravenclaw",
   slytherin: (studentCard) => studentCard.house === "Slytherin",
+  prefect: (studentCard) => studentCard.prefect === true,
+  iqsquad: (studentCard) => studentCard.iqSquad === true,
 };
 
 // controls the sorting and filter settings
