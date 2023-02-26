@@ -63,6 +63,7 @@ function loadPage() {
 }
 // Gives eventlisteners on all the buttons
 function registerButtons() {
+  document.getElementById("search-button").addEventListener("click", searchStudents);
   document.querySelectorAll("[data-action='filter']").forEach((button) => button.addEventListener("click", selectFilter));
   document.querySelectorAll("[data-action='sort']").forEach((button) => button.addEventListener("click", selectSort));
   console.log("buttons ready");
@@ -265,7 +266,12 @@ function sortList(sortedList) {
   }
   return sortedList;
 }
-
+function searchStudents() {
+  const searchTerm = document.getElementById("search-input").value.trim().toLowerCase();
+  allStudents = allStudents.filter((student) => student.firstname.toLowerCase().includes(searchTerm));
+  buildList();
+  console.log(allStudents);
+}
 // Build the list of students whenever the user filter or sorts. This is the center of the script
 function buildList() {
   const currentList = filterList(allStudents);
