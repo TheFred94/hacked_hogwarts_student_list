@@ -1,3 +1,17 @@
+/* Sorting styling */
+#sorting th.sortby[data-sort-direction="desc"]::after {
+  content: " ⬆️ ";
+}
+
+#sorting th.sortby[data-sort-direction="asc"]::after {
+  content: " ⬇️ ";
+}
+
+#sorting th.sortby {
+  background-color: aquamarine;
+}
+
+/* Tables styling */
 #list {
   border-collapse: collapse;
   width: 100%;
