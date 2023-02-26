@@ -22,6 +22,7 @@ const Student = {
   gender: "",
 };
 
+// Toggles between the lists of students and expelled students
 function toggleStudents() {
   let allStudents = document.getElementById("allstudents");
   let expelledStudents = document.getElementById("expelledstudents");
@@ -45,6 +46,7 @@ const filterFunctions = {
   slytherin: (studentCard) => studentCard.house === "Slytherin",
 };
 
+// controls the sorting and filter settings
 const settings = {
   filter: "all",
   sortBy: "name",
@@ -57,7 +59,7 @@ function loadPage() {
 
   loadJSON(studentDataUrl);
 }
-
+// Gives eventlisteners on all the buttons
 function registerButtons() {
   document.querySelectorAll("[data-action='filter']").forEach((button) => button.addEventListener("click", selectFilter));
   document.querySelectorAll("[data-action='sort']").forEach((button) => button.addEventListener("click", selectSort));
@@ -95,6 +97,7 @@ function prepareObjects(jsonData) {
   buildList();
 }
 
+// This is where all the magic happens. All the different name values are returned here -------------------------
 function prepareObject(jsonObject) {
   // Creates a const with the name student card that contains all the information from the Object
   const studentCard = Object.create(Student);
@@ -112,8 +115,6 @@ function prepareObject(jsonObject) {
 
   return studentCard;
 }
-
-// This is where all the magic happens. All the different name values are returned here -------------------------
 
 function selectFilter(event) {
   const filter = event.target.dataset.filter;
@@ -263,6 +264,7 @@ function sortList(sortedList) {
   return sortedList;
 }
 
+// Build the list of students whenever the user filter or sorts. This is the center of the script
 function buildList() {
   const currentList = filterList(allStudents);
   const sortedList = sortList(currentList);
@@ -297,8 +299,15 @@ function displayStudent(studentCard) {
   clone.querySelector("[data-field=prefect]").addEventListener("click", clickPrefect);
 
   // Expelled function. Looks at index and splices the student from allStudents then pushes it into expelledStudents.
+
   // Then runs moveToExpelled which clones the student into the new template
   clone.querySelector("[data-field=expelled]").addEventListener("click", function () {
+    document.querySelector("#removestudent").classList.remove("hide");
+    document.querySelector("#removestudent .closebutton").addEventListener("click", closeDialog);
+    document.querySelector("#removestudent #yes").addEventListener("click", expelStudent);
+    document.querySelector("#removestudent #no").addEventListener("click", closeDialog);
+    document.querySelector("#expelled_student_name").textContent = `Do you wish to expel ${studentCard.firstname} ${studentCard.lastname}?`;
+
     // Find the index of the student in the allStudents array
     const index = allStudents.findIndex((student) => student.firstname === studentCard.firstname);
 
@@ -306,10 +315,18 @@ function displayStudent(studentCard) {
     const expelledStudent = allStudents.splice(index, 1)[0];
     expelledStudents.push(expelledStudent);
 
+    function closeDialog() {
+      document.querySelector("#removestudent").classList.add("hide");
+      document.querySelector("#removestudent .closebutton").removeEventListener("click", closeDialog);
+      document.querySelector("#removestudent #yes").removeEventListener("click", expelStudent);
+    }
+    function expelStudent() {
+      closeDialog();
+      moveToExpelled(studentCard);
+    }
     // Rebuild the list to update the displayed students
-
-    moveToExpelled(studentCard);
   });
+
   clone.querySelector("[data-field=iqsquad]").addEventListener("click", clickIqSquad);
 
   if (studentCard.iqSquad === true) {
@@ -472,13 +489,5 @@ function moveToExpelled(studentCard) {
   tbody.appendChild(row);
   console.log(allStudents);
   console.log(expelledStudents);
-  buildList();
-}
-
-function moveFromExpelled(student) {
-  const index = expelledStudents.findIndex((s) => s.id === student.id);
-  const restoredStudent = Object.assign({}, student); // create a copy of the student object
-  expelledStudents.splice(index, 1);
-  allStudents.push(restoredStudent); // push the copied object into the array
   buildList();
 }

@@ -97,7 +97,6 @@
       </section>
     </main>
     <!-- This is the list of data for the expelled students -->
-
     <div id="remove_other" class="modal hide">
       <div class="dialog">
         <button class="closebutton">X</button>
@@ -118,11 +117,21 @@
           Only students of Slytherin can become a part of the Inqusitorial Squad. <br />
           Please choose one or more Slytherin students?
         </p>
+      </div>
+    </div>
+
+    <div id="removestudent" class="modal hide">
+      <div class="dialog">
+        <button class="closebutton">X</button>
+        <h1>Warning!</h1>
+        <p id="expelled_student_name">Do you wish to expel this student? <br /></p>
         <div class="sidebyside">
-          <button class="closebutton filter" data-action="filter" data-filter="slytherin">Get Slytherin students</button>
+          <button id="yes" class="closebutton">Yes</button>
+          <button id="no" class="closebutton">No</button>
         </div>
       </div>
     </div>
+
     <script src="hogwartz.js"></script>
   </body>
 </html>
