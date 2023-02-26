@@ -30,7 +30,7 @@ function toggleStudents() {
   if (allStudents.style.display === "none") {
     allStudents.style.display = "block";
     expelledStudents.style.display = "none";
-    toggleButton.textContent = "Show expelled";
+    toggleButton.textContent = "Show expelled students";
   } else {
     allStudents.style.display = "none";
     expelledStudents.style.display = "block";
