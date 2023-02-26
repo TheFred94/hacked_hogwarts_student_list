@@ -252,7 +252,6 @@ function buildList() {
   const currentList = filterList(allStudents);
   const sortedList = sortList(currentList);
   displayList(sortedList);
-  console.log("new list build");
 }
 
 // Clears the html and displays the list-----------------------------------
@@ -282,6 +281,15 @@ function displayStudent(studentCard) {
   clone.querySelector("[data-field=prefect]").dataset.prefect = studentCard.prefect;
   clone.querySelector("[data-field=prefect]").addEventListener("click", clickPrefect);
   clone.querySelector("[data-field=expelled]").addEventListener("click", function () {
+    // Find the index of the student in the allStudents array
+    const index = allStudents.findIndex((student) => student.firstname === studentCard.firstname);
+
+    // Remove the student from the allStudents array and add them to the expelledStudents array
+    const expelledStudent = allStudents.splice(index, 1)[0];
+    expelledStudents.push(expelledStudent);
+
+    // Rebuild the list to update the displayed students
+
     moveToExpelled(studentCard);
   });
   clone.querySelector("[data-field=iqsquad]").addEventListener("click", clickIqSquad);
@@ -425,11 +433,6 @@ function makeStudentAPrefect(selectedStudent) {
 }
 
 function moveToExpelled(studentCard) {
-  const index = allStudents.findIndex((s) => s.id === studentCard.id);
-  const expelledStudent = Object.assign({}, studentCard);
-  allStudents.splice(index, 1);
-  expelledStudents.push(expelledStudent);
-
   // Get the template for expelled students
   const template = document.querySelector("#expelledstudent");
 
@@ -449,16 +452,9 @@ function moveToExpelled(studentCard) {
   // Add the new row to the table
   const tbody = document.querySelector("#expelledlist tbody");
   tbody.appendChild(row);
-
+  console.log(allStudents);
+  console.log(expelledStudents);
   buildList();
-}
-
-function displayExpelledList(expelledStudents) {
-  // Grabs the id="list" and the tbody element from the HTML and empties the content
-  document.querySelector("#expelledstudent tbody").innerHTML = "";
-
-  //  Runs the displayStudent functions for each of the data entries in the Json file
-  expelledStudents.forEach(displayStudent);
 }
 
 function moveFromExpelled(student) {
