@@ -2,6 +2,8 @@
 
 const studentDataUrl = "https://petlatkea.dk/2021/hogwarts/students.json";
 let allStudents = [];
+let expelledStudents = [];
+
 let students;
 let studentCard;
 
@@ -16,9 +18,26 @@ const Student = {
   house: "",
   iqsquad: false,
   prefect: false,
+  expelled: false,
   gender: "",
 };
 
+// Toggles between the lists of students and expelled students
+function toggleStudents() {
+  let allStudents = document.getElementById("allstudents");
+  let expelledStudents = document.getElementById("expelledstudents");
+  let toggleButton = document.getElementById("togglebutton");
+
+  if (allStudents.style.display === "none") {
+    allStudents.style.display = "block";
+    expelledStudents.style.display = "none";
+    toggleButton.textContent = "Show expelled students";
+  } else {
+    allStudents.style.display = "none";
+    expelledStudents.style.display = "block";
+    toggleButton.textContent = "Show all students";
+  }
+}
 // Controls the filter functions
 const filterFunctions = {
   gryffindor: (studentCard) => studentCard.house === "Gryffindor",
@@ -27,6 +46,7 @@ const filterFunctions = {
   slytherin: (studentCard) => studentCard.house === "Slytherin",
 };
 
+// controls the sorting and filter settings
 const settings = {
   filter: "all",
   sortBy: "name",
@@ -39,7 +59,7 @@ function loadPage() {
 
   loadJSON(studentDataUrl);
 }
-
+// Gives eventlisteners on all the buttons
 function registerButtons() {
   document.querySelectorAll("[data-action='filter']").forEach((button) => button.addEventListener("click", selectFilter));
   document.querySelectorAll("[data-action='sort']").forEach((button) => button.addEventListener("click", selectSort));
@@ -77,6 +97,7 @@ function prepareObjects(jsonData) {
   buildList();
 }
 
+// This is where all the magic happens. All the different name values are returned here -------------------------
 function prepareObject(jsonObject) {
   // Creates a const with the name student card that contains all the information from the Object
   const studentCard = Object.create(Student);
@@ -94,8 +115,6 @@ function prepareObject(jsonObject) {
 
   return studentCard;
 }
-
-// This is where all the magic happens. All the different name values are returned here -------------------------
 
 function selectFilter(event) {
   const filter = event.target.dataset.filter;
@@ -245,11 +264,11 @@ function sortList(sortedList) {
   return sortedList;
 }
 
+// Build the list of students whenever the user filter or sorts. This is the center of the script
 function buildList() {
   const currentList = filterList(allStudents);
   const sortedList = sortList(currentList);
   displayList(sortedList);
-  console.log("new list build");
 }
 
 // Clears the html and displays the list-----------------------------------
@@ -266,16 +285,6 @@ function displayStudent(studentCard) {
   // Clones the template for each of the students
   const clone = document.querySelector("template#student").content.cloneNode(true);
 
-  // if (studentCard.firstname === "Leanne") {
-  //   clone.querySelector("[data-field=fullname]").textContent = studentCard.firstname;
-  // } else if (studentCard.middlename === `N/A` && studentCard.nickname === `N/A`) {
-  //  clone.querySelector("[data-field=fullname]").textContent = `${studentCard.firstname} ${studentCard.lastname}`;
-  // } else if (studentCard.middlename === `N/A` && studentCard.nickname !== `N/A`) {
-  //   clone.querySelector("[data-field=fullname]").textContent = `${studentCard.firstname} "${studentCard.nickname}" ${studentCard.lastname}`;
-  // } else {
-  //   clone.querySelector("[data-field=fullname]").textContent = `${studentCard.firstname} ${studentCard.middlename} ${studentCard.lastname}`;
-  // }
-
   // Grabs the firstname data field in the HTML and displays the textcontent from the studentCard firstname property
   clone.querySelector("[data-field=firstname]").textContent = studentCard.firstname;
   clone.querySelector("[data-field=nickname]").textContent = studentCard.nickname;
@@ -289,12 +298,42 @@ function displayStudent(studentCard) {
   clone.querySelector("[data-field=prefect]").dataset.prefect = studentCard.prefect;
   clone.querySelector("[data-field=prefect]").addEventListener("click", clickPrefect);
 
+  // Expelled function. Looks at index and splices the student from allStudents then pushes it into expelledStudents.
+  // Then runs moveToExpelled which clones the student into the new template
+  // Throws a dialog box with a "yes" or "no" possibility
+  clone.querySelector("[data-field=expelled]").addEventListener("click", function () {
+    document.querySelector("#removestudent").classList.remove("hide");
+    document.querySelector("#removestudent .closebutton").addEventListener("click", closeDialog);
+    document.querySelector("#removestudent #yes").addEventListener("click", expelStudent);
+    document.querySelector("#removestudent #no").addEventListener("click", closeDialog);
+    document.querySelector("#expelled_student_name").textContent = `Do you wish to expel ${studentCard.firstname} ${studentCard.lastname}?`;
+
+    // Find the index of the student in the allStudents array
+    const index = allStudents.findIndex((student) => student.firstname === studentCard.firstname);
+
+    // Remove the student from the allStudents array and add them to the expelledStudents array
+    const expelledStudent = allStudents.splice(index, 1)[0];
+    expelledStudents.push(expelledStudent);
+
+    function closeDialog() {
+      document.querySelector("#removestudent").classList.add("hide");
+      document.querySelector("#removestudent .closebutton").removeEventListener("click", closeDialog);
+      document.querySelector("#removestudent #yes").removeEventListener("click", expelStudent);
+    }
+    function expelStudent() {
+      closeDialog();
+      moveToExpelled(studentCard);
+    }
+    // Rebuild the list to update the displayed students
+  });
+
+  clone.querySelector("[data-field=iqsquad]").addEventListener("click", clickIqSquad);
+
   if (studentCard.iqSquad === true) {
     clone.querySelector("[data-field=iqsquad]").textContent = "⭐";
   } else {
     clone.querySelector("[data-field=iqsquad]").textContent = "☆";
   }
-  clone.querySelector("[data-field=iqsquad]").addEventListener("click", clickIqSquad);
 
   // Check wether the student is from Slytherin or not. If not it's a no-go getting into the Inqisitorial Squad
   function clickIqSquad() {
@@ -426,4 +465,29 @@ function makeStudentAPrefect(selectedStudent) {
   function removePrefect(studentCard) {
     studentCard.prefect = false;
   }
+}
+
+function moveToExpelled(studentCard) {
+  // Get the template for expelled students
+  const template = document.querySelector("#expelledstudent");
+
+  // Clone the template and fill in the fields with the expelled student's data
+  const row = template.content.cloneNode(true).querySelector("tr");
+  row.querySelector("[data-field='image'] img").src = `images/${studentCard.image}`;
+  row.querySelector("[data-field='gender']").textContent = studentCard.gender;
+  row.querySelector("[data-field='iqsquad']").textContent = studentCard.iqsquad;
+  row.querySelector("[data-field='prefect']").textContent = studentCard.prefect;
+  row.querySelector("[data-field='bloodtype']").textContent = studentCard.blood;
+  row.querySelector("[data-field='firstname']").textContent = studentCard.firstname;
+  row.querySelector("[data-field='nickname']").textContent = studentCard.nickname;
+  row.querySelector("[data-field='middlename']").textContent = studentCard.middlename;
+  row.querySelector("[data-field='lastname']").textContent = studentCard.lastname;
+  row.querySelector("[data-field='house']").textContent = studentCard.house;
+
+  // Add the new row to the table
+  const tbody = document.querySelector("#expelledlist tbody");
+  tbody.appendChild(row);
+  console.log(allStudents);
+  console.log(expelledStudents);
+  buildList();
 }

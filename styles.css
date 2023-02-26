@@ -18,6 +18,35 @@
   background-color: rgb(173, 230, 210);
 }
 
+#expelledlist {
+  border-collapse: collapse;
+  width: 100%;
+}
+
+/* List of expelled students */
+#expelledstudents {
+  display: none;
+}
+
+#expelledlist th,
+#expelledlist td {
+  border: 1px solid black;
+  padding: 8px;
+  text-align: center;
+}
+
+#expelledlist th {
+  background-color: lightgray;
+}
+
+#expelledlist tr:nth-child(even) {
+  background-color: rgb(173, 230, 210);
+}
+
+td[data-field="expelled"]::after {
+  content: " ❌ ";
+}
+
 td[data-field="prefect"]::after {
   content: " 🥇 ";
 }
