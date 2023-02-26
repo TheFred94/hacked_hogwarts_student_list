@@ -280,6 +280,9 @@ function displayStudent(studentCard) {
   // Assign prefect
   clone.querySelector("[data-field=prefect]").dataset.prefect = studentCard.prefect;
   clone.querySelector("[data-field=prefect]").addEventListener("click", clickPrefect);
+
+  // Expelled function. Looks at index and splices the student from allStudents then pushes it into expelledStudents.
+  // Then runs moveToExpelled which clones the student into the new template
   clone.querySelector("[data-field=expelled]").addEventListener("click", function () {
     // Find the index of the student in the allStudents array
     const index = allStudents.findIndex((student) => student.firstname === studentCard.firstname);
