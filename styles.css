@@ -50,8 +50,15 @@ td[data-field="expelled"]::after {
 td[data-field="prefect"]::after {
   content: " 🥇 ";
 }
+
 td[data-field="prefect"][data-prefect="false"]::after {
   filter: grayscale(1);
+}
+
+/* Removes the medal icon from the expelled student */
+#expelledstudents td[data-field="prefect"][data-prefect="false"]::after {
+  filter: grayscale(1);
+  content: " ";
 }
 
 /* popup dialog boxes ------------------------------- */
