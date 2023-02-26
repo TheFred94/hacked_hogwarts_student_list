@@ -3,6 +3,7 @@
 const studentDataUrl = "https://petlatkea.dk/2021/hogwarts/students.json";
 let allStudents = [];
 let expelledStudents = [];
+let allStudentsCopy = [];
 
 let students;
 let studentCard;
@@ -64,6 +65,7 @@ function loadPage() {
 // Gives eventlisteners on all the buttons
 function registerButtons() {
   document.getElementById("search-button").addEventListener("click", searchStudents);
+  document.getElementById("reset-button").addEventListener("click", resetStudents);
   document.querySelectorAll("[data-action='filter']").forEach((button) => button.addEventListener("click", selectFilter));
   document.querySelectorAll("[data-action='sort']").forEach((button) => button.addEventListener("click", selectSort));
   console.log("buttons ready");
@@ -266,11 +268,32 @@ function sortList(sortedList) {
   }
   return sortedList;
 }
+
+// Search function
 function searchStudents() {
+  // allStudentsCopy hold a copy of allStudents array.
+  // Function checks if the copy is empty. If it is a copy is created
+  // search is performed on allStudentsCopy.
+  // Results are stored in the allStudents array.
+  // ! Ensures that the allStudents array can be searched repeadetly. Every search the allStudents array is filtered and updated, while the allStudentsCopy array holds the copy
+  // * See theLogicBehind.md for more details
   const searchTerm = document.getElementById("search-input").value.trim().toLowerCase();
-  allStudents = allStudents.filter((student) => student.firstname.toLowerCase().includes(searchTerm));
+
+  // if allStudentsCopy is empty, create a copy of allStudents array
+  if (allStudentsCopy.length === 0) {
+    allStudentsCopy = [...allStudents];
+  }
+
+  allStudents = allStudentsCopy.filter((student) => student.firstname.toLowerCase().includes(searchTerm));
   buildList();
   console.log(allStudents);
+}
+
+// Resets the list of students back to the allStudents array
+function resetStudents() {
+  document.getElementById("search-input").value = ""; // clear the search input field
+  allStudents = [...allStudentsCopy]; // restore the original unfiltered array
+  buildList();
 }
 // Build the list of students whenever the user filter or sorts. This is the center of the script
 function buildList() {
