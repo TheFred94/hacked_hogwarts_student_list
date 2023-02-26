@@ -299,8 +299,8 @@ function displayStudent(studentCard) {
   clone.querySelector("[data-field=prefect]").addEventListener("click", clickPrefect);
 
   // Expelled function. Looks at index and splices the student from allStudents then pushes it into expelledStudents.
-
   // Then runs moveToExpelled which clones the student into the new template
+  // Throws a dialog box with a "yes" or "no" possibility
   clone.querySelector("[data-field=expelled]").addEventListener("click", function () {
     document.querySelector("#removestudent").classList.remove("hide");
     document.querySelector("#removestudent .closebutton").addEventListener("click", closeDialog);
