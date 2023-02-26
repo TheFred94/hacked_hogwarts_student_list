@@ -52,7 +52,7 @@ const filterFunctions = {
 const settings = {
   filter: "all",
   sortBy: "name",
-  sortDir: "desc",
+  sortDir: "asc",
 };
 // Loads the page
 function loadPage() {
