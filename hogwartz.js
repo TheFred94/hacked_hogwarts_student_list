@@ -22,6 +22,21 @@ const Student = {
   gender: "",
 };
 
+function toggleStudents() {
+  let allStudents = document.getElementById("allstudents");
+  let expelledStudents = document.getElementById("expelledstudents");
+  let toggleButton = document.getElementById("togglebutton");
+
+  if (allStudents.style.display === "none") {
+    allStudents.style.display = "block";
+    expelledStudents.style.display = "none";
+    toggleButton.textContent = "Show expelled";
+  } else {
+    allStudents.style.display = "none";
+    expelledStudents.style.display = "block";
+    toggleButton.textContent = "Show all students";
+  }
+}
 // Controls the filter functions
 const filterFunctions = {
   gryffindor: (studentCard) => studentCard.house === "Gryffindor",
