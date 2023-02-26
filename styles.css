@@ -23,6 +23,11 @@
   width: 100%;
 }
 
+/* List of expelled students */
+#expelledstudents {
+  display: none;
+}
+
 #expelledlist th,
 #expelledlist td {
   border: 1px solid black;
