@@ -1,6 +1,6 @@
 <mxfile host="65bd71144e">
     <diagram name="Page-1" id="Lkjmjo3w-PD-YkwlmQaR">
-        <mxGraphModel dx="1096" dy="1672" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="850" pageHeight="1100" math="0" shadow="0">
+        <mxGraphModel dx="1517" dy="2315" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="850" pageHeight="1100" math="0" shadow="0">
             <root>
                 <mxCell id="0"/>
                 <mxCell id="1" parent="0"/>
@@ -613,9 +613,22 @@
                         </Array>
                     </mxGeometry>
                 </mxCell>
-                <mxCell id="318" value="allStudents = display: none" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" vertex="1" connectable="0" parent="316">
+                <mxCell id="318" value="[allStudents = display: block]" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" vertex="1" connectable="0" parent="316">
                     <mxGeometry x="-0.2067" y="1" relative="1" as="geometry">
                         <mxPoint x="4" y="-1" as="offset"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="321" style="edgeStyle=none;html=1;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="1" source="315" target="320">
+                    <mxGeometry relative="1" as="geometry">
+                        <mxPoint x="1627" y="759" as="targetPoint"/>
+                        <Array as="points">
+                            <mxPoint x="1620" y="695"/>
+                        </Array>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="322" value="[allStudents = display: none]" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" vertex="1" connectable="0" parent="321">
+                    <mxGeometry x="-0.3406" y="-4" relative="1" as="geometry">
+                        <mxPoint x="14" y="-4" as="offset"/>
                     </mxGeometry>
                 </mxCell>
                 <mxCell id="315" value="" style="rhombus;whiteSpace=wrap;html=1;fillColor=none;" vertex="1" parent="1">
@@ -623,6 +636,9 @@
                 </mxCell>
                 <mxCell id="319" value="shows all&amp;nbsp;&lt;br&gt;students" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
                     <mxGeometry x="1160" y="758" width="120" height="60" as="geometry"/>
+                </mxCell>
+                <mxCell id="320" value="shows expelled&lt;br&gt;students" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+                    <mxGeometry x="1560" y="758" width="120" height="60" as="geometry"/>
                 </mxCell>
             </root>
         </mxGraphModel>
