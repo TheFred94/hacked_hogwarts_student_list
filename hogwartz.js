@@ -475,8 +475,8 @@ function moveToExpelled(studentCard) {
   const row = template.content.cloneNode(true).querySelector("tr");
   row.querySelector("[data-field='image'] img").src = `images/${studentCard.image}`;
   row.querySelector("[data-field='gender']").textContent = studentCard.gender;
-  row.querySelector("[data-field='iqsquad']").textContent = studentCard.iqsquad;
-  row.querySelector("[data-field='prefect']").textContent = studentCard.prefect;
+  row.querySelector("[data-field='iqsquad']").textContent = `N/A`;
+  row.querySelector("[data-field='prefect']").textContent = `N/A`;
   row.querySelector("[data-field='bloodtype']").textContent = studentCard.blood;
   row.querySelector("[data-field='firstname']").textContent = studentCard.firstname;
   row.querySelector("[data-field='nickname']").textContent = studentCard.nickname;
