@@ -6,6 +6,8 @@ let allStudents = [];
 let expelledStudents = [];
 let allStudentsCopy = [];
 let studentBloodStatus = [];
+let pureBloods = [];
+let halfBloods = [];
 let students;
 let studentCard;
 let allStudentsCounter = 0;
@@ -73,8 +75,8 @@ function loadPage() {
     .then((response) => response.json())
     .then((data) => {
       // Process blood status data into two arrays
-      const pureBloods = data.pure;
-      const halfBloods = data.half;
+      pureBloods = data.pure;
+      halfBloods = data.half;
 
       // Fetch and process student data and sorts students into either pure or halfblood students
       fetch(studentDataUrl)
@@ -157,6 +159,9 @@ function prepareObject(jsonObject) {
   studentCard.image = getStudentImage(fullnameTrim);
   studentCard.house = getStudentHouse(jsonObject);
   studentCard.gender = getStudentGender(jsonObject);
+  const isPureBlood = pureBloods.includes(studentCard.lastname);
+  const isHalfBlood = halfBloods.includes(studentCard.lastname);
+  studentCard.blood = isPureBlood ? "Pureblood" : isHalfBlood ? "Half-blood" : "Muggle-born";
 
   return studentCard;
 }
@@ -368,6 +373,7 @@ function displayStudent(studentCard) {
   clone.querySelector("#studentHouse").src = `house_crests/${studentCard.house}.svg`;
   clone.querySelector("[data-field=gender]").textContent = studentCard.gender;
   clone.querySelector("#studentImage").src = `images/${studentCard.image}`;
+  clone.querySelector("[data-field=bloodtype]").textContent = studentCard.blood;
   clone.querySelector("[data-field=image]").addEventListener("click", () => showStudentDetails(studentCard));
   // Assign prefect
   clone.querySelector("[data-field=prefect]").dataset.prefect = studentCard.prefect;
