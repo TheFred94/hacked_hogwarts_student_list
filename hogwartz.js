@@ -532,12 +532,12 @@ function moveToExpelled(studentCard) {
   row.querySelector("[data-field='gender']").textContent = studentCard.gender;
   row.querySelector("[data-field='iqsquad']").textContent = `N/A`;
   row.querySelector("[data-field='prefect']").textContent = `N/A`;
-  row.querySelector("[data-field='bloodtype']").textContent = studentCard.blood;
+  row.querySelector("#studentBlood").src = `blood_status/${studentCard.blood}.svg`;
+  row.querySelector("#studentHouse").src = `house_crests/${studentCard.house}.svg`;
   row.querySelector("[data-field='firstname']").textContent = studentCard.firstname;
   row.querySelector("[data-field='nickname']").textContent = studentCard.nickname;
   row.querySelector("[data-field='middlename']").textContent = studentCard.middlename;
   row.querySelector("[data-field='lastname']").textContent = studentCard.lastname;
-  row.querySelector("[data-field='house']").textContent = studentCard.house;
   row.querySelector("[data-field=image]").addEventListener("click", () => showStudentDetails(studentCard));
   // Add the new row to the table
   const tbody = document.querySelector("#expelledlist tbody");
