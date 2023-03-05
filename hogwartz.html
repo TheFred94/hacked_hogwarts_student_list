@@ -55,7 +55,7 @@
               <td data-field="nickname"></td>
               <td data-field="middlename"></td>
               <td data-field="lastname"></td>
-              <td data-field="house"></td>
+              <td data-field="house"><img id="studentHouse" src="" /></td>
               <td class="expelled" data-expel="false" data-field="expelled"></td>
             </tr>
           </template>
@@ -102,6 +102,32 @@
         </template>
       </section>
     </main>
+
+<!-- CONTENT FOR THE POPUP -->
+    <section id="popup" >
+      <article class="popup_details">
+        <div class="close">&#x2715</div>
+        <img class="student_house" alt="House crest">
+        <img class="student_image" alt="Picture of student">
+        
+          <p class="firstname_text">Firstname</p>
+          <p class="nickname_text">Nickname</p>
+          <p class="middlename_text">Middlename</p>
+          <p class="lastname_text">Lastname</p>
+
+        <p class="student_name"></p>
+        <p class="student_nickname"></p>
+        <p class="student_middlename"></p>
+        <p class="student_lastname"></p>
+        <p class="prefect" data-prefect="false" data-field="prefect"></p>
+        <p class="iqsquad" data-field="iqsquad">☆</p>
+        <p class="expelled" data-expelled="false" ></p>
+        
+    
+        </table>
+        </div>
+      </article>
+    </section>
     <!-- This is the list of data for the expelled students -->
     <div id="remove_other" class="modal hide">
       <div class="dialog">

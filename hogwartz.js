@@ -321,10 +321,10 @@ function displayStudent(studentCard) {
   clone.querySelector("[data-field=nickname]").textContent = studentCard.nickname;
   clone.querySelector("[data-field=middlename]").textContent = studentCard.middlename;
   clone.querySelector("[data-field=lastname]").textContent = studentCard.lastname;
-  clone.querySelector("[data-field=house]").textContent = studentCard.house;
+  clone.querySelector("#studentHouse").src = `house_crests/${studentCard.house}.svg`;
   clone.querySelector("[data-field=gender]").textContent = studentCard.gender;
   clone.querySelector("#studentImage").src = `images/${studentCard.image}`;
-
+  clone.querySelector("[data-field=image]").addEventListener("click", () => showStudentDetails(studentCard));
   // Assign prefect
   clone.querySelector("[data-field=prefect]").dataset.prefect = studentCard.prefect;
   clone.querySelector("[data-field=prefect]").addEventListener("click", clickPrefect);
@@ -353,6 +353,7 @@ function displayStudent(studentCard) {
     }
     function expelStudent() {
       closeDialog();
+      studentCard.expelled = true;
       moveToExpelled(studentCard);
     }
     // Rebuild the list to update the displayed students
@@ -372,8 +373,10 @@ function displayStudent(studentCard) {
     if (checkStudentHouse(studentCard)) {
       if (studentCard.iqSquad === true) {
         studentCard.iqSquad = false;
+        console.log(studentCard.iqSquad);
       } else {
         studentCard.iqSquad = true;
+        console.log(studentCard.iqSquad);
       }
       buildList();
     } else {
@@ -460,39 +463,6 @@ function makeStudentAPrefect(selectedStudent) {
     // Ask the user to remove or ignore the other
   }
 
-  // function removePrefectAOrPrefectB(prefectA, prefectB) {
-  //   document.querySelector("#remove_aorb").classList.remove("hide");
-  //   document.querySelector("#remove_aorb .closebutton").addEventListener("click", closeDialog);
-  //   document.querySelector("#remove_aorb #removea").addEventListener("click", clickRemoveA);
-  //   document.querySelector("#remove_aorb #removeb").addEventListener("click", clickRemoveB);
-
-  //   // Show names on buttons
-  //   document.querySelector("#remove_aorb [data-field=winnerA]").textContent = winnerA.name;
-  //   document.querySelector("#remove_aorb [data-field=winnerB]").textContent = winnerB.name;
-
-  //   // if ignore - do nothing
-  //   function closeDialog() {
-  //     document.querySelector("#remove_aorb").classList.add("hide");
-  //     document.querySelector("#remove_aorb .closebutton").removeEventListener("click", closeDialog);
-  //     document.querySelector("#remove_aorb #removea").removeEventListener("click", clickRemoveA);
-  //     document.querySelector("#remove_aorb #removeb").removeEventListener("click", clickRemoveB);
-  //   }
-  //   // if removeA
-  //   function clickRemoveA() {
-  //     removePrefect(prefectA);
-  //     assignPrefect(selectedStudent);
-  //     buildList();
-  //     closeDialog();
-  //   }
-
-  //   // else - if removeB
-  //   function clickRemoveB() {
-  //     removePrefect(prefectB);
-  //     assignPrefect(selectedStudent);
-  //     buildList();
-  //     closeDialog();
-  //   }
-  // }
   function removePrefect(studentCard) {
     studentCard.prefect = false;
   }
@@ -514,7 +484,7 @@ function moveToExpelled(studentCard) {
   row.querySelector("[data-field='middlename']").textContent = studentCard.middlename;
   row.querySelector("[data-field='lastname']").textContent = studentCard.lastname;
   row.querySelector("[data-field='house']").textContent = studentCard.house;
-
+  row.querySelector("[data-field=image]").addEventListener("click", () => showStudentDetails(studentCard));
   // Add the new row to the table
   const tbody = document.querySelector("#expelledlist tbody");
   tbody.appendChild(row);
@@ -522,3 +492,34 @@ function moveToExpelled(studentCard) {
   console.log(expelledStudents);
   buildList();
 }
+
+function showStudentDetails(studentCard) {
+  console.log(student);
+  popup.style.display = "block";
+  popup.querySelector(".student_name").textContent = `${studentCard.firstname}`;
+  popup.querySelector(".student_nickname").textContent = `${studentCard.nickname}`;
+  popup.querySelector(".student_middlename").textContent = `${studentCard.middlename}`;
+  popup.querySelector(".student_lastname").textContent = `${studentCard.lastname}`;
+  popup.querySelector(".student_image").src = `images/${studentCard.image}`;
+  popup.querySelector(".student_house").src = `house_crests/${studentCard.house}.svg`;
+
+  // When opening popup, change the value of data-prefect depending on status either true or false
+  const prefectElem = popup.querySelector(".prefect");
+  prefectElem.dataset.prefect = studentCard.prefect;
+
+  const iqSquadElem = popup.querySelector("[data-field=iqsquad]");
+  if (studentCard.iqSquad === true) {
+    iqSquadElem.textContent = "⭐";
+  } else {
+    iqSquadElem.textContent = "☆";
+  }
+
+  const expelledElem = popup.querySelector(".expelled");
+  if (studentCard.expelled === true) {
+    expelledElem.textContent = "This student has been Expelled";
+  } else {
+    expelledElem.textContent = "";
+  }
+}
+
+document.querySelector(".close").addEventListener("click", () => (popup.style.display = "none"));
