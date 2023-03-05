@@ -483,7 +483,7 @@ function moveToExpelled(studentCard) {
   row.querySelector("[data-field='middlename']").textContent = studentCard.middlename;
   row.querySelector("[data-field='lastname']").textContent = studentCard.lastname;
   row.querySelector("[data-field='house']").textContent = studentCard.house;
-
+  row.querySelector("[data-field=image]").addEventListener("click", () => showStudentDetails(studentCard));
   // Add the new row to the table
   const tbody = document.querySelector("#expelledlist tbody");
   tbody.appendChild(row);
