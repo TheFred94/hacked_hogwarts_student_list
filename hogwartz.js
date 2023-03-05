@@ -306,10 +306,10 @@ function buildList() {
   displayedStudentsCounter = 0;
 
   const currentList = filterList(allStudents);
-  displayedStudentsCounter += currentList.length;
   const sortedList = sortList(currentList);
   displayList(sortedList);
-  updateCounters();
+
+  updateCounters(currentList);
 }
 
 // Clears the html and displays the list-----------------------------------
@@ -535,10 +535,10 @@ function showStudentDetails(studentCard) {
 
 document.querySelector(".close").addEventListener("click", () => (popup.style.display = "none"));
 
-function updateCounters() {
+function updateCounters(currentList) {
   allStudentsCounter = allStudents.length;
   expelledStudentsCounter = expelledStudents.length;
-  displayedStudentsCounter = document.querySelectorAll(".student").length;
+  displayedStudentsCounter = currentList.length;
 
   allStudentsCounterElement.textContent = allStudentsCounter;
   expelledStudentsCounterElement.textContent = expelledStudentsCounter;
