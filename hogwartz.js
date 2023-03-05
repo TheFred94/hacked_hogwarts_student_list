@@ -557,6 +557,7 @@ function showStudentDetails(studentCard) {
   popup.querySelector(".student_lastname").textContent = `${studentCard.lastname}`;
   popup.querySelector(".student_image").src = `images/${studentCard.image}`;
   popup.querySelector(".student_house").src = `house_crests/${studentCard.house}.svg`;
+  popup.querySelector(".student_blood").src = `blood_status/${studentCard.blood}.svg`;
 
   // When opening popup, change the value of data-prefect depending on status either true or false
   const prefectElem = popup.querySelector(".prefect");

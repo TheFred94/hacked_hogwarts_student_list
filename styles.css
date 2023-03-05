@@ -241,3 +241,8 @@ p[data-field="prefect"][data-prefect="false"] {
   grid-column: 3 span;
   grid-row: 5;
 }
+
+.student_blood {
+  grid-row: 5;
+  grid-column: 3;
+}
