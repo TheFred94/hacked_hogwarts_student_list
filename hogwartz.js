@@ -162,7 +162,7 @@ function prepareObject(jsonObject) {
   const isPureBlood = pureBloods.includes(studentCard.lastname);
   const isHalfBlood = halfBloods.includes(studentCard.lastname);
   studentCard.blood = isPureBlood ? "Pureblood" : isHalfBlood ? "Half-blood" : "Muggle-born";
-
+  console.log(studentCard.blood);
   return studentCard;
 }
 
@@ -371,14 +371,14 @@ function displayStudent(studentCard) {
   clone.querySelector("[data-field=middlename]").textContent = studentCard.middlename;
   clone.querySelector("[data-field=lastname]").textContent = studentCard.lastname;
   clone.querySelector("#studentHouse").src = `house_crests/${studentCard.house}.svg`;
+
   clone.querySelector("[data-field=gender]").textContent = studentCard.gender;
   clone.querySelector("#studentImage").src = `images/${studentCard.image}`;
-  clone.querySelector("[data-field=bloodtype]").textContent = studentCard.blood;
+  clone.querySelector("#studentBlood").src = `blood_status/${studentCard.blood}.svg`;
   clone.querySelector("[data-field=image]").addEventListener("click", () => showStudentDetails(studentCard));
   // Assign prefect
   clone.querySelector("[data-field=prefect]").dataset.prefect = studentCard.prefect;
   clone.querySelector("[data-field=prefect]").addEventListener("click", clickPrefect);
-
   // Expelled function. Looks at index and splices the student from allStudents then pushes it into expelledStudents.
   // Then runs moveToExpelled which clones the student into the new template
   // Throws a dialog box with a "yes" or "no" possibility
