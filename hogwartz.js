@@ -57,6 +57,9 @@ const filterFunctions = {
   slytherin: (studentCard) => studentCard.house === "Slytherin",
   prefect: (studentCard) => studentCard.prefect === true,
   iqsquad: (studentCard) => studentCard.iqSquad === true,
+  pureblood: (studentCard) => studentCard.blood === "Pureblood",
+  halfblood: (studentCard) => studentCard.blood === "Half-blood",
+  muggleborn: (studentCard) => studentCard.blood === "Muggle-born",
 };
 
 // controls the sorting and filter settings
