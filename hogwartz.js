@@ -526,7 +526,10 @@ function moveToExpelled(studentCard) {
 function showStudentDetails(studentCard) {
   console.log(student);
   popup.style.display = "block";
-  document.querySelector(".student_name").textContent = studentCard.firstname;
+  document.querySelector(".student_name").textContent = `${studentCard.firstname}`;
+  document.querySelector(".student_nickname").textContent = `${studentCard.nickname}`;
+  document.querySelector(".student_middlename").textContent = `${studentCard.middlename}`;
+  document.querySelector(".student_lastname").textContent = `${studentCard.lastname}`;
   document.querySelector(".student_image").src = `images/${studentCard.image}`;
   document.querySelector(".student_house").src = `house_crests/${studentCard.house}.svg`;
 }
