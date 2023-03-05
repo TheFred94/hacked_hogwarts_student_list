@@ -324,7 +324,7 @@ function displayStudent(studentCard) {
   clone.querySelector("[data-field=house]").textContent = studentCard.house;
   clone.querySelector("[data-field=gender]").textContent = studentCard.gender;
   clone.querySelector("#studentImage").src = `images/${studentCard.image}`;
-
+  clone.querySelector("[data-field=image]").addEventListener("click", () => showStudentDetails(studentCard));
   // Assign prefect
   clone.querySelector("[data-field=prefect]").dataset.prefect = studentCard.prefect;
   clone.querySelector("[data-field=prefect]").addEventListener("click", clickPrefect);
@@ -522,3 +522,11 @@ function moveToExpelled(studentCard) {
   console.log(expelledStudents);
   buildList();
 }
+
+function showStudentDetails(studentCard) {
+  console.log(student);
+  popup.style.display = "block";
+  document.querySelector(".student_name").textContent = studentCard.firstname;
+}
+
+document.querySelector(".close").addEventListener("click", () => (popup.style.display = "none"));

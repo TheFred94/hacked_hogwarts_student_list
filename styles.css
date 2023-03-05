@@ -1,4 +1,5 @@
 /* Sorting styling */
+
 #sorting th.sortby[data-sort-direction="desc"]::after {
   content: " ⬆️ ";
 }
@@ -102,4 +103,48 @@ button.close_button {
 .dialog {
   padding: 1rem;
   background-color: antiquewhite;
+}
+
+/* POPUP DETAILS ABOUT STUDENT --------------------------- */
+#popup {
+  display: none;
+  position: fixed;
+  left: 0;
+  top: 0;
+  height: 100vh;
+  width: 100vw;
+  background-color: rgba(31, 31, 31, 0.8);
+  overflow: scroll;
+  padding: 0;
+  margin: 0;
+}
+
+.close {
+  position: fixed;
+  font-size: 1.7rem;
+  font-weight: bolder;
+  color: white;
+  cursor: pointer;
+}
+
+.popup_details {
+  padding: 0;
+  margin: 0;
+}
+
+#popup article {
+  transition: 1sec;
+  width: 1000px;
+  height: 1000px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  margin: 10rem auto;
+
+  background-color: #ffff;
+}
+
+section > article > h2 {
+  color: black;
 }
