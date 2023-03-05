@@ -353,6 +353,7 @@ function displayStudent(studentCard) {
     }
     function expelStudent() {
       closeDialog();
+      studentCard.expelled = true;
       moveToExpelled(studentCard);
     }
     // Rebuild the list to update the displayed students
@@ -511,6 +512,13 @@ function showStudentDetails(studentCard) {
     iqSquadElem.textContent = "⭐";
   } else {
     iqSquadElem.textContent = "☆";
+  }
+
+  const expelledElem = popup.querySelector(".expelled");
+  if (studentCard.expelled === true) {
+    expelledElem.textContent = "This student has been Expelled";
+  } else {
+    expelledElem.textContent = "";
   }
 }
 

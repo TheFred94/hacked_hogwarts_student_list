@@ -236,3 +236,8 @@ p[data-field="prefect"][data-prefect="false"] {
 .iqsquad {
   grid-column: 4;
 }
+
+.expelled {
+  grid-column: 3 span;
+  grid-row: 5;
+}
