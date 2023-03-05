@@ -4,9 +4,15 @@ const studentDataUrl = "https://petlatkea.dk/2021/hogwarts/students.json";
 let allStudents = [];
 let expelledStudents = [];
 let allStudentsCopy = [];
-
 let students;
 let studentCard;
+let allStudentsCounter = 0;
+let expelledStudentsCounter = 0;
+let displayedStudentsCounter = 0;
+
+const allStudentsCounterElement = document.querySelector("#allStudentsCounter");
+const expelledStudentsCounterElement = document.querySelector("#expelledStudentsCounter");
+const displayedStudentsCounterElement = document.querySelector("#displayedStudentsCounter");
 
 document.addEventListener("DOMContentLoaded", loadPage);
 const Student = {
@@ -297,9 +303,13 @@ function resetStudents() {
 }
 // Build the list of students whenever the user filter or sorts. This is the center of the script
 function buildList() {
+  displayedStudentsCounter = 0;
+
   const currentList = filterList(allStudents);
+  displayedStudentsCounter += currentList.length;
   const sortedList = sortList(currentList);
   displayList(sortedList);
+  updateCounters();
 }
 
 // Clears the html and displays the list-----------------------------------
@@ -404,6 +414,7 @@ function displayStudent(studentCard) {
     }
     buildList();
   }
+
   document.querySelector("#list tbody").appendChild(clone);
 }
 
@@ -523,3 +534,13 @@ function showStudentDetails(studentCard) {
 }
 
 document.querySelector(".close").addEventListener("click", () => (popup.style.display = "none"));
+
+function updateCounters() {
+  allStudentsCounter = allStudents.length;
+  expelledStudentsCounter = expelledStudents.length;
+  displayedStudentsCounter = document.querySelectorAll(".student").length;
+
+  allStudentsCounterElement.textContent = allStudentsCounter;
+  expelledStudentsCounterElement.textContent = expelledStudentsCounter;
+  displayedStudentsCounterElement.textContent = displayedStudentsCounter;
+}
