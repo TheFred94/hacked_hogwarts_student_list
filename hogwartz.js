@@ -504,6 +504,7 @@ function moveToExpelled(studentCard) {
   buildList();
 }
 
+// Displays the popup and the details about a student
 function showStudentDetails(studentCard) {
   console.log(student);
   popup.style.display = "block";
@@ -533,8 +534,10 @@ function showStudentDetails(studentCard) {
   }
 }
 
+// Looks for a click on the "X" in the popup showStudentDetails
 document.querySelector(".close").addEventListener("click", () => (popup.style.display = "none"));
 
+// updates the counters when
 function updateCounters(currentList) {
   allStudentsCounter = allStudents.length;
   expelledStudentsCounter = expelledStudents.length;
