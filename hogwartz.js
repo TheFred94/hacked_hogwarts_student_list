@@ -372,8 +372,10 @@ function displayStudent(studentCard) {
     if (checkStudentHouse(studentCard)) {
       if (studentCard.iqSquad === true) {
         studentCard.iqSquad = false;
+        console.log(studentCard.iqSquad);
       } else {
         studentCard.iqSquad = true;
+        console.log(studentCard.iqSquad);
       }
       buildList();
     } else {
@@ -503,8 +505,13 @@ function showStudentDetails(studentCard) {
   // When opening popup, change the value of data-prefect depending on status either true or false
   const prefectElem = popup.querySelector(".prefect");
   prefectElem.dataset.prefect = studentCard.prefect;
-  const iqSquadElem = popup.querySelector(".prefect");
-  prefectElem.dataset.prefect = studentCard.prefect;
+
+  const iqSquadElem = popup.querySelector("[data-field=iqsquad]");
+  if (studentCard.iqSquad === true) {
+    iqSquadElem.textContent = "⭐";
+  } else {
+    iqSquadElem.textContent = "☆";
+  }
 }
 
 document.querySelector(".close").addEventListener("click", () => (popup.style.display = "none"));
