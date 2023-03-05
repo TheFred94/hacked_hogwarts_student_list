@@ -528,6 +528,7 @@ function showStudentDetails(studentCard) {
   popup.style.display = "block";
   document.querySelector(".student_name").textContent = studentCard.firstname;
   document.querySelector(".student_image").src = `images/${studentCard.image}`;
+  document.querySelector(".student_house").src = `house_crests/${studentCard.house}.svg`;
 }
 
 document.querySelector(".close").addEventListener("click", () => (popup.style.display = "none"));

@@ -1,3 +1,9 @@
+/* GENERAL ---------------------------------- */
+img {
+  height: 100px;
+  width: 100px;
+}
+
 /* Sorting styling */
 
 #sorting th.sortby[data-sort-direction="desc"]::after {
@@ -139,16 +145,26 @@ button.close_button {
 #popup article {
   transition: 1sec;
   width: 1000px;
-  height: 1000px;
+  height: 700px;
 
   align-items: center;
   justify-content: center;
   flex-direction: column;
-  margin: 10rem auto;
+  margin: 30rem auto;
 
   background-color: #ffff;
 }
 
 section > article > h2 {
   color: black;
+}
+section > article > .student_house {
+  position: absolute;
+  top: 314px;
+  left: 536.4px;
+  height: 300px;
+  width: 300px;
+  grid-column: 3;
+  grid-row: 1;
+  align-self: start;
 }
