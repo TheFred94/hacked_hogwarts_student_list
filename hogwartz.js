@@ -321,7 +321,7 @@ function displayStudent(studentCard) {
   clone.querySelector("[data-field=nickname]").textContent = studentCard.nickname;
   clone.querySelector("[data-field=middlename]").textContent = studentCard.middlename;
   clone.querySelector("[data-field=lastname]").textContent = studentCard.lastname;
-  clone.querySelector("[data-field=house]").textContent = studentCard.house;
+  clone.querySelector("#studentHouse").src = `house_crests/${studentCard.house}.svg`;
   clone.querySelector("[data-field=gender]").textContent = studentCard.gender;
   clone.querySelector("#studentImage").src = `images/${studentCard.image}`;
   clone.querySelector("[data-field=image]").addEventListener("click", () => showStudentDetails(studentCard));
@@ -527,6 +527,7 @@ function showStudentDetails(studentCard) {
   console.log(student);
   popup.style.display = "block";
   document.querySelector(".student_name").textContent = studentCard.firstname;
+  document.querySelector(".student_image").src = `images/${studentCard.image}`;
 }
 
 document.querySelector(".close").addEventListener("click", () => (popup.style.display = "none"));
