@@ -1,9 +1,11 @@
 "use strict";
 
 const studentDataUrl = "https://petlatkea.dk/2021/hogwarts/students.json";
+const bloodStatusUrl = "https://petlatkea.dk/2021/hogwarts/families.json";
 let allStudents = [];
 let expelledStudents = [];
 let allStudentsCopy = [];
+let studentBloodStatus = [];
 let students;
 let studentCard;
 let allStudentsCounter = 0;
@@ -66,7 +68,39 @@ function loadPage() {
   console.log("Page loaded");
   registerButtons();
 
-  loadJSON(studentDataUrl);
+  // Fetch blood status data
+  fetch(bloodStatusUrl)
+    .then((response) => response.json())
+    .then((data) => {
+      // Process blood status data into two arrays
+      const pureBloods = data.pure;
+      const halfBloods = data.half;
+
+      // Fetch and process student data and sorts students into either pure or halfblood students
+      fetch(studentDataUrl)
+        .then((response) => response.json())
+        .then((data) => {
+          // Process student data
+          allStudents = data.map(prepareObject);
+          allStudentsCopy = [...allStudents];
+          buildList();
+
+          // Filter students by blood status
+          studentBloodStatus = allStudents.filter((student) => {
+            const isPureBlood = pureBloods.includes(student.lastname);
+            const isHalfBlood = halfBloods.includes(student.lastname);
+            return isPureBlood || isHalfBlood;
+          });
+          console.log(
+            "Purebloods:",
+            studentBloodStatus.filter((student) => pureBloods.includes(student.lastname))
+          );
+          console.log(
+            "Halfbloods:",
+            studentBloodStatus.filter((student) => halfBloods.includes(student.lastname))
+          );
+        });
+    });
 }
 // Gives eventlisteners on all the buttons
 function registerButtons() {
