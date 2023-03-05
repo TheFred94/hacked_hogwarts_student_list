@@ -216,3 +216,19 @@ section > article > .student_house {
   grid-row: 7;
   grid-column: 1;
 }
+
+.iqsquad {
+  grid-column: 3;
+}
+
+p[data-field="prefect"]::after {
+  content: " 🥇 ";
+}
+
+p[data-field="prefect"][data-prefect="false"] {
+  filter: grayscale(1);
+}
+
+.prefect {
+  grid-column: 3;
+}
