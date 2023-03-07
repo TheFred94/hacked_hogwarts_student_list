@@ -116,6 +116,7 @@ function loadPage() {
         });
     });
 }
+
 // Gives eventlisteners on all the buttons
 function registerButtons() {
   document.getElementById("search-button").addEventListener("click", searchStudents);
