@@ -48,21 +48,29 @@
       <section id="allstudents">
         <table id="list">
             <div id="sorting">
-              <p>Portrait</p>
-              <p data-action="sort" data-sort-direction="asc" data-sort="gender">Gender</p>
-              <p data-action="sort" data-sort-direction="asc" data-sort="iqsquad">Inqusitorial Squad</p>
-              <p data-action="sort" data-sort-direction="asc" data-sort="prefect">Prefect</p>
-              <p data-action="sort" data-sort-direction="asc" data-sort="bloodtype">Bloodtype</p>
-              <p data-action="sort" data-sort-direction="asc" data-sort="firstname">First name</p>
-              <p data-action="sort" data-sort-direction="asc" data-sort="nickname">Nick name</p>
-              <p data-action="sort" data-sort-direction="asc" data-sort="middlename">Middle name</p>
-              <p data-action="sort" data-sort-direction="asc" data-sort="lastname">Last name</p>
-              <p data-action="sort" data-sort-direction="asc" data-sort="house">House</p>
+              <div class="burger">
+                <span class="bar"></span>
+                <span class="bar"></span>
+                <span class="bar"></span>
+              </div> 
+              <div class="nav-links">
+              <p class="nav-item table_head_portrait">Portrait</p>
+              <p class="nav-item data-action="sort" data-sort-direction="asc" data-sort="gender">Gender</p>
+              <p class="nav-item data-action="sort" data-sort-direction="asc" data-sort="iqsquad">Inqusitorial Squad</p>
+              <p class="nav-item data-action="sort" data-sort-direction="asc" data-sort="prefect">Prefect</p>
+              <p class="nav-item data-action="sort" data-sort-direction="asc" data-sort="bloodtype">Bloodtype</p>
+              <p class="nav-item data-action="sort" data-sort-direction="asc" data-sort="firstname">First name</p>
+              <p class="nav-item data-action="sort" data-sort-direction="asc" data-sort="nickname">Nick name</p>
+              <p class="nav-item data-action="sort" data-sort-direction="asc" data-sort="middlename">Middle name</p>
+              <p class="nav-item data-action="sort" data-sort-direction="asc" data-sort="lastname">Last name</p>
+              <p class="nav-item data-action="sort" data-sort-direction="asc" data-sort="house">House</p>
               <p>Expell Student</p>
             </div>
+          </div>
           </thead>
           <template id="student">
           <section class="student_template">
+            
             <p class="fullname" data-field="fullname"></p>
               <p class="image" data-field="image"><img id="studentImage" src="" /></p>
             
@@ -88,6 +96,11 @@
       <section id="expelledstudents">
         <table id="expelledlist">
           <div id="sorting">
+            <div class="burger">
+              <span class="bar"></span>
+              <span class="bar"></span>
+              <span class="bar"></span>
+            </div>  
               <p>Portrait</p>
               <p data-action="sort" data-sort-direction="asc" data-sort="gender">Gender</p>
               <p data-action="sort" data-sort-direction="asc" data-sort="iqsquad">Inqusitorial Squad</p>

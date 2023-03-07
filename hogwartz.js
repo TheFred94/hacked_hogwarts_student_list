@@ -33,6 +33,15 @@ const Student = {
   gender: "",
 };
 
+// SORTING MENU
+const burger = document.querySelector(".burger");
+const navLinks = document.querySelector(".nav-links");
+
+burger.addEventListener("click", () => {
+  burger.classList.toggle("active");
+  navLinks.classList.toggle("active");
+});
+
 // Toggles between the lists of students and expelled students
 function toggleStudents() {
   let allStudents = document.getElementById("allstudents");
