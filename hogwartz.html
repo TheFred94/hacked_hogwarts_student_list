@@ -67,21 +67,20 @@
               <p>Expell Student</p>
             </div>
           </div>
-          </thead>
+          
           <template id="student">
           <section class="student_template">
             
             <p id="student_fullname" class="fullname" data-field="fullname"></p>
               <p class="image" data-field="image"><img id="studentImage" src="" /></p>
-            
               <p class="gender" data-field="gender"></p>
               <p class="iqsquad" data-field="iqsquad">☆</p>
               <p class="prefect" data-prefect="false" data-field="prefect"></p>
               <p class="bloodtype" data-field="bloodtype"><img id="studentBlood" src="" /></p>
-              <p class="firstname" data-field="firstname"></p>
-              <p class="nickname" data-field="nickname"></p>
-              <p class="middlename" data-field="middlename"></p>
-              <p class="lastname" data-field="lastname"></p>
+              <p id="student_firstname" class="firstname" data-field="firstname"></p>
+              <p id="student_nickname" class="nickname" data-field="nickname"></p>
+              <p id="student_middlename" class="middlename" data-field="middlename"></p>
+              <p id="student_lastname" class="lastname" data-field="lastname"></p>
              <div class="house_crest_container house" data-field="house"><img id="studentHouse" src="" /></div>
               <p class="expel" class="expelled" data-expel="false" data-field="expelled"></p>
             </section>
@@ -101,36 +100,40 @@
               <span class="bar"></span>
               <span class="bar"></span>
             </div>  
-              <p>Portrait</p>
-              <p data-action="sort" data-sort-direction="asc" data-sort="gender">Gender</p>
-              <p data-action="sort" data-sort-direction="asc" data-sort="iqsquad">Inqusitorial Squad</p>
-              <p data-action="sort" data-sort-direction="asc" data-sort="prefect">Prefect</p>
-              <p data-action="sort" data-sort-direction="asc" data-sort="bloodtype">Bloodtype</p>
-              <p data-action="sort" data-sort-direction="asc" data-sort="name">First name</p>
-              <p data-action="sort" data-sort-direction="asc" data-sort="nickname">Nick name</p>
-              <p data-action="sort" data-sort-direction="asc" data-sort="middlename">Middle name</p>
-              <p data-action="sort" data-sort-direction="asc" data-sort="lastname">Last name</p>
-              <p data-action="sort" data-sort-direction="asc" data-sort="house">House</p>
-            
-          </thead>
+            <div class="nav-links">
+              <p class="nav-item header_portrait">Portrait</p>
+              <p class="nav-item header_gender" data-action="sort" data-sort-direction="asc" data-sort="gender">Gender</p>
+              <p class="nav-item header_iqsquad" data-action="sort" data-sort-direction="asc" data-sort="iqsquad">Inqusitorial Squad</p>
+              <p class="nav-item header_prefect" data-action="sort" data-sort-direction="asc" data-sort="prefect">Prefect</p>
+              <p class="nav-item header_bloodstatus" data-action="sort" data-sort-direction="asc" data-sort="bloodtype">Bloodtype</p>
+              <p class="nav-item header_firstname" data-action="sort" data-sort-direction="asc" data-sort="firstname">First name</p>
+              <p class="nav-item header_nickname" data-action="sort" data-sort-direction="asc" data-sort="nickname">Nick name</p>
+              <p class="nav-item header_middlename" data-action="sort" data-sort-direction="asc" data-sort="middlename">Middle name</p>
+              <p class="nav-item header_lastname" data-action="sort" data-sort-direction="asc" data-sort="lastname">Last name</p>
+              <p class="nav-item header_house" data-action="sort" data-sort-direction="asc" data-sort="house">House</p>
+            </div>
+          </div>
+          
+          <template id="expelledstudent">
+            <section class="student_template">
+              <p id="student_fullname" class="fullname" data-field="fullname"></p>
+              <p class="image" data-field="image"><img id="studentImage" src="" /></p>
+              <p class="gender" data-field="gender"></p>
+              <p class="iqsquad" data-field="iqsquad">☆</p>
+              <p class="prefect" data-prefect="false" data-field="prefect"></p>
+              <p class="bloodtype" data-field="bloodtype"><img id="studentBlood" src="" /></p>
+              <p id="student_firstname" class="firstname" data-field="firstname"></p>
+              <p id="student_nickname" class="nickname" data-field="nickname"></p>
+              <p id="student_middlename" class="middlename" data-field="middlename"></p>
+              <p id="student_lastname" class="lastname" data-field="lastname"></p>
+             <div class="house_crest_container house" data-field="house"><img id="studentHouse" src="" /></div>
+              <p class="expel" class="expelled" data-expel="false" data-field="expelled"></p>
+            </section>
+          </template>
           <tbody>
             <!-- The student template will be copied here -->
           </tbody>
         </table>
-        <template id="expelledstudent">
-          <section class="student_template">
-            <p data-field="image"><img id="studentImage" src="" /></p>
-            <p data-field="gender"></p>
-            <p class="iqsquad" data-field="iqsquad">☆</p>
-            <p class="prefect" data-prefect="false" data-field="prefect"></p>
-            <p data-field="bloodtype"><img id="studentBlood" src"" /></p>
-            <p data-field="firstname"></p>
-            <p data-field="nickname"></p>
-            <p data-field="middlename"></p>
-            <p data-field="lastname"></p>
-            <p data-field="house"><img id="studentHouse" src="" /></p>
-          </section>
-        </template>
       </section>
     </main>
 
