@@ -45,6 +45,7 @@ img {
 
 #sorting > p {
   display: flex;
+  justify-content: space-evenly;
 }
 
 tbody {
@@ -126,37 +127,30 @@ tbody {
 
 /* SORTING STYLING ------------------------ */
 
-#sorting th.sortby[data-sort-direction="desc"]::after {
+#sorting [data-sort-direction="desc"]::after {
+  justify-content: flex-end;
   content: " ⬆️ ";
 }
-
-#sorting th.sortby[data-sort-direction="asc"]::after {
-  content: " ⬇️ ";
+#sorting [data-sort-direction="desc"]::before {
+  content: " ⬆️ ";
+  opacity: 0;
 }
 
-#sorting th.sortby {
+#sorting [data-sort-direction="asc"]::after {
+  content: " ⬇️ ";
+}
+#sorting [data-sort-direction="asc"]::before {
+  content: " ⬇️ ";
+  opacity: 0;
+}
+
+.sortby {
   background-color: aquamarine;
 }
 
 /* Tables styling */
 #list {
-  border-collapse: collapse;
   width: 100%;
-}
-
-#list th,
-#list td {
-  border: 1px solid black;
-  padding: 8px;
-  text-align: center;
-}
-
-#list th {
-  background-color: lightgray;
-}
-
-#list tr:nth-child(even) {
-  background-color: rgb(173, 230, 210);
 }
 
 #expelledlist {
@@ -169,22 +163,7 @@ tbody {
   display: none;
 }
 
-#expelledlist th,
-#expelledlist td {
-  border: 1px solid black;
-  padding: 8px;
-  text-align: center;
-}
-
-#expelledlist th {
-  background-color: lightgray;
-}
-
-#expelledlist tr:nth-child(even) {
-  background-color: rgb(173, 230, 210);
-}
-
-td[data-field="expelled"]::after {
+[data-field="expelled"]::after {
   content: " ❌ ";
 }
 
