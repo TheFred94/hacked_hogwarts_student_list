@@ -51,9 +51,32 @@ img {
   grid-template-columns: repeat(11, 1fr);
 }
 
+#student_fullname {
+  grid-row: 2;
+  visibility: hidden;
+}
+
 #sorting > p {
   display: flex;
   justify-content: space-evenly;
+}
+
+.gender {
+  grid-row: 1;
+  grid-column: 2 /3;
+}
+.iqsquad {
+  grid-row: 4;
+  grid-column: 3 / 4;
+}
+.prefect {
+  grid-row: 4;
+  grid-column: 4 / 5;
+}
+
+.bloodtype {
+  grid-row: 4;
+  grid-column: 1;
 }
 
 tbody {
@@ -73,21 +96,111 @@ tbody {
   align-items: center;
 }
 
-.gender {
+.nav-links {
+  display: grid;
+  grid-template-columns: repeat(11, 1fr);
+  grid-column: 1 / 12;
+}
+
+/* Header */
+.header_gender,
+.header_firstname,
+.header_nickname,
+.header_middlename,
+.header_lastname,
+.header_portrait,
+.header_iqsquad,
+.header_prefect,
+.header_house {
   grid-row: 1;
-  grid-column: 2 /3;
+}
+
+.header_portrait {
+  grid-column: 1/ 2;
+}
+
+.header_gender {
+  grid-column: 2 / 3;
+}
+.header_iqsquad {
+  grid-column: 3 /4;
+}
+.header_prefect {
+  grid-column: 4 / 5;
+}
+.header_firstname {
+  grid-column: 5 / 6;
+}
+
+.header_nickname {
+  grid-column: 6 / 7;
+}
+
+.header_middlename {
+  grid-column: 7 / 8;
+}
+.header_lastname {
+  grid-column: 8 / 9;
+}
+.header_house {
+  grid-column: 9 / 10;
+}
+
+.header_expel {
+  grid-column: 11 / 12;
+}
+
+/* SECTION --------------------------- */
+.gender,
+.firstname,
+.nickname,
+.middlename,
+.lastname,
+.portrait,
+.iqsquad,
+.bloodtype,
+.prefect,
+.house {
+  grid-row: 1;
+}
+
+.portrait {
+  grid-column: 1 / 2;
+}
+
+.gender {
+  grid-column: 2 / 3;
 }
 .iqsquad {
-  grid-row: 1;
-  grid-column: 3 / 4;
+  grid-column: 3 /4;
 }
 .prefect {
-  grid-row: 1;
   grid-column: 4 / 5;
+}
+.firstname {
+  grid-column: 5 / 6;
+}
+
+.nickname {
+  grid-column: 6 / 7;
+}
+
+.middlename {
+  grid-column: 7 / 8;
+}
+.lastname {
+  grid-column: 8 / 9;
+}
+.house {
+  grid-column: 9 / 10;
 }
 
 .bloodtype {
-  grid-column: 5 / 6;
+  grid-column: 10 / 11;
+}
+
+.expel {
+  grid-column: 11 / 12;
 }
 
 /* DROPDOWN STYLING --------------------------*/
@@ -350,7 +463,7 @@ p[data-field="prefect"][data-prefect="false"] {
 
   .gender {
     grid-row: 4;
-    grid-column: 2 /3;
+    grid-column: 2 / 3;
   }
   .iqsquad {
     grid-row: 4;
@@ -378,7 +491,9 @@ p[data-field="prefect"][data-prefect="false"] {
     grid-column: 5 / 6;
   }
 
-  .fullname {
+  #student_fullname {
+    padding-top: 40px;
+    visibility: visible;
     justify-items: center;
     grid-row: 3;
     grid-column: 2 / 5;
