@@ -58,11 +58,14 @@
               <p data-action="sort" data-sort-direction="asc" data-sort="middlename">Middle name</p>
               <p data-action="sort" data-sort-direction="asc" data-sort="lastname">Last name</p>
               <p data-action="sort" data-sort-direction="asc" data-sort="house">House</p>
+              <p>Expell Student</p>
             </div>
           </thead>
           <template id="student">
           <section class="student_template">
+            
               <p class="image" data-field="image"><img id="studentImage" src="" /></p>
+            
               <p class="gender" data-field="gender"></p>
               <p class="iqsquad" data-field="iqsquad">☆</p>
               <p class="prefect" data-prefect="false" data-field="prefect"></p>
@@ -71,7 +74,7 @@
               <p class="nickname" data-field="nickname"></p>
               <p class="middlename" data-field="middlename"></p>
               <p class="lastname" data-field="lastname"></p>
-              <p class="house" data-field="house"><img id="studentHouse" src="" /></p>
+             <div class="house_crest_container house" data-field="house"><img id="studentHouse" src="" /></div>
               <p class="expel" class="expelled" data-expel="false" data-field="expelled"></p>
             </section>
           </template>
