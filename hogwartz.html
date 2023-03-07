@@ -17,7 +17,6 @@
       <button id="reset-button" type="button">Reset</button>
     </div>
 
-    
     <div class="filters_counters">
       <div class="dropdown">
         <button class="filter_dropdown">Filters</button>
@@ -48,34 +47,33 @@
     <main>
       <section id="allstudents">
         <table id="list">
-          <thead>
-            <tr id="sorting">
-              <th>Portrait</th>
-              <th data-action="sort" data-sort-direction="asc" data-sort="gender">Gender</th>
-              <th data-action="sort" data-sort-direction="asc" data-sort="iqsquad">Inqusitorial Squad</th>
-              <th data-action="sort" data-sort-direction="asc" data-sort="prefect">Prefect</th>
-              <th data-action="sort" data-sort-direction="asc" data-sort="bloodtype">Bloodtype</th>
-              <th data-action="sort" data-sort-direction="asc" data-sort="firstname">First name</th>
-              <th data-action="sort" data-sort-direction="asc" data-sort="nickname">Nick name</th>
-              <th data-action="sort" data-sort-direction="asc" data-sort="middlename">Middle name</th>
-              <th data-action="sort" data-sort-direction="asc" data-sort="lastname">Last name</th>
-              <th data-action="sort" data-sort-direction="asc" data-sort="house">House</th>
-            </tr>
+            <div id="sorting">
+              <p>Portrait</p>
+              <p data-action="sort" data-sort-direction="asc" data-sort="gender">Gender</p>
+              <p data-action="sort" data-sort-direction="asc" data-sort="iqsquad">Inqusitorial Squad</p>
+              <p data-action="sort" data-sort-direction="asc" data-sort="prefect">Prefect</p>
+              <p data-action="sort" data-sort-direction="asc" data-sort="bloodtype">Bloodtype</p>
+              <p data-action="sort" data-sort-direction="asc" data-sort="firstname">First name</p>
+              <p data-action="sort" data-sort-direction="asc" data-sort="nickname">Nick name</p>
+              <p data-action="sort" data-sort-direction="asc" data-sort="middlename">Middle name</p>
+              <p data-action="sort" data-sort-direction="asc" data-sort="lastname">Last name</p>
+              <p data-action="sort" data-sort-direction="asc" data-sort="house">House</p>
+            </div>
           </thead>
           <template id="student">
-            <tr>
-              <td data-field="image"><img id="studentImage" src="" /></td>
-              <td data-field="gender"></td>
-              <td class="iqsquad" data-field="iqsquad">☆</td>
-              <td class="prefect" data-prefect="false" data-field="prefect"></td>
-              <td data-field="bloodtype"><img id="studentBlood" src="" /></td>
-              <td data-field="firstname"></td>
-              <td data-field="nickname"></td>
-              <td data-field="middlename"></td>
-              <td data-field="lastname"></td>
-              <td data-field="house"><img id="studentHouse" src="" /></td>
-              <td class="expelled" data-expel="false" data-field="expelled"></td>
-            </tr>
+          <section class="student_template">
+              <p class="image" data-field="image"><img id="studentImage" src="" /></p>
+              <p class="gender" data-field="gender"></p>
+              <p class="iqsquad" data-field="iqsquad">☆</p>
+              <p class="prefect" data-prefect="false" data-field="prefect"></p>
+              <p class="bloodtype" data-field="bloodtype"><img id="studentBlood" src="" /></p>
+              <p class="firstname" data-field="firstname"></p>
+              <p class="nickname" data-field="nickname"></p>
+              <p class="middlename" data-field="middlename"></p>
+              <p class="lastname" data-field="lastname"></p>
+              <p class="house" data-field="house"><img id="studentHouse" src="" /></p>
+              <p class="expel" class="expelled" data-expel="false" data-field="expelled"></p>
+            </section>
           </template>
           <tbody>
             <!-- The student template will be copied here -->
@@ -86,37 +84,36 @@
       <!-- List of the expelled students -->
       <section id="expelledstudents">
         <table id="expelledlist">
-          <thead>
-            <tr>
-              <th>Portrait</th>
-              <th data-action="sort" data-sort-direction="asc" data-sort="gender">Gender</th>
-              <th data-action="sort" data-sort-direction="asc" data-sort="iqsquad">Inqusitorial Squad</th>
-              <th data-action="sort" data-sort-direction="asc" data-sort="prefect">Prefect</th>
-              <th data-action="sort" data-sort-direction="asc" data-sort="bloodtype">Bloodtype</th>
-              <th data-action="sort" data-sort-direction="asc" data-sort="name">First name</th>
-              <th data-action="sort" data-sort-direction="asc" data-sort="nickname">Nick name</th>
-              <th data-action="sort" data-sort-direction="asc" data-sort="middlename">Middle name</th>
-              <th data-action="sort" data-sort-direction="asc" data-sort="lastname">Last name</th>
-              <th data-action="sort" data-sort-direction="asc" data-sort="house">House</th>
-            </tr>
+          <div id="sorting">
+              <p>Portrait</p>
+              <p data-action="sort" data-sort-direction="asc" data-sort="gender">Gender</p>
+              <p data-action="sort" data-sort-direction="asc" data-sort="iqsquad">Inqusitorial Squad</p>
+              <p data-action="sort" data-sort-direction="asc" data-sort="prefect">Prefect</p>
+              <p data-action="sort" data-sort-direction="asc" data-sort="bloodtype">Bloodtype</p>
+              <p data-action="sort" data-sort-direction="asc" data-sort="name">First name</p>
+              <p data-action="sort" data-sort-direction="asc" data-sort="nickname">Nick name</p>
+              <p data-action="sort" data-sort-direction="asc" data-sort="middlename">Middle name</p>
+              <p data-action="sort" data-sort-direction="asc" data-sort="lastname">Last name</p>
+              <p data-action="sort" data-sort-direction="asc" data-sort="house">House</p>
+            
           </thead>
           <tbody>
             <!-- The student template will be copied here -->
           </tbody>
         </table>
         <template id="expelledstudent">
-          <tr>
-            <td data-field="image"><img id="studentImage" src="" /></td>
-            <td data-field="gender"></td>
-            <td class="iqsquad" data-field="iqsquad">☆</td>
-            <td class="prefect" data-prefect="false" data-field="prefect"></td>
-            <td data-field="bloodtype"><img id="studentBlood" src"" /></td>
-            <td data-field="firstname"></td>
-            <td data-field="nickname"></td>
-            <td data-field="middlename"></td>
-            <td data-field="lastname"></td>
-            <td data-field="house"><img id="studentHouse" src="" /></td>
-          </tr>
+          <section class="student_template">
+            <p data-field="image"><img id="studentImage" src="" /></p>
+            <p data-field="gender"></p>
+            <p class="iqsquad" data-field="iqsquad">☆</p>
+            <p class="prefect" data-prefect="false" data-field="prefect"></p>
+            <p data-field="bloodtype"><img id="studentBlood" src"" /></p>
+            <p data-field="firstname"></p>
+            <p data-field="nickname"></p>
+            <p data-field="middlename"></p>
+            <p data-field="lastname"></p>
+            <p data-field="house"><img id="studentHouse" src="" /></p>
+          </section>
         </template>
       </section>
     </main>
