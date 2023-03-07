@@ -369,6 +369,7 @@ function displayStudent(studentCard) {
   const clone = document.querySelector("template#student").content.cloneNode(true);
 
   // Grabs the firstname data field in the HTML and displays the textcontent from the studentCard firstname property
+  clone.querySelector("[data-field=fullname").textContent = `${studentCard.firstname} ${studentCard.nickname} ${studentCard.middlename} ${studentCard.lastname}`;
   clone.querySelector("[data-field=firstname]").textContent = studentCard.firstname;
   clone.querySelector("[data-field=nickname]").textContent = studentCard.nickname;
   clone.querySelector("[data-field=middlename]").textContent = studentCard.middlename;
