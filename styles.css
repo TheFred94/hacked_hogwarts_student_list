@@ -95,7 +95,8 @@ tbody {
   grid-template-columns: repeat(11, 1fr);
   grid-column: span 11;
 }
-.student_template > p {
+.student_template > p,
+.student_template > div {
   display: flex;
   justify-content: center;
   align-items: center;
