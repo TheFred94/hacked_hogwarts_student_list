@@ -36,7 +36,7 @@ tbody {
 
 .gender {
   grid-row: 1;
-  grid-column: 2/ 3;
+  grid-column: 2 / 3;
 }
 
 .iqsquad {
@@ -60,7 +60,7 @@ tbody {
 }
 .nickname {
   grid-row: 1;
-  grid-row: 7/8;
+  grid-column: 7 / 8;
 }
 
 .middlename {
@@ -219,7 +219,7 @@ tbody {
   background-color: rgb(173, 230, 210);
 }
 
-td[data-field="expelled"]::after {
+p[data-field="expelled"]::after {
   content: " ❌ ";
 }
 
