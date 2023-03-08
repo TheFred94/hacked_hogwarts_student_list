@@ -161,15 +161,36 @@ tbody {
 
 /* SORTING STYLING ------------------------ */
 
-#sorting th.sortby[data-sort-direction="desc"]::after {
+#sorting {
+  display: grid;
+  text-align: center;
+  grid-template-columns: repeat(11, 1fr);
+}
+
+#sorting > p {
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+}
+
+#sorting p.sortby[data-sort-direction="desc"]::after {
   content: " ⬆️ ";
 }
 
-#sorting th.sortby[data-sort-direction="asc"]::after {
+#sorting p.sortby[data-sort-direction="asc"]::after {
   content: " ⬇️ ";
 }
+#sorting p.sortby[data-sort-direction="desc"]::before {
+  content: " ⬆️ ";
+  opacity: 0;
+}
 
-#sorting th.sortby {
+#sorting p.sortby[data-sort-direction="asc"]::before {
+  content: " ⬇️ ";
+  opacity: 0;
+}
+
+#sorting p.sortby {
   background-color: aquamarine;
 }
 
