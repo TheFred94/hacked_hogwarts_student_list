@@ -594,7 +594,7 @@ button.close_button {
 }
 
 .dialog {
-  text-align: center;
+  justify-content: center;
   padding: 1rem;
   background: var(--gryffindor-red);
   box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);

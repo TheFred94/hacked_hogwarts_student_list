@@ -432,7 +432,14 @@ function displayStudent(studentCard) {
   clone.querySelector("[data-field=gender]").textContent = studentCard.gender;
   clone.querySelector("#studentImage").src = `images/${studentCard.image}`;
   clone.querySelector("#studentBlood").src = `blood_status/${studentCard.blood}.svg`;
-  clone.querySelector(".student_template").addEventListener("click", () => showStudentDetails(studentCard));
+  clone.querySelector(".image").addEventListener("click", () => showStudentDetails(studentCard));
+  clone.querySelector(".gender").addEventListener("click", () => showStudentDetails(studentCard));
+  clone.querySelector(".bloodtype").addEventListener("click", () => showStudentDetails(studentCard));
+  clone.querySelector(".house_crest_container").addEventListener("click", () => showStudentDetails(studentCard));
+  clone.querySelector("#student_firstname").addEventListener("click", () => showStudentDetails(studentCard));
+  clone.querySelector("#student_nickname").addEventListener("click", () => showStudentDetails(studentCard));
+  clone.querySelector("#student_middlename").addEventListener("click", () => showStudentDetails(studentCard));
+  clone.querySelector("#student_lastname").addEventListener("click", () => showStudentDetails(studentCard));
   clone.querySelector(".student_template").classList.add(houseColors[studentCard.house]);
   // Assign prefect
   clone.querySelector("[data-field=prefect]").dataset.prefect = studentCard.prefect;
