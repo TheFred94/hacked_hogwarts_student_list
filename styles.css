@@ -149,7 +149,8 @@ button {
   box-shadow: inset 200px 0 0 0 var(--white_color);
 }
 
-.filter_active {
+.filter_active,
+.sorting-active {
   color: var(--white_color);
   background-color: var(--black_color);
 }
@@ -337,7 +338,8 @@ header {
   padding: 0 20px;
 }
 
-nav {
+nav,
+#sorting {
   position: fixed;
   top: 345px;
   left: -400px;
@@ -359,7 +361,8 @@ nav {
   border-radius: 0 10px 10px 0;
 }
 
-nav.active {
+nav.active,
+#sorting.active {
   left: 0px;
   width: 400px;
 }
@@ -374,7 +377,8 @@ nav.active {
   flex-direction: column;
 }
 
-.filter {
+.filter,
+.sorting {
   background-color: transparent;
   color: white;
   border: none;
@@ -384,40 +388,61 @@ nav.active {
   width: 200px;
 }
 
+.sorting {
+  cursor: pointer;
+  width: 250px;
+  transition: ease-out 0.3s;
+  box-shadow: inset 0 0 0 0 var(--black_color);
+}
+.sorting:hover {
+  cursor: pointer;
+  width: 250px;
+  transition: ease-out 0.3s;
+  box-shadow: inset 250px 0 0 0 var(--black_color);
+}
+
 .filter:hover {
   background-color: #444;
 }
 
-#burger-btn {
-  color: var(--black_color);
+#burger-btn,
+#sorting-btn {
   border: none;
   padding: 10px 20px;
   font-size: var(--p_font);
   cursor: pointer;
   width: 200px;
   transition: ease-out 0.3s;
-  box-shadow: inset 0 0 0 0 var(--black_color);
 }
 
-#burger-btn:hover {
-  color: var(--white_color);
+#burger-btn:hover,
+#sortin-btn:hover {
   transition: ease-out 0.3s;
-  box-shadow: inset 200px 0 0 0 var(--black_color);
 }
 
-#burger-btn:hover .burger-icon:nth-child(1) {
-  transform: translateY(-5px);
+.sorting-icon {
+  display: block;
+  height: 2px;
+  width: 25px;
+  background-color: white;
+  margin-bottom: 5px;
+  transition: transform 0.3s ease-in-out;
 }
 
-#sorting {
-  display: grid;
-  text-align: center;
-  grid-template-columns: repeat(11, 1fr);
+#sorting > button {
+  cursor: pointer;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  margin-top: 20px;
 }
 
-#expelledstudents > #sorting {
-  visibility: hidden;
+#sorting.active {
+  left: 0;
 }
+
 #sorting > button {
   display: flex;
   align-items: center;
@@ -451,10 +476,6 @@ nav.active {
 
 #sorting button.sortby {
   background-color: rgb(52, 88, 76);
-}
-
-#sorting-btn {
-  visibility: hidden;
 }
 
 /* Tables styling */
@@ -708,50 +729,6 @@ p[data-field="prefect"][data-prefect="false"] {
 }
 
 @media screen and (width < 600px) {
-  /* SORTING MENU FOR MOBILE */
-
-  .sorting-icon {
-    display: block;
-    height: 2px;
-    width: 25px;
-    background-color: white;
-    margin-bottom: 5px;
-    transition: transform 0.3s ease-in-out;
-  }
-
-  #sorting {
-    position: fixed;
-    top: 0;
-    left: -250px;
-    height: 100%;
-    width: 250px;
-    background-color: #333;
-    color: white;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    transition: left 0.3s ease-in-out;
-    z-index: 1;
-  }
-
-  #sorting > button {
-    cursor: pointer;
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    align-items: center;
-    gap: 10px;
-    margin-top: 20px;
-  }
-
-  #sorting-btn {
-    visibility: visible;
-  }
-  #sorting.active {
-    left: 0;
-  }
-
   /* STYLING FOR TABLE ON MOBILE */
   #list {
     display: grid;

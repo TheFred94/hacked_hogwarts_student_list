@@ -35,6 +35,8 @@ const sortingButtons = document.querySelectorAll(".sorting");
 burgerBtn.addEventListener("click", () => {
   burgerMenu.classList.toggle("active");
   burgerBtn.classList.toggle("filter_active");
+
+  closeSortingMenu();
 });
 
 function closeBurgerMenu() {
@@ -48,10 +50,14 @@ filterButtons.forEach((button) => {
 
 function closeSortingMenu() {
   sortingMenu.classList.remove("active");
+  sortingBtn.classList.remove("filter_active");
 }
 
 sortingBtn.addEventListener("click", () => {
   sortingMenu.classList.toggle("active");
+  sortingBtn.classList.toggle("filter_active");
+
+  closeBurgerMenu();
 });
 
 sortingButtons.forEach((button) => {
