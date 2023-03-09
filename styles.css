@@ -149,6 +149,7 @@ nav {
   align-items: center;
   justify-content: center;
   transition: left 0.3s ease-in-out;
+  z-index: 1;
 }
 
 nav.active {
@@ -488,6 +489,7 @@ p[data-field="prefect"][data-prefect="false"] {
     align-items: center;
     justify-content: center;
     transition: left 0.3s ease-in-out;
+    z-index: 1;
   }
 
   #sorting > button {
