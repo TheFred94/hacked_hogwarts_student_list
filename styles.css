@@ -1,8 +1,17 @@
 /* GENERAL ---------------------------------- */
 
+html {
+  --gryffindor-red: rgb(163, 65, 67);
+  --ravenclaw-blue: rgb(133, 195, 222);
+  --slytherin-green: rgb(40, 116, 60);
+  --huffelpuff-yellow: rgb(247, 237, 124);
+}
+
 /* FONT */
 p {
-  font-family: ltc-hadriano-pro, sans-serif;
+  font-family: "new-spirit", serif;
+  font-weight: 400;
+  font-style: normal;
   font-size: 1.5rem;
 }
 
