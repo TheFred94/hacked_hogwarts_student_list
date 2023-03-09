@@ -18,6 +18,22 @@ const allStudentsCounterElement = document.querySelector("#allStudentsCounter");
 const expelledStudentsCounterElement = document.querySelector("#expelledStudentsCounter");
 const displayedStudentsCounterElement = document.querySelector("#displayedStudentsCounter");
 
+const burgerBtn = document.getElementById("burger-btn");
+const burgerMenu = document.getElementById("burger-menu");
+const filterButtons = document.querySelectorAll(".filter");
+
+function closeBurgerMenu() {
+  burgerMenu.classList.remove("active");
+}
+
+burgerBtn.addEventListener("click", () => {
+  burgerMenu.classList.toggle("active");
+});
+
+filterButtons.forEach((button) => {
+  button.addEventListener("click", closeBurgerMenu);
+});
+
 document.addEventListener("DOMContentLoaded", loadPage);
 const Student = {
   firstname: "",

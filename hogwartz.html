@@ -17,8 +17,14 @@
       <button id="reset-button" type="button">Reset</button>
     </div>
 
-    
+    <button id="burger-btn">
+      <span class="burger-icon"></span>
+      <span class="burger-icon"></span>
+      <span class="burger-icon"></span>
+    </button>
+  </header>
     <div class="filters_counters">
+      <nav id="burger-menu">
       <div class="filter_buttons_container">
           <button class="filter" data-action="filter" data-filter="gryffindor">Gryffindor</button>
           <button class="filter" data-action="filter" data-filter="slytherin">Slytherin</button>
@@ -31,6 +37,9 @@
           <button class="filter" data-action="filter" data-filter="iqsquad">Inquisitors</button>
           <button class="filter" data-action="filter" data-filter="*">All Houses</button>
         </div>
+      </nav>
+        </div>
+        <div>
           <div class="student_icons_container">
             <div class="number_container"><img src="student_icons/total.svg">
               <span id="allStudentsCounter">0</span>
@@ -48,18 +57,17 @@
       <section id="allstudents">
         <table id="list">
             <div id="sorting">
-              
-              <p class=" header_portrait">Portrait</p>
-              <p data-action="sort" class=" header_gender"  data-sort-direction="asc" data-sort="gender">Gender</p>
-              <p class=" header_iqsquad" data-action="sort" data-sort-direction="asc" data-sort="iqsquad">Inqusitorial Squad</p>
-              <p class=" header_prefect" data-action="sort" data-sort-direction="asc" data-sort="prefect">Prefect</p>
-              <p class=" header_bloodstatus" data-action="sort" data-sort-direction="asc" data-sort="bloodtype">Bloodtype</p>
-              <p class=" header_firstname" data-action="sort" data-sort-direction="asc" data-sort="firstname">First name</p>
-              <p class=" header_nickname" data-action="sort" data-sort-direction="asc" data-sort="nickname">Nick name</p>
-              <p class=" header_middlename" data-action="sort" data-sort-direction="asc" data-sort="middlename">Middle name</p>
-              <p class=" header_lastname" data-action="sort" data-sort-direction="asc" data-sort="lastname">Last name</p>
-              <p class=" header_house" data-action="sort" data-sort-direction="asc" data-sort="house">House</p>
-              <p>Expell Student</p>
+              <button class=" header_portrait">Portrait</button>
+              <button data-action="sort" class=" header_gender"  data-sort-direction="asc" data-sort="gender">Gender</button>
+              <button class=" header_iqsquad" data-action="sort" data-sort-direction="asc" data-sort="iqsquad">Inqusitorial Squad</button>
+              <button class=" header_prefect" data-action="sort" data-sort-direction="asc" data-sort="prefect">Prefect</button>
+              <button class=" header_bloodstatus" data-action="sort" data-sort-direction="asc" data-sort="bloodtype">Bloodtype</button>
+              <button class=" header_firstname" data-action="sort" data-sort-direction="asc" data-sort="firstname">First name</button>
+              <button class=" header_nickname" data-action="sort" data-sort-direction="asc" data-sort="nickname">Nick name</button>
+              <button class=" header_middlename" data-action="sort" data-sort-direction="asc" data-sort="middlename">Middle name</button>
+              <button class=" header_lastname" data-action="sort" data-sort-direction="asc" data-sort="lastname">Last name</button>
+              <button class=" header_house" data-action="sort" data-sort-direction="asc" data-sort="house">House</button>
+              <button>Expell Student</button>
             
           </div>
           <template id="student">
