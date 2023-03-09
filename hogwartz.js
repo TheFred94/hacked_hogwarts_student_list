@@ -14,6 +14,13 @@ let allStudentsCounter = 0;
 let expelledStudentsCounter = 0;
 let displayedStudentsCounter = 0;
 
+const houseColors = {
+  Gryffindor: "gryffindor",
+  Hufflepuff: "hufflepuff",
+  Slytherin: "slytherin",
+  Ravenclaw: "ravenclaw",
+};
+
 const allStudentsCounterElement = document.querySelector("#allStudentsCounter");
 const expelledStudentsCounterElement = document.querySelector("#expelledStudentsCounter");
 const displayedStudentsCounterElement = document.querySelector("#displayedStudentsCounter");
@@ -410,6 +417,7 @@ function displayStudent(studentCard) {
   clone.querySelector("#studentImage").src = `images/${studentCard.image}`;
   clone.querySelector("#studentBlood").src = `blood_status/${studentCard.blood}.svg`;
   clone.querySelector("[data-field=image]").addEventListener("click", () => showStudentDetails(studentCard));
+  clone.querySelector(".student_template").classList.add(houseColors[studentCard.house]);
   // Assign prefect
   clone.querySelector("[data-field=prefect]").dataset.prefect = studentCard.prefect;
   clone.querySelector("[data-field=prefect]").addEventListener("click", clickPrefect);

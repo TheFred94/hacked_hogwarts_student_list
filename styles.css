@@ -7,6 +7,22 @@ html {
   --huffelpuff-yellow: rgb(247, 237, 124);
 }
 
+.gryffindor {
+  background-color: var(--gryffindor-red);
+}
+
+.hufflepuff {
+  background-color: var(--huffelpuff-yellow);
+}
+
+.slytherin {
+  background-color: var(--slytherin-green);
+}
+
+.ravenclaw {
+  background-color: var(--ravenclaw-blue);
+}
+
 /* FONT */
 p {
   font-family: "new-spirit", serif;
