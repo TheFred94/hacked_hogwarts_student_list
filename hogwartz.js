@@ -31,6 +31,15 @@ const filterButtons = document.querySelectorAll(".filter");
 const sortingBtn = document.getElementById("sorting-btn");
 const sortingMenu = document.getElementById("sorting");
 const sortingButtons = document.querySelectorAll(".sorting");
+const closeSorting = document.getElementById("close_sorting");
+const closeFiltering = document.getElementById("close_filtering");
+
+closeSorting.addEventListener("click", () => {
+  closeSortingMenu();
+});
+closeFiltering.addEventListener("click", () => {
+  closeBurgerMenu();
+});
 
 burgerBtn.addEventListener("click", () => {
   burgerMenu.classList.toggle("active");

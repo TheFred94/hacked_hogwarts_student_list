@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="styles.css" />
     <link rel="stylesheet" href="https://use.typekit.net/rwe5sgn.css">
-    <link href="dist/hamburgers.css" rel="stylesheet">
+    
 
     <title>Hacked Hogwarts</title>
   </head>
@@ -24,10 +24,18 @@
       <p>Filter</p>
 
     </button>
+    <button id="sorting-btn">
+      <p>Sorting</p>
+    </button>
+  </button>
   </header>
   
     <div class="filters_counters">
       <nav id="burger-menu">
+        <div class="close_side_menu_container">
+          <button id="close_filtering">&#x2715</button>
+        </div>
+        <p class="side_menu_header">FILTERS</p>
       <div class="filter_buttons_container">
           <button class="filter gryffindor_btn" data-action="filter" data-filter="gryffindor">Gryffindor</button>
           <button class="filter slytherin_btn" data-action="filter" data-filter="slytherin">Slytherin</button>
@@ -58,12 +66,13 @@
   
       <section id="allstudents">
         <table id="list">
-          <button id="sorting-btn">
-            <p>Sorting</p>
-          </button>
-        </button>
+    
         
             <div id="sorting">
+              <div class="close_side_menu_container">
+                <button id="close_sorting">&#x2715</button>
+              </div>
+              <p class="side_menu_header">SORTING</p>
               <div class="filter_buttons_container">
               
               <button data-action="sort" class="sorting header_gender"  data-sort-direction="asc" data-sort="gender">Gender</button>

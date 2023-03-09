@@ -60,6 +60,7 @@ body {
 }
 
 button {
+  border-radius: 5px;
   font-family: "new-spirit", serif;
   font-size: var(--button_font);
 }
@@ -390,19 +391,50 @@ nav.active,
 
 .sorting {
   cursor: pointer;
-  width: 250px;
+  width: 325px;
   transition: ease-out 0.3s;
   box-shadow: inset 0 0 0 0 var(--black_color);
 }
 .sorting:hover {
   cursor: pointer;
-  width: 250px;
+  width: 325px;
   transition: ease-out 0.3s;
-  box-shadow: inset 250px 0 0 0 var(--black_color);
+  box-shadow: inset 325px 0 0 0 var(--black_color);
 }
 
 .filter:hover {
   background-color: #444;
+}
+
+.close_side_menu_container {
+  position: relative;
+}
+
+.side_menu_header {
+  color: var(--white_color);
+  text-decoration: underline;
+  font-size: 2rem;
+}
+
+#close_filtering {
+  cursor: pointer;
+  font-size: 2rem;
+  background-color: transparent;
+  border: none;
+  color: var(--white_color);
+  position: absolute;
+  top: -100px;
+  left: 150px;
+}
+#close_sorting {
+  cursor: pointer;
+  font-size: 2rem;
+  background-color: transparent;
+  border: none;
+  color: var(--white_color);
+  position: absolute;
+  top: -130px;
+  left: 150px;
 }
 
 #burger-btn,
