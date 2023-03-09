@@ -466,6 +466,44 @@ p[data-field="prefect"][data-prefect="false"] {
 @media screen and (width < 600px) {
   /* SORTING MENU FOR MOBILE */
 
+  .sorting-icon {
+    display: block;
+    height: 2px;
+    width: 25px;
+    background-color: white;
+    margin-bottom: 5px;
+    transition: transform 0.3s ease-in-out;
+  }
+
+  #sorting {
+    position: fixed;
+    top: 0;
+    left: -250px;
+    height: 100%;
+    width: 250px;
+    background-color: #333;
+    color: white;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    transition: left 0.3s ease-in-out;
+  }
+
+  #sorting > button {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    margin-top: 20px;
+  }
+
+  #sorting.active {
+    left: 0;
+  }
+
+  /* STYLING FOR TABLE ON MOBILE */
   #list {
     display: grid;
     grid-column: 1 / 2;
@@ -567,12 +605,6 @@ p[data-field="prefect"][data-prefect="false"] {
   .number_container > img {
     height: 50px;
     width: 50px;
-  }
-
-  #sorting {
-    display: grid;
-    text-align: center;
-    grid-template-columns: repeat(5, 1fr);
   }
 
   /* POPUP MOBILE */
