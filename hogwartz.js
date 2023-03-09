@@ -425,32 +425,6 @@ function displayStudent(studentCard) {
   // Expelled function. Looks at index and splices the student from allStudents then pushes it into expelledStudents.
   // Then runs moveToExpelled which clones the student into the new template
   // Throws a dialog box with a "yes" or "no" possibility
-  clone.querySelector("[data-field=expelled]").addEventListener("click", function () {
-    document.querySelector("#removestudent").classList.remove("hide");
-    document.querySelector("#removestudent .closebutton").addEventListener("click", closeDialog);
-    document.querySelector("#removestudent #yes").addEventListener("click", expelStudent);
-    document.querySelector("#removestudent #no").addEventListener("click", closeDialog);
-    document.querySelector("#expelled_student_name").textContent = `Do you wish to expel ${studentCard.firstname} ${studentCard.lastname}?`;
-
-    // Find the index of the student in the allStudents array
-    const index = allStudents.findIndex((student) => student.firstname === studentCard.firstname);
-
-    // Remove the student from the allStudents array and add them to the expelledStudents array
-    const expelledStudent = allStudents.splice(index, 1)[0];
-    expelledStudents.push(expelledStudent);
-
-    function closeDialog() {
-      document.querySelector("#removestudent").classList.add("hide");
-      document.querySelector("#removestudent .closebutton").removeEventListener("click", closeDialog);
-      document.querySelector("#removestudent #yes").removeEventListener("click", expelStudent);
-    }
-    function expelStudent() {
-      closeDialog();
-      studentCard.expelled = true;
-      moveToExpelled(studentCard);
-    }
-    // Rebuild the list to update the displayed students
-  });
 
   clone.querySelector("[data-field=iqsquad]").addEventListener("click", clickIqSquad);
 
@@ -579,6 +553,7 @@ function moveToExpelled(studentCard) {
   row.querySelector("[data-field='middlename']").textContent = studentCard.middlename;
   row.querySelector("[data-field='lastname']").textContent = studentCard.lastname;
   row.querySelector("[data-field=image]").addEventListener("click", () => showStudentDetails(studentCard));
+
   // Add the new row to the table
   const tbody = document.querySelector("#expelledlist tbody");
   tbody.appendChild(row);
@@ -598,6 +573,33 @@ function showStudentDetails(studentCard) {
   popup.querySelector(".student_image").src = `images/${studentCard.image}`;
   popup.querySelector(".student_house_popup").src = `house_crests/${studentCard.house}.svg`;
   popup.querySelector(".student_blood").src = `blood_status/${studentCard.blood}.svg`;
+  popup.querySelector("[data-field=expelled]").addEventListener("click", function () {
+    document.querySelector("#removestudent").classList.remove("hide");
+    document.querySelector("#removestudent .closebutton").addEventListener("click", closeDialog);
+    document.querySelector("#removestudent #yes").addEventListener("click", expelStudent);
+    document.querySelector("#removestudent #no").addEventListener("click", closeDialog);
+    document.querySelector("#expelled_student_name").textContent = `Do you wish to expel ${studentCard.firstname} ${studentCard.lastname}?`;
+
+    // Find the index of the student in the allStudents array
+    const index = allStudents.findIndex((student) => student.firstname === studentCard.firstname);
+
+    // Remove the student from the allStudents array and add them to the expelledStudents array
+    const expelledStudent = allStudents.splice(index, 1)[0];
+    expelledStudents.push(expelledStudent);
+
+    function closeDialog() {
+      document.querySelector("#removestudent").classList.add("hide");
+      document.querySelector("#removestudent .closebutton").removeEventListener("click", closeDialog);
+      document.querySelector("#removestudent #yes").removeEventListener("click", expelStudent);
+    }
+    function expelStudent() {
+      closeDialog();
+      popup.style.display = "none";
+      studentCard.expelled = true;
+      moveToExpelled(studentCard);
+    }
+    // Rebuild the list to update the displayed students
+  });
 
   // When opening popup, change the value of data-prefect depending on status either true or false
   const prefectElem = popup.querySelector(".prefect");

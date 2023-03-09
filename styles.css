@@ -6,7 +6,7 @@ html {
   --slytherin-green: rgb(40, 116, 60, 0.5);
   --huffelpuff-yellow: rgb(247, 237, 124, 0.5);
   --white_color: #f2f2f2;
-  --black_color: #454242af;
+  --black_color: #454242ea;
   --p_font: clamp(1.5rem, -2rem + 8vw, 1.5rem);
   --button_font: clamp(1rem, -2rem + 8vw, 1rem);
 }
@@ -310,7 +310,12 @@ nav {
   left: -400px;
   width: 400px;
   height: 50%;
-  background-color: #333;
+  box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+  backdrop-filter: blur(2.5px);
+  -webkit-backdrop-filter: blur(2.5px);
+  border-radius: 10px;
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  background-color: var(--black_color);
   color: white;
   display: flex;
   flex-direction: column;
