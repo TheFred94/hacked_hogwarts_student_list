@@ -5,7 +5,9 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="styles.css" />
-    <title>Document</title>
+    <link rel="stylesheet" href="https://use.typekit.net/rwe5sgn.css">
+
+    <title>Hacked Hogwarts</title>
   </head>
 
   <body>
@@ -17,11 +19,17 @@
       <button id="reset-button" type="button">Reset</button>
     </div>
 
-    
+    <button id="burger-btn">
+      <p>Filter</p>
+      <span class="burger-icon"></span>
+      <span class="burger-icon"></span>
+      <span class="burger-icon"></span>
+    </button>
+  </header>
+  
     <div class="filters_counters">
-      <div class="dropdown">
-        <button class="filter_dropdown">Filters</button>
-        <div class="dropdown_content">
+      <nav id="burger-menu">
+      <div class="filter_buttons_container">
           <button class="filter" data-action="filter" data-filter="gryffindor">Gryffindor</button>
           <button class="filter" data-action="filter" data-filter="slytherin">Slytherin</button>
           <button class="filter" data-action="filter" data-filter="hufflepuff">Huffelpuff</button>
@@ -33,37 +41,45 @@
           <button class="filter" data-action="filter" data-filter="iqsquad">Inquisitors</button>
           <button class="filter" data-action="filter" data-filter="*">All Houses</button>
         </div>
-      </div>
-      <div class="student_icons_container">
-      <div class="number_container"><img src="student_icons/total.svg">
-        <span id="allStudentsCounter">0</span>
-      </div>
- 
-      <div class="number_container"><img src="student_icons/expelled_students.svg" alt="expelled students icon" /> <span id="expelledStudentsCounter">0</span></div>
-
-
-      <div class="number_container"><img src="student_icons/displayed.svg" alt="displayed students icon"> <span id="displayedStudentsCounter">0</span></div>
-    </div>
-    </div>
+      </nav>
+        </div>
+    
     <main>
       
+        <div class="student_icons_container">
+          <div class="number_container"><img src="student_icons/total.svg">
+            <span id="allStudentsCounter">0</span>
+          </div>
+          
+          <div class="number_container"><img src="student_icons/expelled_students.svg" alt="expelled students icon" /> <span id="expelledStudentsCounter">0</span></div>
+          
+          
+          <div class="number_container"><img src="student_icons/displayed.svg" alt="displayed students icon"> <span id="displayedStudentsCounter">0</span></div>
+        </div>
+  
       <section id="allstudents">
         <table id="list">
+          <button id="sorting-btn">
+            <p>Sorting</p>
+            <span class="sorting-icon"></span>
+            <span class="sorting-icon"></span>
+            <span class="sorting-icon"></span>
+          </button>
+        </button>
             <div id="sorting">
-              
-              <p class=" header_portrait">Portrait</p>
-              <p data-action="sort" class=" header_gender"  data-sort-direction="asc" data-sort="gender">Gender</p>
-              <p class=" header_iqsquad" data-action="sort" data-sort-direction="asc" data-sort="iqsquad">Inqusitorial Squad</p>
-              <p class=" header_prefect" data-action="sort" data-sort-direction="asc" data-sort="prefect">Prefect</p>
-              <p class=" header_bloodstatus" data-action="sort" data-sort-direction="asc" data-sort="bloodtype">Bloodtype</p>
-              <p class=" header_firstname" data-action="sort" data-sort-direction="asc" data-sort="firstname">First name</p>
-              <p class=" header_nickname" data-action="sort" data-sort-direction="asc" data-sort="nickname">Nick name</p>
-              <p class=" header_middlename" data-action="sort" data-sort-direction="asc" data-sort="middlename">Middle name</p>
-              <p class=" header_lastname" data-action="sort" data-sort-direction="asc" data-sort="lastname">Last name</p>
-              <p class=" header_house" data-action="sort" data-sort-direction="asc" data-sort="house">House</p>
-              <p>Expell Student</p>
-            
+              <button class="header_portrait">Portrait</button>
+              <button data-action="sort" class="sorting header_gender"  data-sort-direction="asc" data-sort="gender">Gender</button>
+              <button class="sorting header_iqsquad" data-action="sort" data-sort-direction="asc" data-sort="iqsquad">Inqusitorial Squad</button>
+              <button class="sorting header_prefect" data-action="sort" data-sort-direction="asc" data-sort="prefect">Prefect</button>
+              <button class="sorting header_bloodstatus" data-action="sort" data-sort-direction="asc" data-sort="bloodtype">Bloodtype</button>
+              <button class="sorting header_firstname" data-action="sort" data-sort-direction="asc" data-sort="firstname">First name</button>
+              <button class="sorting header_nickname" data-action="sort" data-sort-direction="asc" data-sort="nickname">Nick name</button>
+              <button class="sorting header_middlename" data-action="sort" data-sort-direction="asc" data-sort="middlename">Middle name</button>
+              <button class="sorting header_lastname" data-action="sort" data-sort-direction="asc" data-sort="lastname">Last name</button>
+              <button class="sorting header_house" data-action="sort" data-sort-direction="asc" data-sort="house">House</button>
+              <button>Expell Student</button>
           </div>
+        
           <template id="student">
           <section class="student_template">
             

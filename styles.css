@@ -1,4 +1,11 @@
 /* GENERAL ---------------------------------- */
+
+/* FONT */
+p {
+  font-family: ltc-hadriano-pro, sans-serif;
+  font-size: 1.5rem;
+}
+
 img {
   height: 100px;
   width: 100px;
@@ -89,25 +96,23 @@ tbody {
   display: grid;
   grid-template-columns: repeat(5, 1fr);
   justify-content: space-between;
+  grid-column: 1;
+  align-items: center;
 }
 
 .student_icons_container {
-  grid-row: 1;
-  grid-column: 5 / 6;
   display: flex;
-  justify-content: space-evenly;
   flex-direction: row;
-}
-
-.filters_counters {
-  grid-column: 1;
-  align-items: center;
-  justify-items: center;
+  justify-content: end;
 }
 
 .number_container {
   display: flex;
   align-items: center;
+}
+.number_container > img {
+  height: 60px;
+  width: 60px;
 }
 
 #allStudentsCounter,
@@ -116,50 +121,82 @@ tbody {
   font-size: 2rem;
 }
 
-/* DROPDOWN STYLING --------------------------*/
+/* FILTER STYLING --------------------------*/
 
-.filter_dropdown {
-  background-color: #04aa6d;
-  color: white;
-  padding: 16px;
-  font-size: 16px;
-  border: none;
-}
-
-.dropdown {
-  position: relative;
-  display: inline-block;
-}
-
-.dropdown_content {
-  display: none;
-  position: absolute;
-  background-color: #f1f1f1;
-  min-width: 160px;
-  box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
-  z-index: 1;
-}
-
-.dropdown_content button {
-  color: black;
-  padding: 12px 16px;
-  text-decoration: none;
-  display: block;
-}
-
-.dropdown_content button:hover {
-  background-color: #ddd;
-}
-
-.dropdown:hover .dropdown_content {
-  display: block;
-}
-
-.dropdown:hover .filter_dropdown {
-  background-color: #3e8e41;
+.filter_buttons_container {
+  display: flex;
+  grid-column: 1 / 5;
+  justify-content: space-evenly;
 }
 
 /* SORTING STYLING ------------------------ */
+
+header {
+  background-color: #333;
+  color: white;
+  height: 50px;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  padding: 0 20px;
+}
+
+nav {
+  position: fixed;
+  top: 0;
+  left: -250px;
+  height: 100%;
+  width: 250px;
+  background-color: #333;
+  color: white;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  transition: left 0.3s ease-in-out;
+  z-index: 1;
+}
+
+nav.active {
+  left: 0;
+}
+
+.filter_buttons_container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: start;
+  gap: 10px;
+  margin-top: 20px;
+  flex-direction: column;
+}
+
+.filter {
+  background-color: transparent;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  font-size: 18px;
+  cursor: pointer;
+  transition: background-color 0.3s ease-in-out;
+}
+
+.filter:hover {
+  background-color: #444;
+}
+
+.burger-icon {
+  display: block;
+  height: 2px;
+  width: 25px;
+  background-color: white;
+  margin-bottom: 5px;
+  transition: transform 0.3s ease-in-out;
+}
+
+#burger-btn:hover .burger-icon:nth-child(1) {
+  transform: translateY(-5px);
+}
 
 #sorting {
   display: grid;
@@ -167,31 +204,35 @@ tbody {
   grid-template-columns: repeat(11, 1fr);
 }
 
-#sorting > p {
+#sorting > button {
   display: flex;
   align-items: center;
   justify-content: space-evenly;
 }
 
-#sorting p.sortby[data-sort-direction="desc"]::after {
+#sorting button.sortby[data-sort-direction="desc"]::after {
   content: " ⬆️ ";
 }
 
-#sorting p.sortby[data-sort-direction="asc"]::after {
+#sorting button.sortby[data-sort-direction="asc"]::after {
   content: " ⬇️ ";
 }
-#sorting p.sortby[data-sort-direction="desc"]::before {
+#sorting button.sortby[data-sort-direction="desc"]::before {
   content: " ⬆️ ";
   opacity: 0;
 }
 
-#sorting p.sortby[data-sort-direction="asc"]::before {
+#sorting button.sortby[data-sort-direction="asc"]::before {
   content: " ⬇️ ";
   opacity: 0;
 }
 
-#sorting p.sortby {
+#sorting button.sortby {
   background-color: aquamarine;
+}
+
+#sorting-btn {
+  visibility: hidden;
 }
 
 /* Tables styling */
@@ -205,14 +246,6 @@ tbody {
   border: 1px solid black;
   padding: 8px;
   text-align: center;
-}
-
-#list th {
-  background-color: lightgray;
-}
-
-#list tr:nth-child(even) {
-  background-color: rgb(173, 230, 210);
 }
 
 #expelledlist {
@@ -442,6 +475,50 @@ p[data-field="prefect"][data-prefect="false"] {
 }
 
 @media screen and (width < 600px) {
+  /* SORTING MENU FOR MOBILE */
+
+  .sorting-icon {
+    display: block;
+    height: 2px;
+    width: 25px;
+    background-color: white;
+    margin-bottom: 5px;
+    transition: transform 0.3s ease-in-out;
+  }
+
+  #sorting {
+    position: fixed;
+    top: 0;
+    left: -250px;
+    height: 100%;
+    width: 250px;
+    background-color: #333;
+    color: white;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    transition: left 0.3s ease-in-out;
+    z-index: 1;
+  }
+
+  #sorting > button {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    margin-top: 20px;
+  }
+
+  #sorting-btn {
+    visibility: visible;
+  }
+  #sorting.active {
+    left: 0;
+  }
+
+  /* STYLING FOR TABLE ON MOBILE */
   #list {
     display: grid;
     grid-column: 1 / 2;
@@ -536,19 +613,9 @@ p[data-field="prefect"][data-prefect="false"] {
     left: -49.1px;
   }
 
-  .student_icons_container {
-    grid-row: 2;
-    grid-column: 1 / 6;
-  }
   .number_container > img {
     height: 50px;
     width: 50px;
-  }
-
-  #sorting {
-    display: grid;
-    text-align: center;
-    grid-template-columns: repeat(5, 1fr);
   }
 
   /* POPUP MOBILE */

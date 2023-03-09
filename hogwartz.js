@@ -18,6 +18,37 @@ const allStudentsCounterElement = document.querySelector("#allStudentsCounter");
 const expelledStudentsCounterElement = document.querySelector("#expelledStudentsCounter");
 const displayedStudentsCounterElement = document.querySelector("#displayedStudentsCounter");
 
+const burgerBtn = document.getElementById("burger-btn");
+const burgerMenu = document.getElementById("burger-menu");
+const filterButtons = document.querySelectorAll(".filter");
+const sortingBtn = document.getElementById("sorting-btn");
+const sortingMenu = document.getElementById("sorting");
+const sortingButtons = document.querySelectorAll(".sorting");
+
+function closeBurgerMenu() {
+  burgerMenu.classList.remove("active");
+}
+
+burgerBtn.addEventListener("click", () => {
+  burgerMenu.classList.toggle("active");
+});
+
+filterButtons.forEach((button) => {
+  button.addEventListener("click", closeBurgerMenu);
+});
+
+function closeSortingMenu() {
+  sortingMenu.classList.remove("active");
+}
+
+sortingBtn.addEventListener("click", () => {
+  sortingMenu.classList.toggle("active");
+});
+
+sortingButtons.forEach((button) => {
+  button.addEventListener("click", closeSortingMenu);
+});
+
 document.addEventListener("DOMContentLoaded", loadPage);
 const Student = {
   firstname: "",
