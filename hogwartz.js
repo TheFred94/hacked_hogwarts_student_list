@@ -416,7 +416,7 @@ function displayStudent(studentCard) {
   clone.querySelector("[data-field=gender]").textContent = studentCard.gender;
   clone.querySelector("#studentImage").src = `images/${studentCard.image}`;
   clone.querySelector("#studentBlood").src = `blood_status/${studentCard.blood}.svg`;
-  clone.querySelector("[data-field=image]").addEventListener("click", () => showStudentDetails(studentCard));
+  clone.querySelector(".student_template").addEventListener("click", () => showStudentDetails(studentCard));
   clone.querySelector(".student_template").classList.add(houseColors[studentCard.house]);
   // Assign prefect
   clone.querySelector("[data-field=prefect]").dataset.prefect = studentCard.prefect;
@@ -588,7 +588,6 @@ function moveToExpelled(studentCard) {
 
 // Displays the popup and the details about a student
 function showStudentDetails(studentCard) {
-  console.log(student);
   popup.style.display = "block";
   popup.querySelector(".student_name").textContent = `${studentCard.firstname}`;
   popup.querySelector(".student_gender").textContent = `${studentCard.gender}`;

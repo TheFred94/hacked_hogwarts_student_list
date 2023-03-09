@@ -1,26 +1,63 @@
 /* GENERAL ---------------------------------- */
 
 html {
-  --gryffindor-red: rgb(163, 65, 67);
-  --ravenclaw-blue: rgb(133, 195, 222);
-  --slytherin-green: rgb(40, 116, 60);
-  --huffelpuff-yellow: rgb(247, 237, 124);
+  --gryffindor-red: rgba(191, 24, 26, 0.5);
+  --ravenclaw-blue: rgb(133, 195, 222, 0.5);
+  --slytherin-green: rgb(40, 116, 60, 0.5);
+  --huffelpuff-yellow: rgb(247, 237, 124, 0.5);
+  --white_color: #d8d5d5af;
+  --p_font: clamp(1.5rem, -2rem + 8vw, 1.5rem);
+  --button_font: clamp(1rem, -2rem + 8vw, 1rem);
+}
+body {
+  max-width: 1200px;
+  margin: 0 auto;
+  background-image: url(student_icons/dragon-scales.svg);
 }
 
 .gryffindor {
+  background: rgba(255, 255, 255, 0.5);
+  box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+  backdrop-filter: blur(2.5px);
+  -webkit-backdrop-filter: blur(2.5px);
+  border-radius: 10px;
+  border: 1px solid rgba(255, 255, 255, 0.18);
   background-color: var(--gryffindor-red);
 }
 
 .hufflepuff {
+  background: rgba(255, 255, 255, 0.5);
+  box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+  backdrop-filter: blur(2.5px);
+  -webkit-backdrop-filter: blur(2.5px);
+  border-radius: 10px;
+  border: 1px solid rgba(255, 255, 255, 0.18);
   background-color: var(--huffelpuff-yellow);
 }
 
 .slytherin {
+  background: rgba(255, 255, 255, 0.5);
+  box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+  backdrop-filter: blur(2.5px);
+  -webkit-backdrop-filter: blur(2.5px);
+  border-radius: 10px;
+  border: 1px solid rgba(255, 255, 255, 0.18);
   background-color: var(--slytherin-green);
 }
 
 .ravenclaw {
+  background: rgba(255, 255, 255, 0.5);
+  box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+  backdrop-filter: blur(2.5px);
+  -webkit-backdrop-filter: blur(2.5px);
+  border-radius: 10px;
+  border: 1px solid rgba(255, 255, 255, 0.18);
   background-color: var(--ravenclaw-blue);
+}
+
+button {
+  font-family: "new-spirit", serif;
+  font-size: var(--button_font);
 }
 
 /* FONT */
@@ -28,7 +65,7 @@ p {
   font-family: "new-spirit", serif;
   font-weight: 400;
   font-style: normal;
-  font-size: 1.5rem;
+  font-size: var(--p_font);
 }
 
 img {
@@ -49,11 +86,22 @@ main {
 }
 
 .student_template {
+  border-radius: 10px;
+  margin-block: 1rem;
   justify-items: center;
   align-items: center;
   display: grid;
   grid-template-columns: repeat(11, 1fr);
   grid-column: 1 / 12;
+  transition: 0.3s;
+  box-shadow: inset 0 0 0 0;
+  cursor: pointer;
+}
+
+.student_template:hover {
+  transition: 0.3s;
+  scale: 1.02;
+  box-shadow: inset 120px 0 0 0 var(--white_color);
 }
 
 tbody {
@@ -233,6 +281,10 @@ nav.active {
   display: flex;
   align-items: center;
   justify-content: space-evenly;
+  background-color: transparent;
+  color: white;
+  border: none;
+  border-radius: 5px;
 }
 
 #sorting button.sortby[data-sort-direction="desc"]::after {
@@ -253,7 +305,7 @@ nav.active {
 }
 
 #sorting button.sortby {
-  background-color: aquamarine;
+  background-color: rgb(52, 88, 76);
 }
 
 #sorting-btn {
@@ -288,14 +340,6 @@ nav.active {
   border: 1px solid black;
   padding: 8px;
   text-align: center;
-}
-
-#expelledlist th {
-  background-color: lightgray;
-}
-
-#expelledlist tr:nth-child(even) {
-  background-color: rgb(173, 230, 210);
 }
 
 p[data-field="expelled"]::after {
