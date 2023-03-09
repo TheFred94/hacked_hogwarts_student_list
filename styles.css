@@ -216,10 +216,10 @@ header {
 
 nav {
   position: fixed;
-  top: 0;
-  left: -250px;
-  height: 100%;
-  width: 250px;
+  top: 345px;
+  left: -400px;
+  width: 400px;
+  height: 50%;
   background-color: #333;
   color: white;
   display: flex;
@@ -228,10 +228,12 @@ nav {
   justify-content: center;
   transition: left 0.3s ease-in-out;
   z-index: 1;
+  border-radius: 0 10px 10px 0;
 }
 
 nav.active {
-  left: 0;
+  left: 0px;
+  width: 400px;
 }
 
 .filter_buttons_container {
