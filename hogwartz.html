@@ -19,17 +19,6 @@
       <button id="search-button">Search</button>
       <button id="reset-button" type="button">Reset</button>
     </div>
-
-    <button id="burger-btn">
-      <p>Filter</p>
-
-    </button>
-    <button id="sorting-btn">
-      <p>Sorting</p>
-    </button>
-  </button>
-  </header>
-  
     <div class="filters_counters">
       <nav id="burger-menu">
         <div class="close_side_menu_container">
@@ -49,25 +38,33 @@
           <button class="filter allhouse_btn" data-action="filter" data-filter="*">All Houses</button>
         </div>
       </nav>
-        </div>
-    
+    </div>
     <main>
       
         <div class="student_icons_container">
+          <div class="filter_sorting_container">
+          <button id="burger-btn">
+            <p>Filter</p>
+          </button>
+          
+          <button id="sorting-btn">
+            <p>Sorting</p>
+          </button>
+          </div>
+          <div
+          class="counter_container">
           <div class="number_container"><img src="student_icons/total.svg">
             <span id="allStudentsCounter">0</span>
           </div>
-          
           <div class="number_container"><img src="student_icons/expelled_students.svg" alt="expelled students icon" /> <span id="expelledStudentsCounter">0</span></div>
           
           
           <div class="number_container"><img src="student_icons/displayed.svg" alt="displayed students icon"> <span id="displayedStudentsCounter">0</span></div>
         </div>
+        </div>
   
       <section id="allstudents">
         <table id="list">
-    
-        
             <div id="sorting">
               <div class="close_side_menu_container">
                 <button id="close_sorting">&#x2715</button>
