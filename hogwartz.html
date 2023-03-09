@@ -13,7 +13,17 @@
 
   <body>
     <h1>Students of Hogwartz</h1>
-    <button id="togglebutton" onclick="toggleStudents()">Show expelled students</button>
+
+
+    
+    <div class="toggle_switch">
+      <label class="switch">
+        <input id="togglebutton" onclick="toggleStudents()" type="checkbox">
+        <span class="slider round"></span>
+      </label>
+    </div>
+    <p id="toggle_text">Show expelled students</p>
+
     <div class="search-container">
       <input type="text" id="search-input" placeholder="Search by first name..." />
       <button id="search-button">Search</button>
@@ -202,7 +212,7 @@
 
     <div id="removestudent" class="modal hide">
       <div class="dialog">
-        <button class="closebutton">X</button>
+        
         <h1>Warning!</h1>
         <p id="expelled_student_name">Do you wish to expel this student? <br /></p>
         <div class="sidebyside">

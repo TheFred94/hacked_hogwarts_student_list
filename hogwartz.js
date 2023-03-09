@@ -92,7 +92,7 @@ const Student = {
 function toggleStudents() {
   let allStudents = document.getElementById("allstudents");
   let expelledStudents = document.getElementById("expelledstudents");
-  let toggleButton = document.getElementById("togglebutton");
+  let toggleButton = document.getElementById("toggle_text");
 
   if (allStudents.style.display === "none") {
     allStudents.style.display = "block";
@@ -475,6 +475,7 @@ function displayStudent(studentCard) {
       document.querySelector("#onlyslytherin .closebutton").removeEventListener("click", closeDialog);
       document.querySelector("#onlyslytherin .filter").removeEventListener("click", closeDialog);
       document.querySelector("#onlyslytherin").classList.add("hide");
+      popup.style.display = "none";
     }
   }
 
@@ -606,6 +607,7 @@ function showStudentDetails(studentCard) {
       document.querySelector("#removestudent").classList.add("hide");
       document.querySelector("#removestudent .closebutton").removeEventListener("click", closeDialog);
       document.querySelector("#removestudent #yes").removeEventListener("click", expelStudent);
+      popup.style.display = "none";
     }
     function expelStudent() {
       closeDialog();
