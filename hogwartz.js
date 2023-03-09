@@ -583,6 +583,7 @@ function moveToExpelled(studentCard) {
   console.log(allStudents);
   console.log(expelledStudents);
   buildList();
+  console.log("student expelled");
 }
 
 // Displays the popup and the details about a student
@@ -596,12 +597,12 @@ function showStudentDetails(studentCard) {
   popup.querySelector(".student_image").src = `images/${studentCard.image}`;
   popup.querySelector(".student_house_popup").src = `house_crests/${studentCard.house}.svg`;
   popup.querySelector(".student_blood").src = `blood_status/${studentCard.blood}.svg`;
-  popup.querySelector("[data-field=expelled]").addEventListener("click", function () {
+  document.querySelector("[data-field=expelled]").addEventListener("click", function () {
     document.querySelector("#removestudent").classList.remove("hide");
-    document.querySelector("#removestudent .closebutton").addEventListener("click", closeDialog);
+    document.querySelector("#expelled_student_name").textContent = `Do you wish to expel ${studentCard.firstname} ${studentCard.lastname}?`;
+    // document.querySelector("#removestudent .closebutton").addEventListener("click", closeDialog);
     document.querySelector("#removestudent #yes").addEventListener("click", expelStudent);
     document.querySelector("#removestudent #no").addEventListener("click", closeDialog);
-    document.querySelector("#expelled_student_name").textContent = `Do you wish to expel ${studentCard.firstname} ${studentCard.lastname}?`;
 
     // Find the index of the student in the allStudents array
     const index = allStudents.findIndex((student) => student.firstname === studentCard.firstname);
@@ -612,17 +613,17 @@ function showStudentDetails(studentCard) {
 
     function closeDialog() {
       document.querySelector("#removestudent").classList.add("hide");
-      document.querySelector("#removestudent .closebutton").removeEventListener("click", closeDialog);
+      document.querySelector("#removestudent #no").removeEventListener("click", closeDialog);
       document.querySelector("#removestudent #yes").removeEventListener("click", expelStudent);
       popup.style.display = "none";
     }
     function expelStudent() {
-      closeDialog();
-      popup.style.display = "none";
+      console.log("Expelstudent runs");
       studentCard.expelled = true;
       moveToExpelled(studentCard);
+      closeDialog();
+      popup.style.display = "none";
     }
-    // Rebuild the list to update the displayed students
   });
 
   // When opening popup, change the value of data-prefect depending on status either true or false
