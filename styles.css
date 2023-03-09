@@ -293,6 +293,7 @@ button.close_button {
   position: fixed;
   left: 0;
   top: 0;
+
   height: 100vh;
   width: 100vw;
   background-color: rgba(31, 31, 31, 0.8);
@@ -327,7 +328,7 @@ button.close_button {
   height: 700px;
 
   align-items: center;
-  justify-content: center;
+  justify-items: center;
   flex-direction: column;
   margin: 30rem auto;
 
@@ -335,7 +336,6 @@ button.close_button {
 }
 
 section > article > p {
-  padding-left: 40px;
   grid-column: 1 / 3;
   grid-row: 4;
   color: black;
@@ -346,7 +346,6 @@ section > article > .student_image {
   width: 150px;
   grid-column: 1;
   grid-row: 3;
-  padding-left: 40px;
 }
 
 section > article > .student_house {
@@ -402,12 +401,12 @@ section > article > .student_house {
   grid-row: 1;
   grid-column: 1 / 6;
 }
-.house_crest_popup_container > .student_house {
+
+.popup_details > .house_crest_popup_container > .student_house_popup {
   position: absolute;
   height: 300px;
   width: 300px;
   top: -180px;
-  left: 345px;
 }
 
 p[data-field="prefect"]::after {
@@ -419,16 +418,22 @@ p[data-field="prefect"][data-prefect="false"] {
 }
 
 .prefect_popup {
+  grid-column: 4;
+  grid-row: 5;
+}
+.student_gender {
   grid-column: 3;
+  grid-row: 4;
 }
 
 .iqsquad_popup {
   grid-column: 4;
+  grid-row: 4;
 }
 
 .expelled {
-  grid-column: 3 span;
-  grid-row: 5;
+  grid-column: 3/5;
+  grid-row: 6;
 }
 
 .student_blood {
@@ -491,10 +496,13 @@ p[data-field="prefect"][data-prefect="false"] {
   }
 
   .nickname {
+    grid-column: 5;
     visibility: hidden;
   }
 
   .middlename {
+    grid-row: 3;
+    grid-column: 5;
     visibility: hidden;
   }
 
@@ -564,36 +572,50 @@ p[data-field="prefect"][data-prefect="false"] {
     height: 700px;
 
     align-items: center;
-    justify-content: center;
+    justify-items: center;
     flex-direction: column;
-    margin: 30rem auto;
+    margin: 10rem auto;
 
     background-color: #ffff;
   }
 
-  .house_crest_popup_container > .student_house {
+  .popup_details > .house_crest_popup_container > .student_house_popup {
     position: absolute;
     height: 200px;
     width: 200px;
     top: -135px;
-    left: 153px;
+    left: -80px;
   }
   .iqsquad_popup {
-    grid-column: 4;
-    grid-row: 2;
+    grid-column: 3;
+    grid-row: 3;
   }
   .student_blood {
-    grid-row: 2;
-    grid-column: 3;
+    grid-row: 3;
+    grid-column: 1;
+    width: 50px;
+    height: 50px;
   }
 
-  .student_image {
+  .popup_details > .student_image {
     grid-row: 2;
-    grid-column: 1 / 3;
+    grid-column: 2 / 5;
   }
 
   .prefect_popup {
-    grid-column: 4;
+    padding: 0;
+    grid-column: 2;
     grid-row: 3;
+  }
+
+  .student_gender {
+    grid-column: 4 / 5;
+    grid-row: 3;
+  }
+}
+
+@media screen and (width > 374px) {
+  .house_crest_popup_container > .student_house_popup {
+    left: -76px;
   }
 }

@@ -552,11 +552,12 @@ function showStudentDetails(studentCard) {
   console.log(student);
   popup.style.display = "block";
   popup.querySelector(".student_name").textContent = `${studentCard.firstname}`;
+  popup.querySelector(".student_gender").textContent = `${studentCard.gender}`;
   popup.querySelector(".student_nickname").textContent = `${studentCard.nickname}`;
   popup.querySelector(".student_middlename").textContent = `${studentCard.middlename}`;
   popup.querySelector(".student_lastname").textContent = `${studentCard.lastname}`;
   popup.querySelector(".student_image").src = `images/${studentCard.image}`;
-  popup.querySelector(".student_house").src = `house_crests/${studentCard.house}.svg`;
+  popup.querySelector(".student_house_popup").src = `house_crests/${studentCard.house}.svg`;
   popup.querySelector(".student_blood").src = `blood_status/${studentCard.blood}.svg`;
 
   // When opening popup, change the value of data-prefect depending on status either true or false
