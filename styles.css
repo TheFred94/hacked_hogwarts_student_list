@@ -1,10 +1,10 @@
 /* GENERAL ---------------------------------- */
 
 html {
-  --gryffindor-red: rgba(191, 24, 26, 0.5);
-  --ravenclaw-blue: rgb(133, 195, 222, 0.5);
-  --slytherin-green: rgb(40, 116, 60, 0.5);
-  --huffelpuff-yellow: rgb(247, 237, 124, 0.5);
+  --gryffindor-red: #a81f2839;
+  --ravenclaw-blue: rgba(133, 195, 222, 0.3);
+  --slytherin-green: rgba(40, 116, 60, 0.3);
+  --huffelpuff-yellow: rgb(247, 237, 124, 0.3);
   --white_color: #f2f2f2;
   --black_color: #454242ea;
   --p_font: clamp(1.5rem, -2rem + 8vw, 1.5rem);
@@ -13,7 +13,10 @@ html {
 body {
   max-width: 1200px;
   margin: 0 auto;
-  background-image: url(student_icons/dragon-scales.svg);
+  background-color: #ffffff;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 1000'%3E%3Cg %3E%3Ccircle fill='%23FFFFFF' cx='50' cy='0' r='50'/%3E%3Cg fill='%23fffcfb' %3E%3Ccircle cx='0' cy='50' r='50'/%3E%3Ccircle cx='100' cy='50' r='50'/%3E%3C/g%3E%3Ccircle fill='%23fff8f8' cx='50' cy='100' r='50'/%3E%3Cg fill='%23fff5f4' %3E%3Ccircle cx='0' cy='150' r='50'/%3E%3Ccircle cx='100' cy='150' r='50'/%3E%3C/g%3E%3Ccircle fill='%23fff1f1' cx='50' cy='200' r='50'/%3E%3Cg fill='%23ffeeed' %3E%3Ccircle cx='0' cy='250' r='50'/%3E%3Ccircle cx='100' cy='250' r='50'/%3E%3C/g%3E%3Ccircle fill='%23ffeaea' cx='50' cy='300' r='50'/%3E%3Cg fill='%23ffe7e6' %3E%3Ccircle cx='0' cy='350' r='50'/%3E%3Ccircle cx='100' cy='350' r='50'/%3E%3C/g%3E%3Ccircle fill='%23ffe3e3' cx='50' cy='400' r='50'/%3E%3Cg fill='%23ffe0df' %3E%3Ccircle cx='0' cy='450' r='50'/%3E%3Ccircle cx='100' cy='450' r='50'/%3E%3C/g%3E%3Ccircle fill='%23ffdddc' cx='50' cy='500' r='50'/%3E%3Cg fill='%23ffd9d9' %3E%3Ccircle cx='0' cy='550' r='50'/%3E%3Ccircle cx='100' cy='550' r='50'/%3E%3C/g%3E%3Ccircle fill='%23ffd6d5' cx='50' cy='600' r='50'/%3E%3Cg fill='%23ffd2d2' %3E%3Ccircle cx='0' cy='650' r='50'/%3E%3Ccircle cx='100' cy='650' r='50'/%3E%3C/g%3E%3Ccircle fill='%23ffcfce' cx='50' cy='700' r='50'/%3E%3Cg fill='%23ffcbcb' %3E%3Ccircle cx='0' cy='750' r='50'/%3E%3Ccircle cx='100' cy='750' r='50'/%3E%3C/g%3E%3Ccircle fill='%23ffc8c7' cx='50' cy='800' r='50'/%3E%3Cg fill='%23ffc4c4' %3E%3Ccircle cx='0' cy='850' r='50'/%3E%3Ccircle cx='100' cy='850' r='50'/%3E%3C/g%3E%3Ccircle fill='%23ffc1c1' cx='50' cy='900' r='50'/%3E%3Cg fill='%23ffbdbd' %3E%3Ccircle cx='0' cy='950' r='50'/%3E%3Ccircle cx='100' cy='950' r='50'/%3E%3C/g%3E%3Ccircle fill='%23FFBABA' cx='50' cy='1000' r='50'/%3E%3C/g%3E%3C/svg%3E");
+  background-attachment: fixed;
+  background-size: contain;
 }
 
 .gryffindor {
@@ -168,6 +171,21 @@ main {
   grid-template-columns: 1fr;
 }
 
+/* SEARCH INPUT */
+#search-input {
+  font-size: var(--p_font);
+  font-family: "new-spirit", serif;
+  height: 60px;
+  width: 300px;
+  background: rgba(255, 255, 255, 0.15);
+  box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+  backdrop-filter: blur(5px);
+  -webkit-backdrop-filter: blur(5px);
+  border-radius: 10px;
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  color: white;
+}
+
 /* STUDENT LIST STYLING */
 #list {
   display: grid;
@@ -245,7 +263,7 @@ tbody {
 
 .house {
   grid-row: 1;
-  grid-column: 10 / 11;
+  grid-column: 10 / 12;
 }
 
 .expel {
@@ -369,8 +387,12 @@ nav.active {
   display: flex;
   align-items: center;
   justify-content: space-evenly;
-  background-color: transparent;
-  color: white;
+  background: rgba(255, 255, 255, 0.15);
+  box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+  backdrop-filter: blur(5px);
+  -webkit-backdrop-filter: blur(5px);
+  border-radius: 10px;
+  border: 1px solid rgba(255, 255, 255, 0.18);
   border: none;
   border-radius: 5px;
 }
@@ -430,8 +452,8 @@ nav.active {
   text-align: center;
 }
 
-p[data-field="expelled"]::after {
-  content: " ❌ ";
+.header_house {
+  grid-column: 10 / 12;
 }
 
 td[data-field="prefect"]::after {
@@ -622,8 +644,27 @@ p[data-field="prefect"][data-prefect="false"] {
 }
 
 .expelled {
-  grid-column: 3/5;
-  grid-row: 6;
+  grid-column: 5/6;
+  grid-row: 7;
+}
+
+.popup_details > button {
+  padding-block: 10px;
+  padding-inline: 10px;
+  font-size: var(--p_font);
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+  background-color: var(--black_color);
+  border: none;
+  color: var(--white_color);
+  transition: ease-out 0.3s;
+  box-shadow: inset 0 0 0 0 var(--gryffindor-red);
+  cursor: pointer;
+}
+.popup_details > button:hover {
+  transition: ease-out 0.3s;
+  box-shadow: inset 180px 0 0 0 var(--gryffindor-red);
 }
 
 .student_blood {
@@ -660,6 +701,7 @@ p[data-field="prefect"][data-prefect="false"] {
   }
 
   #sorting > button {
+    cursor: pointer;
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
