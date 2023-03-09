@@ -32,13 +32,15 @@ const sortingBtn = document.getElementById("sorting-btn");
 const sortingMenu = document.getElementById("sorting");
 const sortingButtons = document.querySelectorAll(".sorting");
 
-function closeBurgerMenu() {
-  burgerMenu.classList.remove("active");
-}
-
 burgerBtn.addEventListener("click", () => {
   burgerMenu.classList.toggle("active");
+  burgerBtn.classList.toggle("filter_active");
 });
+
+function closeBurgerMenu() {
+  burgerMenu.classList.remove("active");
+  burgerBtn.classList.remove("filter_active");
+}
 
 filterButtons.forEach((button) => {
   button.addEventListener("click", closeBurgerMenu);
@@ -412,7 +414,6 @@ function displayStudent(studentCard) {
   clone.querySelector("[data-field=middlename]").textContent = studentCard.middlename;
   clone.querySelector("[data-field=lastname]").textContent = studentCard.lastname;
   clone.querySelector("#studentHouse").src = `house_crests/${studentCard.house}.svg`;
-
   clone.querySelector("[data-field=gender]").textContent = studentCard.gender;
   clone.querySelector("#studentImage").src = `images/${studentCard.image}`;
   clone.querySelector("#studentBlood").src = `blood_status/${studentCard.blood}.svg`;
