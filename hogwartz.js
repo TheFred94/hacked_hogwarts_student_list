@@ -527,17 +527,17 @@ function moveToExpelled(studentCard) {
   const template = document.querySelector("#expelledstudent");
 
   // Clone the template and fill in the fields with the expelled student's data
-  const row = template.content.cloneNode(true).querySelector("tr");
+  const row = template.content.cloneNode(true).querySelector("section");
   row.querySelector("[data-field='image'] img").src = `images/${studentCard.image}`;
   row.querySelector("[data-field='gender']").textContent = studentCard.gender;
   row.querySelector("[data-field='iqsquad']").textContent = `N/A`;
   row.querySelector("[data-field='prefect']").textContent = `N/A`;
-  row.querySelector("[data-field='bloodtype']").textContent = studentCard.blood;
+  row.querySelector("#studentBlood").src = `blood_status/${studentCard.blood}.svg`;
+  row.querySelector("#studentHouse").src = `house_crests/${studentCard.house}.svg`;
   row.querySelector("[data-field='firstname']").textContent = studentCard.firstname;
   row.querySelector("[data-field='nickname']").textContent = studentCard.nickname;
   row.querySelector("[data-field='middlename']").textContent = studentCard.middlename;
   row.querySelector("[data-field='lastname']").textContent = studentCard.lastname;
-  row.querySelector("[data-field='house']").textContent = studentCard.house;
   row.querySelector("[data-field=image]").addEventListener("click", () => showStudentDetails(studentCard));
   // Add the new row to the table
   const tbody = document.querySelector("#expelledlist tbody");
@@ -552,11 +552,13 @@ function showStudentDetails(studentCard) {
   console.log(student);
   popup.style.display = "block";
   popup.querySelector(".student_name").textContent = `${studentCard.firstname}`;
+  popup.querySelector(".student_gender").textContent = `${studentCard.gender}`;
   popup.querySelector(".student_nickname").textContent = `${studentCard.nickname}`;
   popup.querySelector(".student_middlename").textContent = `${studentCard.middlename}`;
   popup.querySelector(".student_lastname").textContent = `${studentCard.lastname}`;
   popup.querySelector(".student_image").src = `images/${studentCard.image}`;
-  popup.querySelector(".student_house").src = `house_crests/${studentCard.house}.svg`;
+  popup.querySelector(".student_house_popup").src = `house_crests/${studentCard.house}.svg`;
+  popup.querySelector(".student_blood").src = `blood_status/${studentCard.blood}.svg`;
 
   // When opening popup, change the value of data-prefect depending on status either true or false
   const prefectElem = popup.querySelector(".prefect");

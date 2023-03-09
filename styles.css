@@ -4,17 +4,193 @@ img {
   width: 100px;
 }
 
-/* Sorting styling */
+main {
+  display: grid;
+  grid-template-columns: 1fr;
+}
 
-#sorting th.sortby[data-sort-direction="desc"]::after {
+/* STUDENT LIST STYLING */
+#list {
+  display: grid;
+  grid-column: 1 / 2;
+  grid-template-columns: repeat(11, 1fr);
+}
+
+.student_template {
+  justify-items: center;
+  align-items: center;
+  display: grid;
+  grid-template-columns: repeat(11, 1fr);
+  grid-column: 1 / 12;
+}
+
+tbody {
+  display: grid;
+  grid-column: 1 / 12;
+}
+
+.image {
+  grid-row: 1;
+  grid-column: 1 / 2;
+}
+
+.gender {
+  grid-row: 1;
+  grid-column: 2 / 3;
+}
+
+.iqsquad {
+  grid-row: 1;
+  grid-column: 3 / 4;
+}
+
+.prefect {
+  grid-row: 1;
+  grid-column: 4 / 5;
+}
+
+.bloodtype {
+  grid-row: 1;
+  grid-column: 5 / 6;
+}
+
+.firstname {
+  grid-row: 1;
+  grid-column: 6 / 7;
+}
+.nickname {
+  grid-row: 1;
+  grid-column: 7 / 8;
+}
+
+.middlename {
+  grid-row: 1;
+  grid-column: 8 / 9;
+}
+
+.lastname {
+  grid-row: 1;
+  grid-column: 9 / 10;
+}
+
+.house {
+  grid-row: 1;
+  grid-column: 10 / 11;
+}
+
+.expel {
+  grid-row: 1;
+  grid-column: 11 / 12;
+}
+
+/* TOP MENU WITH FILTERS AND COUNTERS */
+
+.filters_counters {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  justify-content: space-between;
+}
+
+.student_icons_container {
+  grid-row: 1;
+  grid-column: 5 / 6;
+  display: flex;
+  justify-content: space-evenly;
+  flex-direction: row;
+}
+
+.filters_counters {
+  grid-column: 1;
+  align-items: center;
+  justify-items: center;
+}
+
+.number_container {
+  display: flex;
+  align-items: center;
+}
+
+#allStudentsCounter,
+#expelledStudentsCounter,
+#displayedStudentsCounter {
+  font-size: 2rem;
+}
+
+/* DROPDOWN STYLING --------------------------*/
+
+.filter_dropdown {
+  background-color: #04aa6d;
+  color: white;
+  padding: 16px;
+  font-size: 16px;
+  border: none;
+}
+
+.dropdown {
+  position: relative;
+  display: inline-block;
+}
+
+.dropdown_content {
+  display: none;
+  position: absolute;
+  background-color: #f1f1f1;
+  min-width: 160px;
+  box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+  z-index: 1;
+}
+
+.dropdown_content button {
+  color: black;
+  padding: 12px 16px;
+  text-decoration: none;
+  display: block;
+}
+
+.dropdown_content button:hover {
+  background-color: #ddd;
+}
+
+.dropdown:hover .dropdown_content {
+  display: block;
+}
+
+.dropdown:hover .filter_dropdown {
+  background-color: #3e8e41;
+}
+
+/* SORTING STYLING ------------------------ */
+
+#sorting {
+  display: grid;
+  text-align: center;
+  grid-template-columns: repeat(11, 1fr);
+}
+
+#sorting > p {
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+}
+
+#sorting p.sortby[data-sort-direction="desc"]::after {
   content: " ⬆️ ";
 }
 
-#sorting th.sortby[data-sort-direction="asc"]::after {
+#sorting p.sortby[data-sort-direction="asc"]::after {
   content: " ⬇️ ";
 }
+#sorting p.sortby[data-sort-direction="desc"]::before {
+  content: " ⬆️ ";
+  opacity: 0;
+}
 
-#sorting th.sortby {
+#sorting p.sortby[data-sort-direction="asc"]::before {
+  content: " ⬇️ ";
+  opacity: 0;
+}
+
+#sorting p.sortby {
   background-color: aquamarine;
 }
 
@@ -64,7 +240,7 @@ img {
   background-color: rgb(173, 230, 210);
 }
 
-td[data-field="expelled"]::after {
+p[data-field="expelled"]::after {
   content: " ❌ ";
 }
 
@@ -117,6 +293,7 @@ button.close_button {
   position: fixed;
   left: 0;
   top: 0;
+
   height: 100vh;
   width: 100vw;
   background-color: rgba(31, 31, 31, 0.8);
@@ -151,7 +328,7 @@ button.close_button {
   height: 700px;
 
   align-items: center;
-  justify-content: center;
+  justify-items: center;
   flex-direction: column;
   margin: 30rem auto;
 
@@ -159,7 +336,6 @@ button.close_button {
 }
 
 section > article > p {
-  padding-left: 40px;
   grid-column: 1 / 3;
   grid-row: 4;
   color: black;
@@ -170,7 +346,6 @@ section > article > .student_image {
   width: 150px;
   grid-column: 1;
   grid-row: 3;
-  padding-left: 40px;
 }
 
 section > article > .student_house {
@@ -217,8 +392,21 @@ section > article > .student_house {
   grid-column: 1;
 }
 
-.iqsquad {
+.iqsquad_popup {
   grid-column: 3;
+}
+
+.house_crest_popup_container {
+  position: relative;
+  grid-row: 1;
+  grid-column: 1 / 6;
+}
+
+.popup_details > .house_crest_popup_container > .student_house_popup {
+  position: absolute;
+  height: 300px;
+  width: 300px;
+  top: -180px;
 }
 
 p[data-field="prefect"]::after {
@@ -229,15 +417,205 @@ p[data-field="prefect"][data-prefect="false"] {
   filter: grayscale(1);
 }
 
-.prefect {
+.prefect_popup {
+  grid-column: 4;
+  grid-row: 5;
+}
+.student_gender {
   grid-column: 3;
+  grid-row: 4;
 }
 
-.iqsquad {
+.iqsquad_popup {
   grid-column: 4;
+  grid-row: 4;
 }
 
 .expelled {
-  grid-column: 3 span;
+  grid-column: 3/5;
+  grid-row: 6;
+}
+
+.student_blood {
   grid-row: 5;
+  grid-column: 3;
+}
+
+@media screen and (width < 600px) {
+  #list {
+    display: grid;
+    grid-column: 1 / 2;
+    grid-template-columns: repeat(5, 1fr);
+  }
+
+  .student_template {
+    justify-items: center;
+    align-items: center;
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    grid-column: 1 / 6;
+  }
+
+  tbody {
+    display: grid;
+    grid-column: 1 / 6;
+  }
+
+  .image {
+    grid-row: 1;
+    grid-column: 2 / 5;
+  }
+
+  .gender {
+    grid-row: 4;
+    grid-column: 1 / 2;
+  }
+
+  .iqsquad {
+    grid-row: 4;
+    grid-column: 2 / 3;
+  }
+
+  .prefect {
+    grid-row: 4;
+    grid-column: 3 / 4;
+  }
+
+  .bloodtype {
+    grid-row: 4;
+    grid-column: 4 / 5;
+  }
+  #studentBlood {
+    height: 50px;
+    width: 50px;
+  }
+  .firstname {
+    padding-top: 30px;
+    grid-row: 3;
+    grid-column: 2 / 4;
+  }
+
+  .nickname {
+    grid-column: 5;
+    visibility: hidden;
+  }
+
+  .middlename {
+    grid-row: 3;
+    grid-column: 5;
+    visibility: hidden;
+  }
+
+  .lastname {
+    padding-top: 30px;
+    grid-row: 3;
+    grid-column: 3 / 5;
+  }
+
+  .expel {
+    grid-row: 4;
+    grid-column: 5 / 6;
+  }
+
+  .house_crest_container {
+    position: relative;
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    grid-row: 2;
+    grid-column: 1 / 6;
+  }
+
+  #studentImage {
+    height: 150px;
+    width: 150px;
+  }
+
+  #studentHouse {
+    position: absolute;
+    top: -72px;
+    left: -49.1px;
+  }
+
+  .student_icons_container {
+    grid-row: 2;
+    grid-column: 1 / 6;
+  }
+  .number_container > img {
+    height: 50px;
+    width: 50px;
+  }
+
+  #sorting {
+    display: grid;
+    text-align: center;
+    grid-template-columns: repeat(5, 1fr);
+  }
+
+  /* POPUP MOBILE */
+  #popup {
+    display: none;
+    position: fixed;
+    left: 0;
+    top: 0;
+    height: 100vh;
+    width: 100vw;
+    background-color: rgba(31, 31, 31, 0.8);
+    overflow: scroll;
+    padding: 0;
+    margin: 0;
+  }
+
+  #popup article {
+    gap: 10px;
+    transition: 1sec;
+    width: 100vw;
+    height: 700px;
+
+    align-items: center;
+    justify-items: center;
+    flex-direction: column;
+    margin: 10rem auto;
+
+    background-color: #ffff;
+  }
+
+  .popup_details > .house_crest_popup_container > .student_house_popup {
+    position: absolute;
+    height: 200px;
+    width: 200px;
+    top: -135px;
+    left: -80px;
+  }
+  .iqsquad_popup {
+    grid-column: 3;
+    grid-row: 3;
+  }
+  .student_blood {
+    grid-row: 3;
+    grid-column: 1;
+    width: 50px;
+    height: 50px;
+  }
+
+  .popup_details > .student_image {
+    grid-row: 2;
+    grid-column: 2 / 5;
+  }
+
+  .prefect_popup {
+    padding: 0;
+    grid-column: 2;
+    grid-row: 3;
+  }
+
+  .student_gender {
+    grid-column: 4 / 5;
+    grid-row: 3;
+  }
+}
+
+@media screen and (width > 374px) {
+  .house_crest_popup_container > .student_house_popup {
+    left: -76px;
+  }
 }

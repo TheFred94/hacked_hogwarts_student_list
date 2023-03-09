@@ -17,54 +17,68 @@
       <button id="reset-button" type="button">Reset</button>
     </div>
 
-    <p>
-      Filter:
-      <button class="filter" data-action="filter" data-filter="gryffindor">Gryffindor</button>
-      <button class="filter" data-action="filter" data-filter="slytherin">Slytherin</button>
-      <button class="filter" data-action="filter" data-filter="hufflepuff">Huffelpuff</button>
-      <button class="filter" data-action="filter" data-filter="ravenclaw">Ravenclaw</button>
-      <button class="filter" data-action="filter" data-filter="pureblood">Purebloods</button>
-      <button class="filter" data-action="filter" data-filter="halfblood">Half-Bloods</button>
-      <button class="filter" data-action="filter" data-filter="muggleborn">Muggle Born</button>
-      <button class="filter" data-action="filter" data-filter="prefect">Prefects</button>
-      <button class="filter" data-action="filter" data-filter="iqsquad">Inquisitors</button>
-      <button class="filter" data-action="filter" data-filter="*">All Houses</button>
-      <div>Total students: <span id="allStudentsCounter">0</span></div>
-      <div>Expelled students: <span id="expelledStudentsCounter">0</span></div>
-      <div>Displayed students: <span id="displayedStudentsCounter">0</span></div>
+    
+    <div class="filters_counters">
+      <div class="dropdown">
+        <button class="filter_dropdown">Filters</button>
+        <div class="dropdown_content">
+          <button class="filter" data-action="filter" data-filter="gryffindor">Gryffindor</button>
+          <button class="filter" data-action="filter" data-filter="slytherin">Slytherin</button>
+          <button class="filter" data-action="filter" data-filter="hufflepuff">Huffelpuff</button>
+          <button class="filter" data-action="filter" data-filter="ravenclaw">Ravenclaw</button>
+          <button class="filter" data-action="filter" data-filter="pureblood">Purebloods</button>
+          <button class="filter" data-action="filter" data-filter="halfblood">Half-Bloods</button>
+          <button class="filter" data-action="filter" data-filter="muggleborn">Muggle Born</button>
+          <button class="filter" data-action="filter" data-filter="prefect">Prefects</button>
+          <button class="filter" data-action="filter" data-filter="iqsquad">Inquisitors</button>
+          <button class="filter" data-action="filter" data-filter="*">All Houses</button>
+        </div>
+      </div>
+      <div class="student_icons_container">
+      <div class="number_container"><img src="student_icons/total.svg">
+        <span id="allStudentsCounter">0</span>
+      </div>
+ 
+      <div class="number_container"><img src="student_icons/expelled_students.svg" alt="expelled students icon" /> <span id="expelledStudentsCounter">0</span></div>
 
-    </p>
+
+      <div class="number_container"><img src="student_icons/displayed.svg" alt="displayed students icon"> <span id="displayedStudentsCounter">0</span></div>
+    </div>
+    </div>
     <main>
+      
       <section id="allstudents">
         <table id="list">
-          <thead>
-            <tr id="sorting">
-              <th>Portrait</th>
-              <th data-action="sort" data-sort-direction="asc" data-sort="gender">Gender</th>
-              <th data-action="sort" data-sort-direction="asc" data-sort="iqsquad">Inqusitorial Squad</th>
-              <th data-action="sort" data-sort-direction="asc" data-sort="prefect">Prefect</th>
-              <th data-action="sort" data-sort-direction="asc" data-sort="bloodtype">Bloodtype</th>
-              <th data-action="sort" data-sort-direction="asc" data-sort="firstname">First name</th>
-              <th data-action="sort" data-sort-direction="asc" data-sort="nickname">Nick name</th>
-              <th data-action="sort" data-sort-direction="asc" data-sort="middlename">Middle name</th>
-              <th data-action="sort" data-sort-direction="asc" data-sort="lastname">Last name</th>
-              <th data-action="sort" data-sort-direction="asc" data-sort="house">House</th>
-            </tr>
-          </thead>
+            <div id="sorting">
+              
+              <p class=" header_portrait">Portrait</p>
+              <p data-action="sort" class=" header_gender"  data-sort-direction="asc" data-sort="gender">Gender</p>
+              <p class=" header_iqsquad" data-action="sort" data-sort-direction="asc" data-sort="iqsquad">Inqusitorial Squad</p>
+              <p class=" header_prefect" data-action="sort" data-sort-direction="asc" data-sort="prefect">Prefect</p>
+              <p class=" header_bloodstatus" data-action="sort" data-sort-direction="asc" data-sort="bloodtype">Bloodtype</p>
+              <p class=" header_firstname" data-action="sort" data-sort-direction="asc" data-sort="firstname">First name</p>
+              <p class=" header_nickname" data-action="sort" data-sort-direction="asc" data-sort="nickname">Nick name</p>
+              <p class=" header_middlename" data-action="sort" data-sort-direction="asc" data-sort="middlename">Middle name</p>
+              <p class=" header_lastname" data-action="sort" data-sort-direction="asc" data-sort="lastname">Last name</p>
+              <p class=" header_house" data-action="sort" data-sort-direction="asc" data-sort="house">House</p>
+              <p>Expell Student</p>
+            
+          </div>
           <template id="student">
-            <tr>
-              <td data-field="image"><img id="studentImage" src="" /></td>
-              <td data-field="gender"></td>
-              <td class="iqsquad" data-field="iqsquad">☆</td>
-              <td class="prefect" data-prefect="false" data-field="prefect"></td>
-              <td data-field="bloodtype"><img id="studentBlood" src="" /></td>
-              <td data-field="firstname"></td>
-              <td data-field="nickname"></td>
-              <td data-field="middlename"></td>
-              <td data-field="lastname"></td>
-              <td data-field="house"><img id="studentHouse" src="" /></td>
-              <td class="expelled" data-expel="false" data-field="expelled"></td>
-            </tr>
+          <section class="student_template">
+            
+              <p class="image" data-field="image"><img id="studentImage" src="" /></p>
+              <p class="gender" data-field="gender"></p>
+              <p class="iqsquad" data-field="iqsquad">☆</p>
+              <p class="prefect" data-prefect="false" data-field="prefect"></p>
+              <p class="bloodtype" data-field="bloodtype"><img id="studentBlood" src="" /></p>
+              <p id="student_firstname" class="firstname" data-field="firstname"></p>
+              <p id="student_nickname" class="nickname" data-field="nickname"></p>
+              <p id="student_middlename" class="middlename" data-field="middlename"></p>
+              <p id="student_lastname" class="lastname" data-field="lastname"></p>
+             <div class="house_crest_container house" data-field="house"><img id="studentHouse" src="" /></div>
+              <p class="expel" class="expelled" data-expel="false" data-field="expelled"></p>
+            </section>
           </template>
           <tbody>
             <!-- The student template will be copied here -->
@@ -76,36 +90,37 @@
       <section id="expelledstudents">
         <table id="expelledlist">
           <thead>
-            <tr>
-              <th>Portrait</th>
-              <th data-action="sort" data-sort-direction="asc" data-sort="gender">Gender</th>
-              <th data-action="sort" data-sort-direction="asc" data-sort="iqsquad">Inqusitorial Squad</th>
-              <th data-action="sort" data-sort-direction="asc" data-sort="prefect">Prefect</th>
-              <th data-action="sort" data-sort-direction="asc" data-sort="bloodtype">Bloodtype</th>
-              <th data-action="sort" data-sort-direction="asc" data-sort="name">First name</th>
-              <th data-action="sort" data-sort-direction="asc" data-sort="nickname">Nick name</th>
-              <th data-action="sort" data-sort-direction="asc" data-sort="middlename">Middle name</th>
-              <th data-action="sort" data-sort-direction="asc" data-sort="lastname">Last name</th>
-              <th data-action="sort" data-sort-direction="asc" data-sort="house">House</th>
-            </tr>
+            <div id="sorting">
+              <p>Portrait</p>
+              <p data-action="sort" data-sort-direction="asc" data-sort="gender">Gender</p>
+              <p data-action="sort" data-sort-direction="asc" data-sort="iqsquad">Inqusitorial Squad</p>
+              <p data-action="sort" data-sort-direction="asc" data-sort="prefect">Prefect</p>
+              <p data-action="sort" data-sort-direction="asc" data-sort="bloodtype">Bloodtype</p>
+              <p data-action="sort" data-sort-direction="asc" data-sort="name">First name</p>
+              <p data-action="sort" data-sort-direction="asc" data-sort="nickname">Nick name</p>
+              <p data-action="sort" data-sort-direction="asc" data-sort="middlename">Middle name</p>
+              <p data-action="sort" data-sort-direction="asc" data-sort="lastname">Last name</p>
+              <p data-action="sort" data-sort-direction="asc" data-sort="house">House</p>
+            </div>
           </thead>
           <tbody>
             <!-- The student template will be copied here -->
           </tbody>
         </table>
         <template id="expelledstudent">
-          <tr>
-            <td data-field="image"><img id="studentImage" src="" /></td>
-            <td data-field="gender"></td>
-            <td class="iqsquad" data-field="iqsquad">☆</td>
-            <td class="prefect" data-prefect="false" data-field="prefect"></td>
-            <td data-field="bloodtype"><img id="studentBlood" src"" /></td>
-            <td data-field="firstname"></td>
-            <td data-field="nickname"></td>
-            <td data-field="middlename"></td>
-            <td data-field="lastname"></td>
-            <td data-field="house"></td>
-          </tr>
+          <section class="student_template">
+            <p class="image" data-field="image"><img id="studentImage" src="" /></p>
+            <p class="gender" data-field="gender"></p>
+            <p class="iqsquad" data-field="iqsquad">☆</p>
+            <p class="prefect" data-prefect="false" data-field="prefect"></p>
+            <p class="bloodtype" data-field="bloodtype"><img id="studentBlood" src="" /></p>
+            <p id="student_firstname" class="firstname" data-field="firstname"></p>
+            <p id="student_nickname" class="nickname" data-field="nickname"></p>
+            <p id="student_middlename" class="middlename" data-field="middlename"></p>
+            <p id="student_lastname" class="lastname" data-field="lastname"></p>
+           <div class="house_crest_container house" data-field="house"><img id="studentHouse" src="" /></div>
+            
+          </section>
         </template>
       </section>
     </main>
@@ -114,8 +129,10 @@
     <section id="popup" >
       <article class="popup_details">
         <div class="close">&#x2715</div>
-        <img class="student_house" alt="House crest">
+        <div class="house_crest_popup_container">
+        <img class="student_house_popup" alt="House crest"></div>
         <img class="student_image" alt="Picture of student">
+        <img class="student_blood" alt="student blood status">
         
           <p class="firstname_text">Firstname</p>
           <p class="nickname_text">Nickname</p>
@@ -123,12 +140,14 @@
           <p class="lastname_text">Lastname</p>
 
         <p class="student_name"></p>
+        <p class="student_gender"></p>
         <p class="student_nickname"></p>
         <p class="student_middlename"></p>
         <p class="student_lastname"></p>
-        <p class="prefect" data-prefect="false" data-field="prefect"></p>
-        <p class="iqsquad" data-field="iqsquad">☆</p>
-        <p class="expelled" data-expelled="false" ></p>
+        <p class="prefect prefect_popup" data-prefect="false" data-field="prefect"></p>
+        <p class="iqsquad iqsquad_popup" data-field="iqsquad">☆</p>
+        <p class="expelled expelled_popup" data-expelled="false" ></p>
+
         
     
         </table>
