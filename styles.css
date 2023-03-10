@@ -173,6 +173,11 @@ p {
   font-size: var(--p_font);
 }
 
+h1 {
+  text-align: center;
+  font-family: "new-spirit", serif;
+}
+
 img {
   height: 100px;
   width: 100px;
@@ -346,13 +351,13 @@ tbody {
 /* SORTING STYLING ------------------------ */
 
 header {
-  background-color: #333;
-  color: white;
-  height: 50px;
   display: flex;
-  align-items: center;
-  justify-content: flex-end;
-  padding: 0 20px;
+  justify-content: center;
+}
+
+header > img {
+  width: 300px;
+  height: 300px;
 }
 
 nav,
