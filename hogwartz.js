@@ -196,18 +196,9 @@ function loadJSON() {
 //   prepareObjects(jsonData);
 // }
 
-function prepareObjects(jsonData) {
-  allStudents = jsonData.map(prepareObject);
-
-  buildList();
-}
-
-// This is where all the magic happens. All the different name values are returned here -------------------------
 function prepareObject(jsonObject) {
-  // Creates a const with the name student card that contains all the information from the Object
   const studentCard = Object.create(Student);
 
-  // Trims the fullName string
   let fullnameTrim = jsonObject.fullname.trim().split(" ");
 
   studentCard.firstname = getFirstname(fullnameTrim);
@@ -217,13 +208,13 @@ function prepareObject(jsonObject) {
   studentCard.image = getStudentImage(fullnameTrim);
   studentCard.house = getStudentHouse(jsonObject);
   studentCard.gender = getStudentGender(jsonObject);
+
   const isPureBlood = pureBloods.includes(studentCard.lastname);
   const isHalfBlood = halfBloods.includes(studentCard.lastname);
   studentCard.blood = isPureBlood ? "Pureblood" : isHalfBlood ? "Half-blood" : "Muggle-born";
-  console.log(studentCard.blood);
+
   return studentCard;
 }
-
 function selectFilter(event) {
   const filter = event.target.dataset.filter;
   console.log(`User selected ${filter}`);
@@ -652,4 +643,25 @@ function updateCounters(currentList) {
   allStudentsCounterElement.textContent = allStudentsCounter;
   expelledStudentsCounterElement.textContent = expelledStudentsCounter;
   displayedStudentsCounterElement.textContent = displayedStudentsCounter;
+}
+
+function hackTheSystem() {
+  const newStudent = prepareObject({
+    fullname: "John Doe",
+    house: "Gryffindor",
+    gender: "male",
+  });
+
+  // add new student to array
+  allStudents.push(newStudent);
+
+  // scramble blood statuses
+  allStudents.forEach((student) => {
+    const bloodStatuses = ["Pureblood", "Half-blood", "Muggle-born"];
+    const newBloodStatus = bloodStatuses[Math.floor(Math.random() * bloodStatuses.length)];
+    student.blood = newBloodStatus;
+  });
+
+  buildList();
+  console.log("System hacked! Blood statuses scrambled.");
 }
