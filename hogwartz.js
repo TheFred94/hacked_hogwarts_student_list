@@ -13,25 +13,46 @@ let studentCard;
 let allStudentsCounter = 0;
 let expelledStudentsCounter = 0;
 let displayedStudentsCounter = 0;
-
+let isHacked = false;
 const allStudentsCounterElement = document.querySelector("#allStudentsCounter");
 const expelledStudentsCounterElement = document.querySelector("#expelledStudentsCounter");
 const displayedStudentsCounterElement = document.querySelector("#displayedStudentsCounter");
-
+const hackTheSystemBody = document.querySelector("body");
 const burgerBtn = document.getElementById("burger-btn");
 const burgerMenu = document.getElementById("burger-menu");
 const filterButtons = document.querySelectorAll(".filter");
 const sortingBtn = document.getElementById("sorting-btn");
 const sortingMenu = document.getElementById("sorting");
 const sortingButtons = document.querySelectorAll(".sorting");
+const closeSorting = document.getElementById("close_sorting");
+const closeFiltering = document.getElementById("close_filtering");
+const hackTheSystemBtn = document.getElementById("hackTheSystem");
 
-function closeBurgerMenu() {
-  burgerMenu.classList.remove("active");
-}
+const houseColors = {
+  Gryffindor: "gryffindor",
+  Hufflepuff: "hufflepuff",
+  Slytherin: "slytherin",
+  Ravenclaw: "ravenclaw",
+};
+
+closeSorting.addEventListener("click", () => {
+  closeSortingMenu();
+});
+closeFiltering.addEventListener("click", () => {
+  closeBurgerMenu();
+});
 
 burgerBtn.addEventListener("click", () => {
   burgerMenu.classList.toggle("active");
+  burgerBtn.classList.toggle("filter_active");
+
+  closeSortingMenu();
 });
+
+function closeBurgerMenu() {
+  burgerMenu.classList.remove("active");
+  burgerBtn.classList.remove("filter_active");
+}
 
 filterButtons.forEach((button) => {
   button.addEventListener("click", closeBurgerMenu);
@@ -39,10 +60,14 @@ filterButtons.forEach((button) => {
 
 function closeSortingMenu() {
   sortingMenu.classList.remove("active");
+  sortingBtn.classList.remove("filter_active");
 }
 
 sortingBtn.addEventListener("click", () => {
   sortingMenu.classList.toggle("active");
+  sortingBtn.classList.toggle("filter_active");
+
+  closeBurgerMenu();
 });
 
 sortingButtons.forEach((button) => {
@@ -68,7 +93,7 @@ const Student = {
 function toggleStudents() {
   let allStudents = document.getElementById("allstudents");
   let expelledStudents = document.getElementById("expelledstudents");
-  let toggleButton = document.getElementById("togglebutton");
+  let toggleButton = document.getElementById("toggle_text");
 
   if (allStudents.style.display === "none") {
     allStudents.style.display = "block";
@@ -144,6 +169,8 @@ function registerButtons() {
   document.getElementById("reset-button").addEventListener("click", resetStudents);
   document.querySelectorAll("[data-action='filter']").forEach((button) => button.addEventListener("click", selectFilter));
   document.querySelectorAll("[data-action='sort']").forEach((button) => button.addEventListener("click", selectSort));
+  document.querySelector("[data-action='hack']").addEventListener("click", checkUserReadyness);
+
   console.log("buttons ready");
 }
 
@@ -172,18 +199,9 @@ function loadJSON() {
 //   prepareObjects(jsonData);
 // }
 
-function prepareObjects(jsonData) {
-  allStudents = jsonData.map(prepareObject);
-
-  buildList();
-}
-
-// This is where all the magic happens. All the different name values are returned here -------------------------
 function prepareObject(jsonObject) {
-  // Creates a const with the name student card that contains all the information from the Object
   const studentCard = Object.create(Student);
 
-  // Trims the fullName string
   let fullnameTrim = jsonObject.fullname.trim().split(" ");
 
   studentCard.firstname = getFirstname(fullnameTrim);
@@ -193,13 +211,13 @@ function prepareObject(jsonObject) {
   studentCard.image = getStudentImage(fullnameTrim);
   studentCard.house = getStudentHouse(jsonObject);
   studentCard.gender = getStudentGender(jsonObject);
+
   const isPureBlood = pureBloods.includes(studentCard.lastname);
   const isHalfBlood = halfBloods.includes(studentCard.lastname);
   studentCard.blood = isPureBlood ? "Pureblood" : isHalfBlood ? "Half-blood" : "Muggle-born";
-  console.log(studentCard.blood);
+
   return studentCard;
 }
-
 function selectFilter(event) {
   const filter = event.target.dataset.filter;
   console.log(`User selected ${filter}`);
@@ -405,20 +423,21 @@ function displayStudent(studentCard) {
   clone.querySelector("[data-field=middlename]").textContent = studentCard.middlename;
   clone.querySelector("[data-field=lastname]").textContent = studentCard.lastname;
   clone.querySelector("#studentHouse").src = `house_crests/${studentCard.house}.svg`;
-
-  clone.querySelector("[data-field=gender]").textContent = studentCard.gender;
+  clone.querySelector("#gendericon").src = `student_icons/${studentCard.gender}.svg`;
   clone.querySelector("#studentImage").src = `images/${studentCard.image}`;
   clone.querySelector("#studentBlood").src = `blood_status/${studentCard.blood}.svg`;
-  clone.querySelector("[data-field=image]").addEventListener("click", () => showStudentDetails(studentCard));
-  // Assign prefect
-  clone.querySelector("[data-field=prefect]").dataset.prefect = studentCard.prefect;
-  clone.querySelector("[data-field=prefect]").addEventListener("click", clickPrefect);
-  // Expelled function. Looks at index and splices the student from allStudents then pushes it into expelledStudents.
-  // Then runs moveToExpelled which clones the student into the new template
-  // Throws a dialog box with a "yes" or "no" possibility
+  clone.querySelector(".image").addEventListener("click", () => showStudentDetails(studentCard));
+  clone.querySelector(".gender").addEventListener("click", () => showStudentDetails(studentCard));
+  clone.querySelector(".bloodtype").addEventListener("click", () => showStudentDetails(studentCard));
+  clone.querySelector("#student_firstname").addEventListener("click", () => showStudentDetails(studentCard));
+  clone.querySelector("#student_nickname").addEventListener("click", () => showStudentDetails(studentCard));
+  clone.querySelector("#student_middlename").addEventListener("click", () => showStudentDetails(studentCard));
+  clone.querySelector("#student_lastname").addEventListener("click", () => showStudentDetails(studentCard));
+  clone.querySelector(".house_crest_container").addEventListener("click", () => showStudentDetails(studentCard));
+  clone.querySelector(".student_template").classList.add(houseColors[studentCard.house]);
   clone.querySelector("[data-field=expelled]").addEventListener("click", function () {
     document.querySelector("#removestudent").classList.remove("hide");
-    document.querySelector("#removestudent .closebutton").addEventListener("click", closeDialog);
+
     document.querySelector("#removestudent #yes").addEventListener("click", expelStudent);
     document.querySelector("#removestudent #no").addEventListener("click", closeDialog);
     document.querySelector("#expelled_student_name").textContent = `Do you wish to expel ${studentCard.firstname} ${studentCard.lastname}?`;
@@ -430,18 +449,38 @@ function displayStudent(studentCard) {
     const expelledStudent = allStudents.splice(index, 1)[0];
     expelledStudents.push(expelledStudent);
 
-    function closeDialog() {
-      document.querySelector("#removestudent").classList.add("hide");
-      document.querySelector("#removestudent .closebutton").removeEventListener("click", closeDialog);
-      document.querySelector("#removestudent #yes").removeEventListener("click", expelStudent);
-    }
-    function expelStudent() {
-      closeDialog();
-      studentCard.expelled = true;
-      moveToExpelled(studentCard);
-    }
     // Rebuild the list to update the displayed students
   });
+
+  function closeDialog() {
+    document.querySelector("#removestudent").classList.add("hide");
+    document.querySelector("#cant_expel").classList.add("hide");
+    document.querySelector("#removestudent #yes").removeEventListener("click", expelStudent);
+    popup.style.display = "none";
+
+    // Add event listener to close #cant_expel dialog
+    document.querySelector("#cant_expel #okay").addEventListener("click", closeDialog);
+  }
+
+  function expelStudent() {
+    closeDialog();
+    popup.style.display = "none";
+
+    if (isHacked) {
+      document.querySelector("#cant_expel").classList.remove("hide");
+      return;
+    }
+
+    studentCard.expelled = true;
+    moveToExpelled(studentCard);
+  }
+
+  // Assign prefect
+  clone.querySelector("[data-field=prefect]").dataset.prefect = studentCard.prefect;
+  clone.querySelector("[data-field=prefect]").addEventListener("click", clickPrefect);
+  // Expelled function. Looks at index and splices the student from allStudents then pushes it into expelledStudents.
+  // Then runs moveToExpelled which clones the student into the new template
+  // Throws a dialog box with a "yes" or "no" possibility
 
   clone.querySelector("[data-field=iqsquad]").addEventListener("click", clickIqSquad);
 
@@ -461,6 +500,13 @@ function displayStudent(studentCard) {
       } else {
         studentCard.iqSquad = true;
         console.log(studentCard.iqSquad);
+        if (isHacked) {
+          setTimeout(() => {
+            studentCard.iqSquad = false;
+            console.log(studentCard.iqSquad);
+            buildList();
+          }, 2000);
+        }
       }
       buildList();
     } else {
@@ -477,6 +523,7 @@ function displayStudent(studentCard) {
       document.querySelector("#onlyslytherin .closebutton").removeEventListener("click", closeDialog);
       document.querySelector("#onlyslytherin .filter").removeEventListener("click", closeDialog);
       document.querySelector("#onlyslytherin").classList.add("hide");
+      popup.style.display = "none";
     }
   }
 
@@ -569,7 +616,16 @@ function moveToExpelled(studentCard) {
   row.querySelector("[data-field='nickname']").textContent = studentCard.nickname;
   row.querySelector("[data-field='middlename']").textContent = studentCard.middlename;
   row.querySelector("[data-field='lastname']").textContent = studentCard.lastname;
+  row.querySelector(".image").addEventListener("click", () => showStudentDetails(studentCard));
+  row.querySelector(".gender").addEventListener("click", () => showStudentDetails(studentCard));
+  row.querySelector(".bloodtype").addEventListener("click", () => showStudentDetails(studentCard));
+  row.querySelector("#student_firstname").addEventListener("click", () => showStudentDetails(studentCard));
+  row.querySelector("#student_nickname").addEventListener("click", () => showStudentDetails(studentCard));
+  row.querySelector("#student_middlename").addEventListener("click", () => showStudentDetails(studentCard));
+  row.querySelector("#student_lastname").addEventListener("click", () => showStudentDetails(studentCard));
+  row.querySelector(".house_crest_container").addEventListener("click", () => showStudentDetails(studentCard));
   row.querySelector("[data-field=image]").addEventListener("click", () => showStudentDetails(studentCard));
+
   // Add the new row to the table
   const tbody = document.querySelector("#expelledlist tbody");
   tbody.appendChild(row);
@@ -580,7 +636,6 @@ function moveToExpelled(studentCard) {
 
 // Displays the popup and the details about a student
 function showStudentDetails(studentCard) {
-  console.log(student);
   popup.style.display = "block";
   popup.querySelector(".student_name").textContent = `${studentCard.firstname}`;
   popup.querySelector(".student_gender").textContent = `${studentCard.gender}`;
@@ -591,10 +646,6 @@ function showStudentDetails(studentCard) {
   popup.querySelector(".student_house_popup").src = `house_crests/${studentCard.house}.svg`;
   popup.querySelector(".student_blood").src = `blood_status/${studentCard.blood}.svg`;
 
-  // When opening popup, change the value of data-prefect depending on status either true or false
-  const prefectElem = popup.querySelector(".prefect");
-  prefectElem.dataset.prefect = studentCard.prefect;
-
   const iqSquadElem = popup.querySelector("[data-field=iqsquad]");
   if (studentCard.iqSquad === true) {
     iqSquadElem.textContent = "⭐";
@@ -602,7 +653,7 @@ function showStudentDetails(studentCard) {
     iqSquadElem.textContent = "☆";
   }
 
-  const expelledElem = popup.querySelector(".expelled");
+  const expelledElem = popup.querySelector(".expelled_popup");
   if (studentCard.expelled === true) {
     expelledElem.textContent = "This student has been Expelled";
   } else {
@@ -622,4 +673,62 @@ function updateCounters(currentList) {
   allStudentsCounterElement.textContent = allStudentsCounter;
   expelledStudentsCounterElement.textContent = expelledStudentsCounter;
   displayedStudentsCounterElement.textContent = displayedStudentsCounter;
+}
+
+function checkUserReadyness() {
+  document.querySelector("#user_ready").classList.remove("hide");
+  document.querySelector("#user_ready #no").addEventListener("click", closeDialog);
+
+  function closeDialog() {
+    document.querySelector("#user_ready").classList.add("hide");
+    document.querySelector("#user_ready #no").removeEventListener("click", closeDialog);
+  }
+
+  // buffer array to hold pressed keys
+  var buffer = [];
+
+  document.addEventListener("keydown", function (event) {
+    // get the currently pressed key
+    var key = event.key;
+
+    // add the pressed key to the buffer array
+    buffer.push(key);
+
+    // check if the buffer contains the word "i swear"
+    if (buffer.join("").includes("i swear")) {
+      // execute your function here
+      hackTheSystem();
+      // reset the buffer array
+      buffer = [];
+    }
+  });
+}
+
+function hackTheSystem() {
+  isHacked = true;
+  hackTheSystemBody.classList.remove("systemIsNormal");
+  hackTheSystemBody.classList.add("systemIsHacked");
+  const newStudent = prepareObject({
+    fullname: "Frederik Rømer Larsen",
+    house: "Gryffindor",
+    gender: "male",
+  });
+
+  // add new student to array
+  allStudents.push(newStudent);
+
+  // scramble blood statuses
+  allStudents.forEach((student) => {
+    const bloodStatuses = ["Pureblood", "Half-blood", "Muggle-born"];
+    const newBloodStatus = bloodStatuses[Math.floor(Math.random() * bloodStatuses.length)];
+    student.blood = newBloodStatus;
+  });
+  function closeDialog() {
+    document.querySelector("#user_ready").classList.add("hide");
+    document.querySelector("#user_ready #no").removeEventListener("click", closeDialog);
+  }
+
+  buildList();
+  closeDialog();
+  console.log("System hacked! Blood statuses scrambled.");
 }

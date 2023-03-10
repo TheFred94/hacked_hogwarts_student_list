@@ -6,85 +6,104 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="styles.css" />
     <link rel="stylesheet" href="https://use.typekit.net/rwe5sgn.css">
+    
 
     <title>Hacked Hogwarts</title>
   </head>
 
-  <body>
-    <h1>Students of Hogwartz</h1>
-    <button id="togglebutton" onclick="toggleStudents()">Show expelled students</button>
+  <body class="systemIsNormal">
+    <header>
+      <img data-action="hack" src="house_crests/hogwarts_logo.svg" alt "hogwarts logo" />
+  </header>
+
+  <h1>The list of the year 1991 class of Hogwarts</h1>
+    
+    <div class="toggle_switch">
+      <label class="switch">
+        <input id="togglebutton" onclick="toggleStudents()" type="checkbox">
+        <span class="slider round"></span>
+      </label>
+    </div>
+    <p id="toggle_text">Show expelled students</p>
+
     <div class="search-container">
       <input type="text" id="search-input" placeholder="Search by first name..." />
       <button id="search-button">Search</button>
       <button id="reset-button" type="button">Reset</button>
     </div>
-
-    <button id="burger-btn">
-      <p>Filter</p>
-      <span class="burger-icon"></span>
-      <span class="burger-icon"></span>
-      <span class="burger-icon"></span>
-    </button>
-  </header>
-  
     <div class="filters_counters">
       <nav id="burger-menu">
+        <div class="close_side_menu_container">
+          <button id="close_filtering">&#x2715</button>
+        </div>
+        <p class="side_menu_header">FILTERS</p>
       <div class="filter_buttons_container">
-          <button class="filter" data-action="filter" data-filter="gryffindor">Gryffindor</button>
-          <button class="filter" data-action="filter" data-filter="slytherin">Slytherin</button>
-          <button class="filter" data-action="filter" data-filter="hufflepuff">Huffelpuff</button>
-          <button class="filter" data-action="filter" data-filter="ravenclaw">Ravenclaw</button>
-          <button class="filter" data-action="filter" data-filter="pureblood">Purebloods</button>
-          <button class="filter" data-action="filter" data-filter="halfblood">Half-Bloods</button>
-          <button class="filter" data-action="filter" data-filter="muggleborn">Muggle Born</button>
-          <button class="filter" data-action="filter" data-filter="prefect">Prefects</button>
-          <button class="filter" data-action="filter" data-filter="iqsquad">Inquisitors</button>
-          <button class="filter" data-action="filter" data-filter="*">All Houses</button>
+          <button class="filter gryffindor_btn" data-action="filter" data-filter="gryffindor">Gryffindor</button>
+          <button class="filter slytherin_btn" data-action="filter" data-filter="slytherin">Slytherin</button>
+          <button class="filter hufflepuff_btn" data-action="filter" data-filter="hufflepuff">Huffelpuff</button>
+          <button class="filter ravenclaw_btn" data-action="filter" data-filter="ravenclaw">Ravenclaw</button>
+          <button class="filter blood_btn" data-action="filter" data-filter="pureblood">Purebloods</button>
+          <button class="filter halfblood_btn" data-action="filter" data-filter="halfblood">Half-Bloods</button>
+          <button class="filter muggle_btn" data-action="filter" data-filter="muggleborn">Muggle Born</button>
+          <button class="filter prefect_btn" data-action="filter" data-filter="prefect">Prefects</button>
+          <button class="filter iqsquad_btn" data-action="filter" data-filter="iqsquad">Inquisitors</button>
+          <button class="filter allhouse_btn" data-action="filter" data-filter="*">All Houses</button>
         </div>
       </nav>
-        </div>
-    
+    </div>
     <main>
       
         <div class="student_icons_container">
+          <div class="filter_sorting_container">
+          <button id="burger-btn">
+            <p>Filter</p>
+          </button>
+          
+          <button id="sorting-btn">
+            <p>Sorting</p>
+          </button>
+          </div>
+          <div
+          class="counter_container">
           <div class="number_container"><img src="student_icons/total.svg">
             <span id="allStudentsCounter">0</span>
           </div>
-          
           <div class="number_container"><img src="student_icons/expelled_students.svg" alt="expelled students icon" /> <span id="expelledStudentsCounter">0</span></div>
           
           
           <div class="number_container"><img src="student_icons/displayed.svg" alt="displayed students icon"> <span id="displayedStudentsCounter">0</span></div>
         </div>
+        </div>
   
       <section id="allstudents">
         <table id="list">
-          <button id="sorting-btn">
-            <p>Sorting</p>
-            <span class="sorting-icon"></span>
-            <span class="sorting-icon"></span>
-            <span class="sorting-icon"></span>
-          </button>
-        </button>
             <div id="sorting">
-              <button class="header_portrait">Portrait</button>
+              <div class="close_side_menu_container">
+                <button id="close_sorting">&#x2715</button>
+              </div>
+              <p class="side_menu_header">SORTING</p>
+              <div class="filter_buttons_container">
+              
               <button data-action="sort" class="sorting header_gender"  data-sort-direction="asc" data-sort="gender">Gender</button>
               <button class="sorting header_iqsquad" data-action="sort" data-sort-direction="asc" data-sort="iqsquad">Inqusitorial Squad</button>
               <button class="sorting header_prefect" data-action="sort" data-sort-direction="asc" data-sort="prefect">Prefect</button>
               <button class="sorting header_bloodstatus" data-action="sort" data-sort-direction="asc" data-sort="bloodtype">Bloodtype</button>
-              <button class="sorting header_firstname" data-action="sort" data-sort-direction="asc" data-sort="firstname">First name</button>
-              <button class="sorting header_nickname" data-action="sort" data-sort-direction="asc" data-sort="nickname">Nick name</button>
-              <button class="sorting header_middlename" data-action="sort" data-sort-direction="asc" data-sort="middlename">Middle name</button>
-              <button class="sorting header_lastname" data-action="sort" data-sort-direction="asc" data-sort="lastname">Last name</button>
+              <button class="sorting header_firstname" data-action="sort" data-sort-direction="asc" data-sort="firstname">Firstname</button>
+              <button class="sorting header_nickname" data-action="sort" data-sort-direction="asc" data-sort="nickname">Nickname</button>
+              <button class="sorting header_middlename" data-action="sort" data-sort-direction="asc" data-sort="middlename">Middlename</button>
+              <button class="sorting header_lastname" data-action="sort" data-sort-direction="asc" data-sort="lastname">Lastname</button>
               <button class="sorting header_house" data-action="sort" data-sort-direction="asc" data-sort="house">House</button>
-              <button>Expell Student</button>
+            </div>
           </div>
         
           <template id="student">
-          <section class="student_template">
+          <section class="not_expelled student_template">
             
-              <p class="image" data-field="image"><img id="studentImage" src="" /></p>
-              <p class="gender" data-field="gender"></p>
+              <p class="image" data-field="image"><img id="studentImage" src="" />
+              </p>
+              <p class="gender" data-field="gender">
+                <img id="gendericon" src=""  />
+              </p>
               <p class="iqsquad" data-field="iqsquad">☆</p>
               <p class="prefect" data-prefect="false" data-field="prefect"></p>
               <p class="bloodtype" data-field="bloodtype"><img id="studentBlood" src="" /></p>
@@ -93,7 +112,7 @@
               <p id="student_middlename" class="middlename" data-field="middlename"></p>
               <p id="student_lastname" class="lastname" data-field="lastname"></p>
              <div class="house_crest_container house" data-field="house"><img id="studentHouse" src="" /></div>
-              <p class="expel" class="expelled" data-expel="false" data-field="expelled"></p>
+             <p  class="expel popup_expel expelled" data-expel="false" data-field="expelled"><img class="expelled_icon" src="student_icons/expelled_students.svg" alt="Expelled students icon" /></p>
             </section>
           </template>
           <tbody>
@@ -113,9 +132,9 @@
               <p data-action="sort" data-sort-direction="asc" data-sort="prefect">Prefect</p>
               <p data-action="sort" data-sort-direction="asc" data-sort="bloodtype">Bloodtype</p>
               <p data-action="sort" data-sort-direction="asc" data-sort="name">First name</p>
-              <p data-action="sort" data-sort-direction="asc" data-sort="nickname">Nick name</p>
-              <p data-action="sort" data-sort-direction="asc" data-sort="middlename">Middle name</p>
-              <p data-action="sort" data-sort-direction="asc" data-sort="lastname">Last name</p>
+              <p data-action="sort" data-sort-direction="asc" data-sort="nickname">Nickname</p>
+              <p data-action="sort" data-sort-direction="asc" data-sort="middlename">Middlename</p>
+              <p data-action="sort" data-sort-direction="asc" data-sort="lastname">Lastname</p>
               <p data-action="sort" data-sort-direction="asc" data-sort="house">House</p>
             </div>
           </thead>
@@ -162,8 +181,7 @@
         <p class="student_lastname"></p>
         <p class="prefect prefect_popup" data-prefect="false" data-field="prefect"></p>
         <p class="iqsquad iqsquad_popup" data-field="iqsquad">☆</p>
-        <p class="expelled expelled_popup" data-expelled="false" ></p>
-
+        <p class="expelled_popup" data-expelled="false" ></p>
         
     
         </table>
@@ -180,6 +198,18 @@
           Do you want to remove the other prefect?
         </p>
         <button id="removeother">Remove <span data-field="otherprefect"></span></button>
+      </div>
+    </div>
+    <div id="user_ready" class="modal hide">
+      <div class="dialog">
+        
+        <h1>Hold up!</h1>
+        <p>
+          Do you solemny swear that you are up to no good? <br>
+          The code is: x xxxx
+        </p>
+        
+          <button id="no" >I'm afraid Snape will se me!</button>
       </div>
     </div>
 
@@ -199,12 +229,21 @@
 
     <div id="removestudent" class="modal hide">
       <div class="dialog">
-        <button class="closebutton">X</button>
         <h1>Warning!</h1>
         <p id="expelled_student_name">Do you wish to expel this student? <br /></p>
         <div class="sidebyside">
-          <button id="yes" class="closebutton">Yes</button>
-          <button id="no" class="closebutton">No</button>
+          <button id="yes" >Yes</button>
+          <button id="no" >No</button>
+        </div>
+      </div>
+    </div>
+    <div id="cant_expel" class="modal hide">
+      <div class="dialog">
+        <h1>Warning!</h1>
+        <p id="expelled_student_name">The system has been breached <br />
+        It's no longer possible to expel students</p>
+        <div class="sidebyside">
+          <button id="okay">Okay</button>
         </div>
       </div>
     </div>
