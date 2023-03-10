@@ -658,7 +658,8 @@ button.close_button {
   box-shadow: inset 300px 0 0 0 var(--slytherin-green);
 }
 
-.dialog > div > .closebutton {
+.dialog > div > .closebutton,
+#user_ready > .dialog > button {
   width: 300px;
   padding-block: 10px;
   padding-inline: 39px;
@@ -672,7 +673,8 @@ button.close_button {
   box-shadow: inset 0 0 0 0 var(--slytherin-green);
   cursor: pointer;
 }
-.dialog > div > .closebutton:hover {
+.dialog > div > .closebutton:hover,
+#user_ready > .dialog > button:hover {
   transition: ease-out 0.3s;
   box-shadow: inset 300px 0 0 0 var(--slytherin-green);
 }
