@@ -13,6 +13,7 @@ let studentCard;
 let allStudentsCounter = 0;
 let expelledStudentsCounter = 0;
 let displayedStudentsCounter = 0;
+let isHacked = false;
 
 const houseColors = {
   Gryffindor: "gryffindor",
@@ -485,6 +486,13 @@ function displayStudent(studentCard) {
       } else {
         studentCard.iqSquad = true;
         console.log(studentCard.iqSquad);
+        if (isHacked) {
+          setTimeout(() => {
+            studentCard.iqSquad = false;
+            console.log(studentCard.iqSquad);
+            buildList();
+          }, 2000);
+        }
       }
       buildList();
     } else {
@@ -646,6 +654,7 @@ function updateCounters(currentList) {
 }
 
 function hackTheSystem() {
+  isHacked = true;
   const newStudent = prepareObject({
     fullname: "John Doe",
     house: "Gryffindor",
