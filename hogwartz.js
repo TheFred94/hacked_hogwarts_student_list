@@ -604,6 +604,14 @@ function moveToExpelled(studentCard) {
   row.querySelector("[data-field='nickname']").textContent = studentCard.nickname;
   row.querySelector("[data-field='middlename']").textContent = studentCard.middlename;
   row.querySelector("[data-field='lastname']").textContent = studentCard.lastname;
+  row.querySelector(".image").addEventListener("click", () => showStudentDetails(studentCard));
+  row.querySelector(".gender").addEventListener("click", () => showStudentDetails(studentCard));
+  row.querySelector(".bloodtype").addEventListener("click", () => showStudentDetails(studentCard));
+  row.querySelector("#student_firstname").addEventListener("click", () => showStudentDetails(studentCard));
+  row.querySelector("#student_nickname").addEventListener("click", () => showStudentDetails(studentCard));
+  row.querySelector("#student_middlename").addEventListener("click", () => showStudentDetails(studentCard));
+  row.querySelector("#student_lastname").addEventListener("click", () => showStudentDetails(studentCard));
+  row.querySelector(".house_crest_container").addEventListener("click", () => showStudentDetails(studentCard));
   row.querySelector("[data-field=image]").addEventListener("click", () => showStudentDetails(studentCard));
 
   // Add the new row to the table
@@ -633,7 +641,7 @@ function showStudentDetails(studentCard) {
     iqSquadElem.textContent = "☆";
   }
 
-  const expelledElem = popup.querySelector(".expelled");
+  const expelledElem = popup.querySelector(".expelled_popup");
   if (studentCard.expelled === true) {
     expelledElem.textContent = "This student has been Expelled";
   } else {

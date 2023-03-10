@@ -190,6 +190,7 @@ main {
 
 /* SEARCH INPUT */
 #search-input {
+  margin-bottom: 2rem;
   font-size: var(--p_font);
   font-family: "new-spirit", serif;
   margin-right: 2rem;
@@ -225,8 +226,26 @@ main {
   grid-column: 1 / 2;
   grid-template-columns: repeat(11, 1fr);
 }
-
 .student_template {
+  border-radius: 10px;
+  margin-block: 1rem;
+  justify-items: center;
+  align-items: center;
+  display: grid;
+  grid-template-columns: repeat(11, 1fr);
+  grid-column: 1 / 12;
+  transition: 0.3s;
+  box-shadow: inset 0 0 0 0;
+  cursor: pointer;
+  background-color: var(--white_color);
+}
+
+.student_template:hover {
+  transition: 0.3s;
+  scale: 1.02;
+  box-shadow: inset 120px 0 0 0 var(--white_color);
+}
+#expelledlist > tbody > .student_template {
   border-radius: 10px;
   margin-block: 1rem;
   justify-items: center;
@@ -239,7 +258,7 @@ main {
   cursor: pointer;
 }
 
-.student_template:hover {
+#expelledlist > tbody > .student_template:hover {
   transition: 0.3s;
   scale: 1.02;
   box-shadow: inset 120px 0 0 0 var(--white_color);
@@ -296,7 +315,7 @@ tbody {
 
 .house {
   grid-row: 1;
-  grid-column: 10 / 12;
+  grid-column: 10 / 11;
 }
 
 .expel {
@@ -551,6 +570,9 @@ nav.active,
 
 /* List of expelled students */
 #expelledstudents {
+  margin-top: 2rem;
+  border-radius: 10px;
+
   display: none;
 }
 
@@ -718,6 +740,12 @@ button.close_button {
   transition: 0.3s;
 }
 
+.expelled_popup {
+  background-color: var(--huffelpuff-yellow);
+  grid-row: 6;
+  grid-column: 3;
+}
+
 .close {
   grid-column: 1;
   grid-row: 1;
@@ -853,8 +881,8 @@ p[data-field="prefect"][data-prefect="false"] {
 }
 
 .expelled {
-  grid-column: 5/6;
-  grid-row: 7;
+  grid-column: 11/12;
+  grid-row: 1;
 }
 
 .popup_details > button {
