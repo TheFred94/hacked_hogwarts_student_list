@@ -170,6 +170,7 @@ function registerButtons() {
   document.querySelectorAll("[data-action='filter']").forEach((button) => button.addEventListener("click", selectFilter));
   document.querySelectorAll("[data-action='sort']").forEach((button) => button.addEventListener("click", selectSort));
   document.querySelector("[data-action='hack']").addEventListener("click", checkUserReadyness);
+
   console.log("buttons ready");
 }
 
@@ -453,16 +454,27 @@ function displayStudent(studentCard) {
 
   function closeDialog() {
     document.querySelector("#removestudent").classList.add("hide");
-
+    document.querySelector("#cant_expel").classList.add("hide");
     document.querySelector("#removestudent #yes").removeEventListener("click", expelStudent);
     popup.style.display = "none";
+
+    // Add event listener to close #cant_expel dialog
+    document.querySelector("#cant_expel #okay").addEventListener("click", closeDialog);
   }
+
   function expelStudent() {
     closeDialog();
     popup.style.display = "none";
+
+    if (isHacked) {
+      document.querySelector("#cant_expel").classList.remove("hide");
+      return;
+    }
+
     studentCard.expelled = true;
     moveToExpelled(studentCard);
   }
+
   // Assign prefect
   clone.querySelector("[data-field=prefect]").dataset.prefect = studentCard.prefect;
   clone.querySelector("[data-field=prefect]").addEventListener("click", clickPrefect);
@@ -697,7 +709,7 @@ function hackTheSystem() {
   hackTheSystemBody.classList.remove("systemIsNormal");
   hackTheSystemBody.classList.add("systemIsHacked");
   const newStudent = prepareObject({
-    fullname: "John Doe",
+    fullname: "Frederik Rømer Larsen",
     house: "Gryffindor",
     gender: "male",
   });
