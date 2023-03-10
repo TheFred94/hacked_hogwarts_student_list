@@ -428,6 +428,7 @@ function displayStudent(studentCard) {
   clone.querySelector(".image").addEventListener("click", () => showStudentDetails(studentCard));
   clone.querySelector(".gender").addEventListener("click", () => showStudentDetails(studentCard));
   clone.querySelector(".bloodtype").addEventListener("click", () => showStudentDetails(studentCard));
+  clone.querySelector("#student_firstname").addEventListener("click", () => showStudentDetails(studentCard));
   clone.querySelector("#student_nickname").addEventListener("click", () => showStudentDetails(studentCard));
   clone.querySelector("#student_middlename").addEventListener("click", () => showStudentDetails(studentCard));
   clone.querySelector("#student_lastname").addEventListener("click", () => showStudentDetails(studentCard));
