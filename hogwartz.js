@@ -607,15 +607,17 @@ function moveToExpelled(studentCard) {
   // Clone the template and fill in the fields with the expelled student's data
   const row = template.content.cloneNode(true).querySelector("section");
   row.querySelector("[data-field='image'] img").src = `images/${studentCard.image}`;
-  row.querySelector("[data-field='gender']").textContent = studentCard.gender;
+
   row.querySelector("[data-field='iqsquad']").textContent = `N/A`;
   row.querySelector("[data-field='prefect']").textContent = `N/A`;
   row.querySelector("#studentBlood").src = `blood_status/${studentCard.blood}.svg`;
   row.querySelector("#studentHouse").src = `house_crests/${studentCard.house}.svg`;
+
   row.querySelector("[data-field='firstname']").textContent = studentCard.firstname;
   row.querySelector("[data-field='nickname']").textContent = studentCard.nickname;
   row.querySelector("[data-field='middlename']").textContent = studentCard.middlename;
   row.querySelector("[data-field='lastname']").textContent = studentCard.lastname;
+  row.querySelector("#gendericon").src = `student_icons/${studentCard.gender}.svg`;
   row.querySelector(".image").addEventListener("click", () => showStudentDetails(studentCard));
   row.querySelector(".gender").addEventListener("click", () => showStudentDetails(studentCard));
   row.querySelector(".bloodtype").addEventListener("click", () => showStudentDetails(studentCard));
@@ -711,7 +713,7 @@ function hackTheSystem() {
   const newStudent = prepareObject({
     fullname: "Frederik Rømer Larsen",
     house: "Gryffindor",
-    gender: "male",
+    gender: "Boy",
   });
 
   // add new student to array
