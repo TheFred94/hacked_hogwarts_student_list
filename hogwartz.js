@@ -18,7 +18,6 @@ const allStudentsCounterElement = document.querySelector("#allStudentsCounter");
 const expelledStudentsCounterElement = document.querySelector("#expelledStudentsCounter");
 const displayedStudentsCounterElement = document.querySelector("#displayedStudentsCounter");
 const hackTheSystemBody = document.querySelector("body");
-
 const burgerBtn = document.getElementById("burger-btn");
 const burgerMenu = document.getElementById("burger-menu");
 const filterButtons = document.querySelectorAll(".filter");
@@ -27,6 +26,7 @@ const sortingMenu = document.getElementById("sorting");
 const sortingButtons = document.querySelectorAll(".sorting");
 const closeSorting = document.getElementById("close_sorting");
 const closeFiltering = document.getElementById("close_filtering");
+const hackTheSystemBtn = document.getElementById("hackTheSystem");
 
 const houseColors = {
   Gryffindor: "gryffindor",
@@ -169,6 +169,7 @@ function registerButtons() {
   document.getElementById("reset-button").addEventListener("click", resetStudents);
   document.querySelectorAll("[data-action='filter']").forEach((button) => button.addEventListener("click", selectFilter));
   document.querySelectorAll("[data-action='sort']").forEach((button) => button.addEventListener("click", selectSort));
+  document.querySelector("[data-action='hack']").addEventListener("click", checkUserReadyness);
   console.log("buttons ready");
 }
 
@@ -653,6 +654,35 @@ function updateCounters(currentList) {
   displayedStudentsCounterElement.textContent = displayedStudentsCounter;
 }
 
+function checkUserReadyness() {
+  document.querySelector("#user_ready").classList.remove("hide");
+  document.querySelector("#user_ready #no").addEventListener("click", closeDialog);
+
+  function closeDialog() {
+    document.querySelector("#user_ready").classList.add("hide");
+    document.querySelector("#user_ready #no").removeEventListener("click", closeDialog);
+  }
+
+  // buffer array to hold pressed keys
+  var buffer = [];
+
+  document.addEventListener("keydown", function (event) {
+    // get the currently pressed key
+    var key = event.key;
+
+    // add the pressed key to the buffer array
+    buffer.push(key);
+
+    // check if the buffer contains the word "i swear"
+    if (buffer.join("").includes("i swear")) {
+      // execute your function here
+      hackTheSystem();
+      // reset the buffer array
+      buffer = [];
+    }
+  });
+}
+
 function hackTheSystem() {
   isHacked = true;
   hackTheSystemBody.classList.remove("systemIsNormal");
@@ -672,7 +702,12 @@ function hackTheSystem() {
     const newBloodStatus = bloodStatuses[Math.floor(Math.random() * bloodStatuses.length)];
     student.blood = newBloodStatus;
   });
+  function closeDialog() {
+    document.querySelector("#user_ready").classList.add("hide");
+    document.querySelector("#user_ready #no").removeEventListener("click", closeDialog);
+  }
 
   buildList();
+  closeDialog();
   console.log("System hacked! Blood statuses scrambled.");
 }

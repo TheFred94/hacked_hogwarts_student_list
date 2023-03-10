@@ -13,7 +13,7 @@
 
   <body class="systemIsNormal">
     <header>
-      <img src="house_crests/hogwarts_logo.svg" alt "hogwarts logo" />
+      <img data-action="hack" src="house_crests/hogwarts_logo.svg" alt "hogwarts logo" />
   </header>
 
   <h1>The list of the year 1991 class of Hogwarts</h1>
@@ -195,6 +195,18 @@
           Do you want to remove the other prefect?
         </p>
         <button id="removeother">Remove <span data-field="otherprefect"></span></button>
+      </div>
+    </div>
+    <div id="user_ready" class="modal hide">
+      <div class="dialog">
+        
+        <h1>Hold up!</h1>
+        <p>
+          Do you solilemny swear that you are up to no good? <br>
+          The code is: x xxxx
+        </p>
+        
+          <button id="no" >I'm afraid Snape will se me!</button>
       </div>
     </div>
 
