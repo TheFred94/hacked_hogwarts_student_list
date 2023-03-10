@@ -243,7 +243,6 @@ main {
 .student_template:hover {
   transition: 0.3s;
   scale: 1.02;
-  box-shadow: inset 120px 0 0 0 var(--white_color);
 }
 #expelledlist > tbody > .student_template {
   border-radius: 10px;
@@ -262,7 +261,6 @@ main {
 #expelledlist > tbody > .student_template:hover {
   transition: 0.3s;
   scale: 1.02;
-  box-shadow: inset 120px 0 0 0 var(--white_color);
 }
 
 tbody {
@@ -567,6 +565,20 @@ nav.active,
 #expelledlist {
   border-collapse: collapse;
   width: 100%;
+}
+
+.expelled_icon {
+  width: 50px;
+  height: 50px;
+  transition: 0.3s;
+}
+.expelled_icon:hover {
+  scale: 1.1;
+}
+
+#gendericon {
+  height: 50px;
+  width: 50px;
 }
 
 /* List of expelled students */
@@ -934,7 +946,7 @@ p[data-field="prefect"][data-prefect="false"] {
   left: 0;
   right: 0;
   bottom: 0;
-  background-color: #ccc;
+  background-color: var(--black_color);
   -webkit-transition: 0.4s;
   transition: 0.4s;
 }

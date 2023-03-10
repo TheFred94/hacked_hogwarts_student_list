@@ -423,7 +423,7 @@ function displayStudent(studentCard) {
   clone.querySelector("[data-field=middlename]").textContent = studentCard.middlename;
   clone.querySelector("[data-field=lastname]").textContent = studentCard.lastname;
   clone.querySelector("#studentHouse").src = `house_crests/${studentCard.house}.svg`;
-  clone.querySelector("[data-field=gender]").textContent = studentCard.gender;
+  clone.querySelector("#gendericon").src = `student_icons/${studentCard.gender}.svg`;
   clone.querySelector("#studentImage").src = `images/${studentCard.image}`;
   clone.querySelector("#studentBlood").src = `blood_status/${studentCard.blood}.svg`;
   clone.querySelector(".image").addEventListener("click", () => showStudentDetails(studentCard));
