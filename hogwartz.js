@@ -14,17 +14,10 @@ let allStudentsCounter = 0;
 let expelledStudentsCounter = 0;
 let displayedStudentsCounter = 0;
 let isHacked = false;
-
-const houseColors = {
-  Gryffindor: "gryffindor",
-  Hufflepuff: "hufflepuff",
-  Slytherin: "slytherin",
-  Ravenclaw: "ravenclaw",
-};
-
 const allStudentsCounterElement = document.querySelector("#allStudentsCounter");
 const expelledStudentsCounterElement = document.querySelector("#expelledStudentsCounter");
 const displayedStudentsCounterElement = document.querySelector("#displayedStudentsCounter");
+const hackTheSystemBody = document.querySelector("body");
 
 const burgerBtn = document.getElementById("burger-btn");
 const burgerMenu = document.getElementById("burger-menu");
@@ -34,6 +27,13 @@ const sortingMenu = document.getElementById("sorting");
 const sortingButtons = document.querySelectorAll(".sorting");
 const closeSorting = document.getElementById("close_sorting");
 const closeFiltering = document.getElementById("close_filtering");
+
+const houseColors = {
+  Gryffindor: "gryffindor",
+  Hufflepuff: "hufflepuff",
+  Slytherin: "slytherin",
+  Ravenclaw: "ravenclaw",
+};
 
 closeSorting.addEventListener("click", () => {
   closeSortingMenu();
@@ -655,6 +655,8 @@ function updateCounters(currentList) {
 
 function hackTheSystem() {
   isHacked = true;
+  hackTheSystemBody.classList.remove("systemIsNormal");
+  hackTheSystemBody.classList.add("systemIsHacked");
   const newStudent = prepareObject({
     fullname: "John Doe",
     house: "Gryffindor",
