@@ -640,7 +640,7 @@ function moveToExpelled(studentCard) {
 function showStudentDetails(studentCard) {
   popup.style.display = "block";
   popup.querySelector(".student_name").textContent = `${studentCard.firstname}`;
-  popup.querySelector(".student_gender").textContent = `${studentCard.gender}`;
+  popup.querySelector("#gendericon").src = `student_icons/${studentCard.gender}.svg`;
   popup.querySelector(".student_nickname").textContent = `${studentCard.nickname}`;
   popup.querySelector(".student_middlename").textContent = `${studentCard.middlename}`;
   popup.querySelector(".student_lastname").textContent = `${studentCard.lastname}`;
