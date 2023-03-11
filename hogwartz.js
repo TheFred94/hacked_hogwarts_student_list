@@ -687,11 +687,11 @@ function checkUserReadyness() {
   }
 
   // buffer array to hold pressed keys
-  var buffer = [];
+  let buffer = [];
 
   document.addEventListener("keydown", function (event) {
     // get the currently pressed key
-    var key = event.key;
+    let key = event.key;
 
     // add the pressed key to the buffer array
     buffer.push(key);
